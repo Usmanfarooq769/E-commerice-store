@@ -63,7 +63,7 @@ class UserController extends Controller
     }
 
     /**
-     * Sync all roles for a user at once.
+     * Sync all roles for a user at once.    
      */
     public function syncRoles(Request $request, User $user)
     {
