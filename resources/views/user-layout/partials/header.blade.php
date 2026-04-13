@@ -5,40 +5,32 @@
     <div class="main-header-container container-fluid">
 
         <!-- Start::header-content-left -->
-        <div class="header-content-left">
+                <div class="header-content-left">
 
-            <!-- Start::header-element -->
-            <div class="header-element">
-                <div class="horizontal-logo">
-                    <a href="index.html" class="header-logo">
-                        <img src="../assets/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
-                        <img src="../assets/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
-                        <img src="../assets/images/brand-logos/desktop-white.png" alt="logo" class="desktop-white">
-                        <img src="../assets/images/brand-logos/toggle-white.png" alt="logo" class="toggle-white">
-                    </a>
+                    <!-- Start::header-element -->
+                    <div class="header-element">
+                        <div class="horizontal-logo">
+                            <a href="index.html" class="header-logo">
+                                <img src="../assets/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
+                                <img src="../assets/images/brand-logos/toggle-white.png" alt="logo" class="toggle-white">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    <div class="header-element">
+                        <!-- Start::header-link -->
+                        <a href="javascript:void(0);" class="sidemenu-toggle header-link" data-bs-toggle="sidebar">
+                            <span class="open-toggle">
+                                <i class="ri-menu-3-line fs-20"></i>
+                            </span>
+                        </a>
+                        <!-- End::header-link -->
+                    </div>
+                    <!-- End::header-element -->
+
                 </div>
-            </div>
-            <!-- End::header-element -->
-
-            <!-- Start::header-element -->
-            <div class="header-element mx-lg-0 mx-2">
-                <a aria-label="Hide Sidebar" class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle" data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
-            </div>
-            <!-- End::header-element -->
-
-            <!-- Start::header-element -->
-            <div class="header-element header-search d-lg-block   my-auto auto-complete-search">
-                <!-- Start::header-link -->
-                <input type="text" class="header-search-bar form-control rounded-pill" id="header-search" placeholder="Search for Results..." spellcheck=false autocomplete="off" autocapitalize="off">
-                <a href="javascript:void(0);" class="header-search-icon border-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                </a>
-                <!-- End::header-link -->
-            </div>
-            
-            <!-- End::header-element -->
-
-        </div>
         <!-- End::header-content-left -->
 
         <!-- Start::header-content-right -->
@@ -125,11 +117,7 @@
 
             <!-- Start::header-element -->
             <div class="header-element notifications-dropdown dropdown">
-                <!-- Start::header-link|dropdown-toggle -->
-                <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
-                    <span class="header-icon-pulse bg-secondary rounded pulse pulse-secondary"></span>
-                </a>
+              
                 <!-- End::header-link|dropdown-toggle -->
                 <!-- Start::main-header-dropdown -->
                 <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">

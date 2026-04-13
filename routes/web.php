@@ -8,9 +8,9 @@ use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DeliveryController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');

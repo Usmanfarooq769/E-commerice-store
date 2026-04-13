@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -65,7 +65,7 @@ class UserController extends Controller
     /**
      * Sync all roles for a user at once.    
      */
-    public function syncRoles(Request $request, User $user)
+    public function syncRoles(Request $request, User $user) 
     {
         $request->validate([
             'roles'   => 'nullable|array',
