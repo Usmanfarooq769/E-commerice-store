@@ -32,44 +32,75 @@
                         <span class="side-menu__label">Dashboards</span>
                     </a>
                 </li>
+                <li class="slide">
+                    <a href="{{ route('admin.categories.index') }}" class="side-menu__item">
+                          <i class="ri-folder-add-line me-1"></i>
+                        <span class="side-menu__label">Add Category</span>
+                    </a>
+                </li>
+                 <li class="slide">
+                                    <a href="{{ route('admin.products.index') }}" class="side-menu__item">
+                                        <i class="ri-shopping-bag-line me-1"></i>
+                                        <span class="side-menu__label">Add Products</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="slide">
+                                    <a href="{{ route('admin.orders.index') }}" class="side-menu__item">
+                                        <i class="ri-shopping-cart-line me-1"></i>
+                                        <span class="side-menu__label">Orders</span>
+                                    </a>
+                                </li>
+                                 <li class="slide">
+                                    <a href="{{ route('admin.deliveries.index') }}" class="side-menu__item">
+                                        <i class="ri-truck-line me-1"></i>
+                                        <span class="side-menu__label">Deliveries</span>
+                                    </a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('products') }}" class="side-menu__item">
+                                        <i class="ri-shoppingBag-line me-1"></i>
+                                        <span class="side-menu__label">Products</span>
+                                    </a>
+                                </li>
+                                <li class="slide">
+                                    <a href= "{{ route('product-details') }}"  class="side-menu__item">
+                                        <i class="ri-file-line me-1"></i>
+                                        <span class="side-menu__label">Product Details</span>
+                                    </a>
+                                </li>
+                                <li class="slide">
+                                    <a href= "{{ route('products-list') }}"  class="side-menu__item">
+                                        <i class="ri-list-check me-1"></i>
+                                        <span class="side-menu__label">Products List</span>
+                                    </a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('wishlist') }}" class="side-menu__item">
+                                        <i class="ri-heart-line me-1"></i>
+                                        <span class="side-menu__label">Wishlist</span>
+                                    </a>
+                                </li>
+
                 <!-- Start::slide -->
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"/><path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3"/></svg>
-                        <span class="side-menu__label">Ecommerce</span>
+                        <i class="ri-mail-line me-1"></i> 
+                        <span class="side-menu__label">Email</span>
                         <i class="ri-arrow-right-s-line side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Ecommerce</a>
+                            <a href="javascript:void(0)">Email</a>
                         </li>
-
-                            <li class="slide">
-                                    <a href="{{ route('admin.categories.index') }}" class="side-menu__item">Add Category</a>
+                                  <li class="slide">
+                                    <a href= "{{ route('mail') }}" class="side-menu__item">Mail App</a>
+                                </li>
+                                <li class="slide">
+                                    <a href= "{{ route('mail-settings') }}" class="side-menu__item">Mail Settings</a>
                                 </li>
                     
-                                <li class="slide">
-                                    <a href="{{ route('admin.products.index') }}" class="side-menu__item">Add Products</a>
-                                </li>
-                                
-                                <li class="slide">
-                                    <a href="{{ route('admin.orders.index') }}" class="side-menu__item">Orders</a>
-                                </li>
-                                 <li class="slide">
-                                    <a href="{{ route('admin.deliveries.index') }}" class="side-menu__item">Deliveries</a>
-                                </li>
-                                <li class="slide">
-                                    <a href="{{ route('products') }}" class="side-menu__item">Products</a>
-                                </li>
-                                <li class="slide">
-                                    <a href= "{{ route('product-details') }}"  class="side-menu__item">Product Details</a>
-                                </li>
-                                <li class="slide">
-                                    <a href= "{{ route('products-list') }}"  class="side-menu__item">Products List</a>
-                                </li>
-                                <li class="slide">
-                                    <a href="{{ route('wishlist') }}" class="side-menu__item">Wishlist</a>
-                                </li>
+                               
                             
                                          
                     </ul>
@@ -86,7 +117,7 @@
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3"/><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
-                        <span class="side-menu__label">Pages</span>
+                        <span class="side-menu__label">Profile</span>
                         <i class="ri-arrow-right-s-line side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
@@ -94,35 +125,13 @@
                             <a href="javascript:void(0)">Pages</a>
                         </li>
                         
-                        
-                        
-                        <li class="slide has-sub">
-                            <a href="javascript:void(0);" class="side-menu__item">Email
-                                <i class="ri-arrow-right-s-line side-menu__angle"></i></a>
-                            <ul class="slide-menu child2">
-                                <li class="slide">
-                                    <a href= "{{ route('mail') }}" class="side-menu__item">Mail App</a>
-                                </li>
-                                <li class="slide">
-                                    <a href= "{{ route('mail-settings') }}" class="side-menu__item">Mail Settings</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        
-                       
                         <li class="slide">
                             <a href="profile.html" class="side-menu__item">Profile</a>
                         </li>
                         <li class="slide">
                             <a href="profile-settings.html" class="side-menu__item">Profile Settings</a>
                         </li>
-                        
-                        <li class="slide">
-                            <a href="team.html" class="side-menu__item">Team</a>
-                        </li>
-                        
-                       
+                                               
                     </ul>
                 </li>
                 <!-- End::slide -->
@@ -224,12 +233,12 @@
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 13h-2v-2h2v2zm0-4h-2V7h2v6z" opacity=".3"/><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/></svg>
-                        <span class="side-menu__label">Error</span>
+                        <span class="side-menu__label">Settings</span>
                         <i class="ri-arrow-right-s-line side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Error</a>
+                            <a href="javascript:void(0)">Setting</a>
                         </li>
                         <li class="slide">
                             <a href="401-error.html" class="side-menu__item">401 - Error</a>
@@ -247,18 +256,6 @@
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Web Apps</span></li>
                 <!-- End::slide__category -->
-
-               
-
-                
-
-               
-
-               
-
-
-                
-
 
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>

@@ -20,33 +20,13 @@ Route::get('/', function () {
 Route::get('/', fn () => redirect()->route('admin.roles.index'));
  
 // ─── Admin routes (auth + admin role required) ───────────────────────────────
-Route::middleware(['auth', 'verified', 'role:admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
- 
-        // ── Roles CRUD ───────────────────────────────────────────────────────
+Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('roles', RoleController::class);
- 
-        // ── Permissions CRUD ─────────────────────────────────────────────────
-        Route::resource('permissions', PermissionController::class)
-            ->except(['show']);
- 
-        // ── Users management ─────────────────────────────────────────────────
-        Route::resource('users', UserController::class)
-            ->only(['index', 'show']);
- 
-        // Assign a role to a user
-        Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])
-            ->name('users.assign-role');
- 
-        // Revoke a role from a user
-        Route::delete('users/{user}/revoke-role/{role}', [UserController::class, 'revokeRole'])
-            ->name('users.revoke-role');
- 
-        // Sync all roles at once for a user
-        Route::post('users/{user}/sync-roles', [UserController::class, 'syncRoles'])
-            ->name('users.sync-roles');
+        Route::resource('permissions', PermissionController::class)->except(['show']);
+        Route::resource('users', UserController::class)->only(['index', 'show']);
+        Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])->name('users.assign-role');
+        Route::delete('users/{user}/revoke-role/{role}', [UserController::class, 'revokeRole'])->name('users.revoke-role');
+        Route::post('users/{user}/sync-roles', [UserController::class, 'syncRoles']) ->name('users.sync-roles');
     });
 
 Route::middleware([
