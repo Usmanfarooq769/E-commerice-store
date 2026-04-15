@@ -65,4 +65,37 @@ class UserProductController extends Controller
 
         return view('user.product-details', compact('product', 'discount', 'relatedProducts', 'featuredProducts'));
     }
+    public function byCategory(Request $request, $slug)
+{
+    $category = Category::where('slug', $slug)
+        ->where('status', 'active')
+        ->firstOrFail();
+
+    $categories = Category::where('status', 'active')
+        ->withCount(['products' => fn($q) => $q->where('status', 'active')])
+        ->get();
+
+    $products = Product::with('category')
+        ->where('category_id', $category->id)
+        ->where('status', 'active')
+        ->when($request->filled('search'),    fn($q) => $q->where('name', 'like', '%'.$request->search.'%'))
+        ->when($request->filled('min_price'), fn($q) => $q->where('price', '>=', $request->min_price))
+        ->when($request->filled('max_price'), fn($q) => $q->where('price', '<=', $request->max_price))
+        ->when($request->filled('sort'), function ($q) use ($request) {
+            match($request->sort) {
+                'price_asc'  => $q->orderBy('price', 'asc'),
+                'price_desc' => $q->orderBy('price', 'desc'),
+                'oldest'     => $q->oldest(),
+                default      => $q->latest(),
+            };
+        }, fn($q) => $q->latest())
+        ->paginate(12)
+        ->withQueryString();
+
+    $featuredProducts = Product::where('status', 'active')
+        ->where('is_featured', true)
+        ->latest()->take(5)->get();
+
+    return view('user.category-products', compact('category', 'categories', 'products', 'featuredProducts'));
+}
 }

@@ -18,10 +18,12 @@
         </button>
     </div>
     <div class="card-body">
+        <div class="table-responsive">
         <table id="categoriesTable" class="table table-bordered  text-nowrap w-100">
             <thead >
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Name</th>
                     <th scope="col">Slug</th>
                     <th scope="col">Description</th>
@@ -33,6 +35,7 @@
                 </tr>
             </thead>
         </table>
+        </div>
     </div>
 </div>
 
@@ -52,6 +55,23 @@
                     <input type="text" class="form-control" id="cat_name" placeholder="e.g. Beverages">
                     <div class="invalid-feedback" id="err_name"></div>
                 </div>
+
+                <div class="mb-3">
+                <label class="form-label">Category Image</label>
+
+                {{-- Preview (shown in edit mode when image exists) --}}
+                <div id="imagePreviewWrap" class="mb-2 d-none">
+                    <img id="imagePreview" src="" width="80" height="80"
+                        style="object-fit:cover;border-radius:8px;border:1px solid #dee2e6;">
+                    <button type="button" class="btn btn-danger btn-sm ms-2" id="removeImageBtn">
+                        <i class="ri-close-line"></i> Remove
+                    </button>
+                </div>
+
+                <input type="file" class="form-control" id="cat_image" accept="image/jpeg,image/png,image/webp">
+                <input type="hidden" id="cat_remove_image" value="0">
+                <div class="form-text">Max 2MB. JPG, PNG or WEBP.</div>
+            </div>
 
                 <div class="mb-3">
                     <label class="form-label">Description</label>
@@ -94,14 +114,15 @@ const table = $('#categoriesTable').DataTable({
     ajax: CAT_DATA_URL,
     columns: [
         { data: 'DT_RowIndex',     name: 'id',          orderable: false, searchable: false },
+        { data: 'image_col',       name: 'image',        orderable: false, searchable: false },
         { data: 'name',            name: 'name' },
         { data: 'slug_col',        name: 'slug' },
-        { data: 'description_col', name: 'description', orderable: false },
+        { data: 'description_col', name: 'description',  orderable: false },
         { data: 'status_badge',    name: 'status' },
         { data: 'created_by',      name: 'creator.name', orderable: false },
         { data: 'created_at',      name: 'created_at' },
         { data: 'updated_at',      name: 'updated_at' },
-        { data: 'actions',         name: 'actions',     orderable: false, searchable: false },
+        { data: 'actions',         name: 'actions',      orderable: false, searchable: false },
     ],
     order: [[0, 'desc']],
     pageLength: 10,
@@ -117,6 +138,10 @@ function resetModal(title = 'Add Category') {
     $('#cat_name').val('').removeClass('is-invalid');
     $('#cat_description').val('');
     $('#cat_status').val('active');
+    $('#cat_image').val('');
+    $('#cat_remove_image').val('0');
+    $('#imagePreview').attr('src', '');
+    $('#imagePreviewWrap').addClass('d-none');
     $('#err_name').text('');
 }
 
@@ -134,7 +159,34 @@ $(document).on('click', '.editCatBtn', function () {
     $('#cat_name').val(d.name);
     $('#cat_description').val(d.description);
     $('#cat_status').val(d.status);
+
+    if (d.image) {
+        $('#imagePreview').attr('src', d.image);
+        $('#imagePreviewWrap').removeClass('d-none');
+    }
+
     modal().show();
+});
+
+// ─── Live image preview on file select ────────────────────────
+$('#cat_image').on('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        $('#imagePreview').attr('src', e.target.result);
+        $('#imagePreviewWrap').removeClass('d-none');
+        $('#cat_remove_image').val('0');
+    };
+    reader.readAsDataURL(file);
+});
+
+// ─── Remove image ─────────────────────────────────────────────
+$('#removeImageBtn').on('click', function () {
+    $('#cat_image').val('');
+    $('#imagePreview').attr('src', '');
+    $('#imagePreviewWrap').addClass('d-none');
+    $('#cat_remove_image').val('1');
 });
 
 // ─── Save (Add / Update) ──────────────────────────────────────
@@ -149,20 +201,30 @@ $('#saveCategoryBtn').on('click', function () {
     }
     $('#cat_name').removeClass('is-invalid');
 
-    const url    = id ? `${CAT_UPDATE_BASE}/${id}` : CAT_STORE_URL;
-    const method = id ? 'PUT' : 'POST';
+    // Use FormData to support file upload
+    const formData = new FormData();
+    formData.append('_token',       CSRF);
+    formData.append('name',         name);
+    formData.append('description',  $('#cat_description').val());
+    formData.append('status',       $('#cat_status').val());
+    formData.append('remove_image', $('#cat_remove_image').val());
+
+    const imageFile = $('#cat_image')[0].files[0];
+    if (imageFile) formData.append('image', imageFile);
+
+    if (id) formData.append('_method', 'PUT');
+
+    const url = id ? `${CAT_UPDATE_BASE}/${id}` : CAT_STORE_URL;
 
     $('#saveBtnSpinner').removeClass('d-none');
     $('#saveBtnText').text(id ? 'Updating...' : 'Saving...');
 
     $.ajax({
-        url, method,
-        data: {
-            _token:      CSRF,
-            name:        name,
-            description: $('#cat_description').val(),
-            status:      $('#cat_status').val(),
-        },
+        url,
+        method: 'POST', // always POST with FormData; _method spoofing handles PUT
+        data: formData,
+        processData: false,
+        contentType: false,
         success(res) {
             modal().hide();
             table.ajax.reload(null, false);

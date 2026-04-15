@@ -214,7 +214,8 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
 
 
 Route::get('products',                  [UserProductController::class, 'index'])->name('products');
-    Route::get('product/{slug}',            [UserProductController::class, 'show'])->name('product-details');
+Route::get('product/{slug}',            [UserProductController::class, 'show'])->name('product-details');
+Route::get('/categories/{slug}', [UserProductController::class, 'byCategory'])->name('category');
     
     
     Route::get('wishlist',  fn() => view('user.wishlist'))->name('wishlist');
