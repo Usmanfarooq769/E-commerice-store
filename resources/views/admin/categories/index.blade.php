@@ -107,7 +107,7 @@ const CAT_DATA_URL    = '{{ route("admin.categories.data") }}';
 const CAT_STORE_URL   = '{{ route("admin.categories.store") }}';
 const CAT_UPDATE_BASE = '{{ url("admin/categories") }}';
 
-// ─── Init DataTable ───────────────────────────────────────────
+// Init DataTable 
 const table = $('#categoriesTable').DataTable({
     processing: true,
     serverSide: true,
@@ -120,8 +120,24 @@ const table = $('#categoriesTable').DataTable({
         { data: 'description_col', name: 'description',  orderable: false },
         { data: 'status_badge',    name: 'status' },
         { data: 'created_by',      name: 'creator.name', orderable: false },
-        { data: 'created_at',      name: 'created_at' },
-        { data: 'updated_at',      name: 'updated_at' },
+      { 
+    data: 'created_at', 
+    name: 'created_at',
+    render: function (data) {
+        if (!data) return '';
+        let date = new Date(data);
+        return date.toLocaleString(); // you can customize format
+    }
+},
+{ 
+    data: 'updated_at', 
+    name: 'updated_at',
+    render: function (data) {
+        if (!data) return '';
+        let date = new Date(data);
+        return date.toLocaleString();
+    }
+},
         { data: 'actions',         name: 'actions',      orderable: false, searchable: false },
     ],
     order: [[0, 'desc']],

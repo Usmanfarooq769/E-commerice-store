@@ -174,8 +174,24 @@ const table = $('#productsTable').DataTable({
         { data: 'status_badge',   name: 'status' },
         { data: 'featured_badge', name: 'is_featured' },
         { data: 'created_by',     name: 'creator.name', orderable: false },
-        { data: 'created_at',     name: 'created_at' },
-        { data: 'updated_at',     name: 'updated_at' },
+       { 
+    data: 'created_at', 
+    name: 'created_at',
+    render: function (data) {
+        if (!data) return '';
+        let date = new Date(data);
+        return date.toLocaleString(); // you can customize format
+    }
+},
+{ 
+    data: 'updated_at', 
+    name: 'updated_at',
+    render: function (data) {
+        if (!data) return '';
+        let date = new Date(data);
+        return date.toLocaleString();
+    }
+},
         { data: 'actions',        name: 'actions',    searchable: false },
     ],
     order: [[0, 'desc']],
