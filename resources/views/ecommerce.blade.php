@@ -16,11 +16,9 @@
 </div>
 <!-- Page Header Close -->
 
-<!-- Start::row-1 -->
 <div class="row">
-    <div class="col-xxl-4">
-        <div class="row">
-            <div class="col-lg-6 col-xl-6">
+    <div class="row">
+            <div class="col-lg-3 col-xl-3">
                 <div class="card custom-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
@@ -57,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-xl-6">
+            <div class="col-lg-3 col-xl-3">
                 <div class="card custom-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
@@ -87,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-xl-6">
+            <div class="col-lg-3 col-xl-3">
                 <div class="card custom-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
@@ -119,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-xl-6">
+            <div class="col-lg-3 col-xl-3">
                 <div class="card custom-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
@@ -153,9 +151,11 @@
                 </div>
             </div>
         </div>
+</div>
 
-    </div>
-    <div class="col-xxl-5 col-xl-6">
+<!-- Start::row-1 -->
+<div class="row">
+    <div class="col-xl-6">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">Earnings</div>
@@ -208,7 +208,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xxl-3 col-xl-6">
+    <div class="col-xl-6">
         <div class="card custom-card border border-success border-opacity-50 ecommerce-sellercard">
             <div class="card-body">
                 <div class="d-flex gap-3">
@@ -225,7 +225,143 @@
                 </div>
             </div>
         </div>
-        <h3>usman farooq</h3>
+       
+
+        <div class="card custom-card">
+            <div class="card-header justify-content-between">
+                <div class="card-title">Premier Product Selections</div>
+            </div>
+            <div class="card-body row gx-3 gy-3 gy-sm-0">
+                <div class="col-sm-6">
+                    <div id="carouselpremier1" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                        data-bs-interval="2800">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div
+                                    class="border border-pink border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-pink-transparent posotion-relative overflow-hidden">
+                                    <div class="ribbon-sale ribbon-success top-right">Sale</div>
+                                    <img src="../assets/images/ecommerce/png/30.png" alt=""
+                                        class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="text-success">20% OFF</span>
+                                        <p class="fw-medium mb-1"> on home decor</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
+                                            <span class="text-muted fs-12">(22 reviews)</span>
+                                        </div>
+                                        <a class="btn btn-primary btn-sm">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div
+                                    class="border border-primary border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-primary-transparent ">
+                                    <div class="ribbon-sale ribbon-success top-right">Sale</div>
+                                    <img src="../assets/images/ecommerce/png/34.png" alt=""
+                                        class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="text-danger">21% OFF</span>
+                                        <p class="fw-medium mb-1"> on home decor</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
+                                            <span class="text-muted fs-12">(75 reviews)</span>
+                                        </div>
+                                        <a class="btn btn-primary btn-sm" href="javascript:void(0);">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div
+                                    class="border border-danger border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-danger-transparent">
+                                    <div class="ribbon-sale ribbon-success top-right">Sale</div>
+                                    <img src="../assets/images/ecommerce/png/35.png" alt=""
+                                        class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="text-success">30% OFF</span>
+                                        <p class="fw-medium mb-1"> on home decor</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
+                                            <span class="text-muted fs-12">(66 reviews)</span>
+                                        </div>
+                                        <a class="btn btn-primary btn-sm">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="carouselpremier2" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                        data-bs-interval="3200">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div
+                                    class="border border-info border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-info-transparent">
+                                    <div class="ribbon-sale ribbon-secondary top-right">Offer</div>
+                                    <img src="../assets/images/ecommerce/png/31.png" alt=""
+                                        class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="text-success">20% OFF</span>
+                                        <p class="fw-medium mb-1"> on Fashion Wear</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
+                                            <span class="text-muted fs-12">(111 reviews)</span>
+                                        </div>
+                                        <a class="btn btn-primary btn-sm">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div
+                                    class="border border-warning border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-warning-transparent">
+                                    <div class="ribbon-sale ribbon-secondary top-right">Offer</div>
+                                    <img src="../assets/images/ecommerce/png/32.png" alt=""
+                                        class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="text-success">10% OFF</span>
+                                        <p class="fw-medium mb-1"> on sports shoes</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
+                                            <span class="text-muted fs-12">(23 reviews)</span>
+                                        </div>
+                                        <a class="btn btn-primary btn-sm">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div
+                                    class="border border-success border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-success-transparent">
+                                    <div class="ribbon-sale ribbon-secondary top-right">Offer</div>
+                                    <img src="../assets/images/ecommerce/png/33.png" alt=""
+                                        class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="text-danger">15% OFF</span>
+                                        <p class="fw-medium mb-1"> on Wrist Watch</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
+                                            <span class="text-muted fs-12">(43 reviews)</span>
+                                        </div>
+                                        <a class="btn btn-primary btn-sm">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--End::row-1 -->
