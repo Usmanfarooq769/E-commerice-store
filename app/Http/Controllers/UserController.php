@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -75,5 +77,47 @@ class UserController extends Controller
         $user->syncRoles($request->roles ?? []);
 
         return back()->with('success', "Roles updated for <strong>{$user->name}</strong>.");
+    }
+
+
+    public function create()
+    {
+        $roles = Role::all(); 
+        return view('admin.users.create', compact('roles'));
+    }
+
+    
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role'     => 'required',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+        ]);
+
+        $imagePath = null;
+
+        // Upload Image
+        if ($request->hasFile('profile_photo')) {
+            $imagePath = $request->file('profile_photo')
+                ->store('profile-photos', 'public'); // storage/app/public/profile-photos
+        }
+
+        // Create User
+        $user = User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => bcrypt($request->password),
+            'profile_photo_path' => $imagePath
+        ]);
+
+        // Assign Role
+        $user->assignRole($request->role);
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User created successfully');
     }
 }

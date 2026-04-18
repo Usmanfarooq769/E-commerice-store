@@ -122,11 +122,11 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Pages</a>
+                            <a href="javascript:void(0)">Profile</a>
                         </li>
                         
                         <li class="slide">
-                            <a href="profile.html" class="side-menu__item">Profile</a>
+                            <a href="{{ route('admin.users.index') }}" class="side-menu__item">Profile</a>
                         </li>
                         <li class="slide">
                             <a href="profile-settings.html" class="side-menu__item">Profile Settings</a>
@@ -241,14 +241,12 @@
                             <a href="javascript:void(0)">Setting</a>
                         </li>
                         <li class="slide">
-                            <a href="401-error.html" class="side-menu__item">401 - Error</a>
+                            <a href="{{ route('admin.roles.index') }}" class="side-menu__item">Role</a>
                         </li>
                         <li class="slide">
-                            <a href="404-error.html" class="side-menu__item">404 - Error</a>
+                            <a href="{{ route('admin.permissions.index') }}" class="side-menu__item">Permission</a>
                         </li>
-                        <li class="slide">
-                            <a href="500-error.html" class="side-menu__item">500 - Error</a>
-                        </li>
+                        
                     </ul>
                 </li>
                 <!-- End::slide -->

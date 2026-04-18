@@ -17,16 +17,17 @@ Route::get('/', function () {
 });
 
 
-Route::get('/', fn () => redirect()->route('admin.roles.index'));
+// Route::get('/', fn () => redirect()->route('admin.roles.index'));
  
-// ─── Admin routes (auth + admin role required) ───────────────────────────────
+//Admin routes (auth + admin role required) 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class)->except(['show']);
-        Route::resource('users', UserController::class)->only(['index', 'show']);
+        Route::resource('users', UserController::class)->only(['index', 'show' ,'create' , 'store']);
         Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])->name('users.assign-role');
         Route::delete('users/{user}/revoke-role/{role}', [UserController::class, 'revokeRole'])->name('users.revoke-role');
         Route::post('users/{user}/sync-roles', [UserController::class, 'syncRoles']) ->name('users.sync-roles');
+        // Route::get('users/{user}/profile-settings', [UserController::class, 'profileSettings'])->name('users.profile-settings');
     });
 
 Route::middleware([
