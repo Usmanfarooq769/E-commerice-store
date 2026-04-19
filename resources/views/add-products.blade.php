@@ -1,16 +1,4 @@
 
-
-
-    <link rel="stylesheet" href="../assets/libs/quill/quill.snow.css">
-    <link rel="stylesheet" href="../assets/libs/quill/quill.bubble.css">
-
-    <!-- Filepond CSS -->
-    <link rel="stylesheet" href="../assets/libs/filepond/filepond.min.css">
-    <link rel="stylesheet" href="../assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css">
-    <link rel="stylesheet" href="../assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css">
-
-
-
     @extends('layouts.app')
 
     <!-- Start::app-content -->

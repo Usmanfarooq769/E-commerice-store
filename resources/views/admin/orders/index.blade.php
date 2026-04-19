@@ -57,8 +57,8 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-        <table id="ordersTable" class="table table-hover text-nowrap w-100">
-            <thead class="table-dark">
+        <table id="ordersTable" class="table table-bordered text-nowrap w-100">
+            <thead >
                 <tr>
                     <th>#</th>
                     <th>Order ID</th>
@@ -99,8 +99,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success" id="saveDeliveryBtn">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveDeliveryBtn">
                     <span id="deliveryBtnText">Assign</span>
                     <span id="deliveryBtnSpinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
                 </button>
@@ -112,10 +112,10 @@
 @endsection
 
 @push('scripts')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script> -->
+
 
 <script>
 const CSRF             = '{{ csrf_token() }}';

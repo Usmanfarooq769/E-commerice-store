@@ -10,11 +10,11 @@
             <!-- Start::header-element -->
             <div class="header-element">
                 <div class="horizontal-logo">
-                    <a href="index.html" class="header-logo">
-                        <img src="../assets/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
-                        <img src="../assets/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
-                        <img src="../assets/images/brand-logos/desktop-white.png" alt="logo" class="desktop-white">
-                        <img src="../assets/images/brand-logos/toggle-white.png" alt="logo" class="toggle-white">
+                    <a href="{{ route('dashboard') }}" class="header-logo">
+                        <img src="{{asset('assets/images/brand-logos/desktop-logo.png')}}" alt="logo" class="desktop-logo">
+                        <img src="{{asset('assets/images/brand-logos/toggle-logo.png')}}" alt="logo" class="toggle-logo">
+                        <img src="{{asset('assets/images/brand-logos/desktop-white.png')}}" alt="logo" class="desktop-white">
+                        <img src="{{asset('assets/images/brand-logos/toggle-white.png')}}" alt="logo" class="toggle-white">
                     </a>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                             <div class="d-flex align-items-center gap-3">
                                 <div class="lh-1">
                                     <span class="avatar avatar-lg bg-light">
-                                        <img src="../assets/images/media/media-92.jpg" alt="">
+                                        <img src="{{asset('assets/images/media/media-92.jpg')}}" alt="">
                                     </span>
                                 </div>
                                 <div class="flex-fill">
@@ -115,7 +115,7 @@
                             <div class="d-flex align-items-center gap-3">
                                 <div class="lh-1">
                                     <span class="avatar avatar-lg bg-light">
-                                        <img src="../assets/images/media/media-93.jpg" alt="StellarPhone X">
+                                        <img src="{{asset('assets/images/media/media-93.jpg')}}" alt="StellarPhone X">
                                     </span>
                                 </div>
                                 <div class="flex-fill">
@@ -188,7 +188,7 @@
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
                                     <span class="avatar avatar-md offline bg-primary-transparent avatar-rounded">
-                                        <img src="../assets/images/faces/1.jpg" alt="Sonia Agarwal">
+                                        <img src="{{asset('assets/images/faces/1.jpg')}}" alt="Sonia Agarwal">
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -234,7 +234,7 @@
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
                                     <span class="avatar avatar-md offline bg-success-transparent avatar-rounded">
-                                        <img src="../assets/images/faces/3.jpg" alt="Ayesha Malik">
+                                        <img src="{{asset('assets/images/faces/3.jpg')}}" alt="Ayesha Malik">
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -257,7 +257,7 @@
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
                                     <span class="avatar avatar-md online bg-danger-transparent avatar-rounded">
-                                        <img src="../assets/images/faces/14.jpg" alt="Mohan Desai">
+                                        <img src="{{asset('assets/images/faces/14.jpg')}}" alt="Mohan Desai">
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -280,7 +280,7 @@
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
                                     <span class="avatar avatar-md offline bg-warning-transparent avatar-rounded">
-                                        <img src="../assets/images/faces/5.jpg" alt="Priya Sharma">
+                                        <img src="{{asset('assets/images/faces/5.jpg')}}" alt="Priya Sharma">
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -336,7 +336,7 @@
                 <!-- Start::header-link|dropdown-toggle -->
                 <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     <span class="avatar avatar-sm avatar-rounded">
-                        <img src="../assets/images/faces/14.jpg" alt="img" class="img-fluid">
+                        <img src="{{asset('assets/images/faces/14.jpg')}}" alt="img" class="img-fluid">
                     </span>
                 </a>
                 <!-- End::header-link|dropdown-toggle -->
@@ -344,8 +344,8 @@
                     <li class="p-3 bg-light bg-opacity-75 border-bottom">
                         <div class="d-flex align-items-center justify-content-between gap-4">
                             <div>
-                                <p class="mb-0 fw-semibold lh-1">Usman Farooq</p>
-                                <span class="fs-11 text-muted">shanusmanfarooq@gmail.com</span>
+                                <p class="mb-0 fw-semibold lh-1">{{ Auth::user()->name }}</p>
+                                <span class="fs-11 text-muted">{{ Auth::user()->email }}</span>
                             </div>
                       
                         </div>
@@ -354,7 +354,17 @@
                     <li><a class="dropdown-item d-flex align-items-center" href= "{{route('mail')}}"><i class="ti ti-inbox fs-18 me-2 text-gray fw-normal"></i>Mail Inbox <span class="badge bg-success ms-auto">06</span></a></li>
                     <li><a class="dropdown-item d-flex align-items-center" href="{{route('mail-settings')}}"><i class="ti ti-adjustments-horizontal fs-18 me-2 text-gray fw-normal"></i>Account Settings</a></li>
                     <li> <hr class="dropdown-divider"> </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{route('sign-in-cover')}}"><i class="ti ti-logout fs-18 me-2 text-gray fw-normal"></i>Sign Out</a></li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="ti ti-logout fs-18 me-2 text-gray fw-normal"></i>
+                            Sign Out
+                        </a>
+
+                        <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                 </ul>
             </div>  
            

@@ -15,10 +15,20 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        // return view('dashboard');
+        return view('ecommerce');
+    })->name('dashboard');
+});
 
 
-// Route::get('/', fn () => redirect()->route('admin.roles.index'));
- 
+
+
 //Admin routes (auth + admin role required) 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('roles', RoleController::class);
@@ -30,16 +40,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
         // Route::get('users/{user}/profile-settings', [UserController::class, 'profileSettings'])->name('users.profile-settings');
     });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        // return view('dashboard');
-        return view('ecommerce');
-    })->name('dashboard');
-});
+
+    Route::middleware(['auth'])->get('/profile', function () {
+    return view('profile'); // or controller
+})->name('profile');
+
+
 
 // user 
 Route::get('profile', function () {

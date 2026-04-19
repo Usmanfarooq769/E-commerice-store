@@ -23,8 +23,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function delivery()
-    {
+    public function delivery()    {
         return $this->hasOne(Delivery::class);
     }
+
 }

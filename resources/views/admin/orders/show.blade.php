@@ -279,9 +279,9 @@
                 </div>
             </div>
             <div class="card-footer border-top-0 d-flex align-items-center justify-content-between gap-2">
-                <button class="btn btn-primary-light" onclick="window.print()">
+                <!-- <button class="btn btn-primary-light" onclick="window.print()">
                     <i class="ri-printer-line me-1"></i> Print
-                </button>
+                </button> -->
                 <a href="{{ route('admin.order.invoice', $order->id) }}" class="btn btn-primary">
                     <i class="ri-download-line me-1"></i> Download Invoice
                 </a>
@@ -326,7 +326,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 <script>
 const CSRF           = '{{ csrf_token() }}';
 const ORDERS_BASE    = '{{ url("admin/orders") }}';
