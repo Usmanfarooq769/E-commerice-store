@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-    @include("user-layout.partials.mainhead")
+   @include("layouts.partials.mainhead")
 
     <!-- Additional Styles -->
     <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
 
-    @stack('styles')
-    <!-- Stack for child styles -->
+    @stack('styles') <!-- Stack for child styles -->
 </head>
 
 

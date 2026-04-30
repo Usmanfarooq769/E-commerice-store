@@ -4,7 +4,6 @@
 </div>
 <div id="responsive-overlay"></div>
 <!-- Scroll To Top -->
-<!-- Popper JS -->
 <script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
 <!-- Bootstrap JS -->
 <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

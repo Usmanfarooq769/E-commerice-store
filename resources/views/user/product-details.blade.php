@@ -1,6 +1,32 @@
 @extends('user-layout.app')
 
 @section('content')
+<!-- Favicon -->
+<link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
+
+<!-- Bootstrap CSS -->
+<link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+<!-- Main Styles -->
+<link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
+
+<!-- Plugins CSS -->
+<link href="{{ asset('assets/libs/node-waves/waves.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/libs/simplebar/simplebar.min.css') }}" rel="stylesheet">
+
+<!-- Flatpickr / Color Picker -->
+<link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
+
+<!-- Choices -->
+<link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
+
+<!-- AutoComplete -->
+<link rel="stylesheet" href="{{ asset('assets/libs/@tarekraafat/autocomplete.js/css/autoComplete.css') }}">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}">
 
 <div class="container-fluid">
     <div class="row">
@@ -23,18 +49,55 @@
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
-                    <div class="swiper swiper-view-details mt-2">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img class="img-fluid"
-                                    src="{{ $product->image_url ?? asset('assets/images/ecommerce/png/10.png') }}"
-                                    alt="{{ $product->name }}">
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+          <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    Effect Coverflow
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="swiper swiper-overflow">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-40.jpg')}}" alt="img">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-41.jpg')}}" alt="img">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-42.jpg')}}" alt="img">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-43.jpg')}}" alt="img">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-44.jpg')}}" alt="img">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-59.jpg')}}" alt="img">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-46.jpg')}}" alt="img">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-61.jpg')}}" alt="img">
+                                        </div>
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
         {{-- Product Info --}}
         <div class="col-xxl-8">
@@ -98,23 +161,6 @@
                                 </span>
                             </div>
 
-                            {{-- Quantity --}}
-                            <div class="d-flex gap-5 align-items-center mb-4">
-                                <div class="d-flex gap-4 align-items-center">
-                                    <p class="fs-15 fw-semibold mb-1">Quantity:</p>
-                                    <div class="product-quantity-container ecommerce-page-quantity">
-                                        <div class="input-group flex-nowrap rounded-pill cart-input-group">
-                                            <button type="button" class="btn btn-icon btn-wave btn-sm btn-primary product-quantity-minus">
-                                                <i class="ri-subtract-line"></i>
-                                            </button>
-                                            <input type="text" class="form-control form-control-sm text-center p-0" value="1" id="qty-input">
-                                            <button type="button" class="btn btn-icon btn-wave btn-sm btn-primary product-quantity-plus">
-                                                <i class="ri-add-line"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="d-flex gap-2 align-items-center flex-wrap">
                                 @if($product->stock > 0)
@@ -346,3 +392,42 @@
 </div>
 
 @endsection
+
+@push('script')
+<!-- Popper JS -->
+<script src="{{ asset('assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+
+<!-- Bootstrap JS -->
+<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Defaultmenu JS -->
+<script src="{{ asset('assets/js/defaultmenu.js') }}"></script>
+
+<!-- Node Waves JS -->
+<script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+
+<!-- Sticky JS -->
+<script src="{{ asset('assets/js/sticky.js') }}"></script>
+
+<!-- Simplebar JS -->
+<script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ asset('assets/js/simplebar.js') }}"></script>
+
+<!-- Auto Complete JS -->
+<script src="{{ asset('assets/libs/@tarekraafat/autocomplete.js/autoComplete.min.js') }}"></script>
+
+<!-- Color Picker JS -->
+<script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
+
+<!-- Custom Switcher JS -->
+<script src="{{ asset('assets/js/custom-switcher.js') }}"></script>
+
+<!-- Swiper JS -->
+<script src="{{ asset('assets/libs/swiper/swiper-bundle.min.js') }}"></script>
+
+<!-- Internal Swiper JS -->
+<script src="{{ asset('assets/js/swiper.js') }}"></script>
+
+<!-- Custom JS -->
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+@endpush
