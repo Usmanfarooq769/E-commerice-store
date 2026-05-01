@@ -25,9 +25,21 @@ Route::middleware([
         return view('ecommerce');
     })->name('dashboard');
 });
+   Route::middleware(['auth'])->get('/profile', function () {
+    return view('profile'); // or controller
+})->name('profile');
+Route::get('profile', function () {
+    return view('profile');
+})->name('profile');
+
+Route::get('mail-settings', function () {
+    return view('mail-settings');
+})->name('mail-settings');
 
 
-
+Route::get('ecommerce', function () {
+    return view('ecommerce');
+})->name('ecommerce');
 
 //Admin routes (auth + admin role required) 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -40,104 +52,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
         Route::post('users/{user}/sync-roles', [UserController::class, 'syncRoles']) ->name('users.sync-roles');
         // Route::get('users/{user}/profile-settings', [UserController::class, 'profileSettings'])->name('users.profile-settings');
     });
-
-
-    Route::middleware(['auth'])->get('/profile', function () {
-    return view('profile'); // or controller
-})->name('profile');
-
-
-
-// user 
-Route::get('profile', function () {
-    return view('profile');
-})->name('profile');
-
-Route::get('mail-settings', function () {
-    return view('mail-settings');
-})->name('mail-settings');
-
-
-Route::get('sign-in-cover', function () {
-    return view('sign-in-cover');
-})->name('sign-in-cover');
-
-
-Route::get('mail', function () {
-    return view('mail');
-})->name('mail');
-
-// all deshboard 
-
-
-
-Route::get('ecommerce', function () {
-    return view('ecommerce');
-})->name('ecommerce');
-// ecommerce website routes 
-
-
-Route::get('add-products', function () {
-    return view('add-products');
-})->name('add-products');
-
-
-Route::get('cart', function () {
-    return view('cart');
-})->name('cart');
-
-Route::get('check-out', function () {
-    return view('checkout');
-})->name('check-out');
-
-Route::get('products', function () {
-    return view('products');
-})->name('products');
-
-Route::get('products-list', function () {
-    return view('products-list');
-})->name('products-list');
-
-Route::get('product-details', function () {
-    return view('product-details');
-})->name('product-details');
-
-Route::get('wishlist', function () {
-    return view('wishlist');
-})->name('wishlist');
-
-
-Route::get('edit-products', function () {
-    return view('edit-products');
-})->name('edit-products');
-
-Route::get('order-details', function () {
-    return view('order-details');
-})->name('order-details');
-
-Route::get('orders', function () {
-    return view('orders');
-})->name('orders');
-
-Route::get('products-list', function () {
-    return view('products-list');
-})->name('products-list');
-//Email
-
-
-Route::get('mail', function () {
-    return view('mail');
-})->name('mail');
-
-Route::get('mail-settings', function () {
-    return view('mail-settings');
-})->name('mail-settings');  
-
-
-//Admin routes
-
-// routes/web.php
-
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
 
@@ -181,45 +95,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
 Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
 
-// Route::get('products', function () {
-//     return view('user.index');
-// })->name('products');
-
-// Route::get('cart', function () {
-//     return view('user.cart');
-// })->name('cart');
-
-// Route::get('check-out', function () {
-//     return view('user.checkout');
-// })->name('check-out');
-// Route::get('wishlist', function () {
-//     return view('user.wishlist');
-// })->name('wishlist');
-
-// Route::get('product-details', function () {
-//     return view('user.product-details');
-// })->name('product-details');
-
-
 Route::get('products',                  [UserProductController::class, 'index'])->name('products');
 Route::get('product/{slug}',            [UserProductController::class, 'show'])->name('product-details');
 Route::get('/categories/{slug}', [UserProductController::class, 'byCategory'])->name('category');
-    
-    
-    Route::get('wishlist',  fn() => view('user.wishlist'))->name('wishlist');
-
-
-    // Cart AJAX
     Route::get('cart',            [CartController::class, 'index'])->name('cart');
     Route::post('cart/add',        [CartController::class, 'add'])->name('cart.add');
     Route::put('cart/{id}',        [CartController::class, 'update'])->name('cart.update');
     Route::delete('cart/{id}',     [CartController::class, 'remove'])->name('cart.remove');
     Route::get('cart/header-data', [CartController::class, 'headerCart'])->name('cart.header');
-
-    
-
-
-    // ... existing routes ...
     Route::get('check-out',                   [CheckoutController::class, 'index'])->name('check-out');
     Route::post('check-out/place-order',      [CheckoutController::class, 'placeOrder'])->name('checkout.place-order');
     Route::get('order/{id}/invoice',          [CheckoutController::class, 'downloadInvoice'])->name('order.invoice');
