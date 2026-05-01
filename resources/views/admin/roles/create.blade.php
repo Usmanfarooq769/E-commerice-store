@@ -2,12 +2,18 @@
 
 @section('content')
 
-
+<div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+    <h1 class="page-title fw-semibold fs-18 mb-0">Create Role</h1>
+    <nav><ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">Setting</a></li>
+        <li class="breadcrumb-item active">Create Role</li>
+    </ol></nav>
+</div>
 
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card custom-card bg-primary-transprint">
+        <div class="card custom-card bg-primary-transparent">
             <div class="card-header justify-content-between flex-wrap border-0">
                 <h3 class="card-title">Create Role</h3>
                 <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-light">

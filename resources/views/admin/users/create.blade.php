@@ -20,11 +20,11 @@
                 <h3 class="card-title">Create User</h3>
 
             </div>
-            
-                    <form action="{{ route('admin.users.store') }}" method="POST">
-                        @csrf
-                        <div class="card-body">
-                         <div class="row">
+
+            <form action="{{ route('admin.users.store') }}" method="POST">
+                @csrf
+                <div class="card-body">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
@@ -41,7 +41,7 @@
                         <div class="col-md-6">
 
                             <div class="mb-3">
-                                <label>Profile Image</label>
+                                <label class="form-label">Profile Image</label>
                                 <input type="file" name="profile_photo" class="form-control">
                             </div>
                         </div>
@@ -56,7 +56,7 @@
 
                             <div class="mb-3">
                                 <label for="roles" class="form-label">Assign Roles</label>
-                                <select name="roles[]" id="roles" class="form-select" multiple>
+                                <select name="roles[]" id="roles" class="form-select js-example-basic-multiple" multiple="multiple">
                                     @foreach($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
@@ -64,15 +64,18 @@
                             </div>
                         </div>
 
-                          <button type="submit" class="btn btn-primary">Create User</button>
-                        </div>
-                    </form>
+                       
+                    </div>
+                    <div class="card-footer text-end">
+                         <button type="submit" class="btn btn-primary">Create User</button>
+                    </div>
+            </form>
 
 
-                
-            </div>
+
         </div>
     </div>
+</div>
 </div>
 
 

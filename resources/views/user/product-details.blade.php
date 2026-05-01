@@ -49,55 +49,61 @@
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
 
-
-
-          <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    Effect Coverflow
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card custom-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            Effect Coverflow
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="swiper swiper-overflow">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-40.jpg')}}"
+                                        alt="img">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-41.jpg')}}"
+                                        alt="img">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-42.jpg')}}"
+                                        alt="img">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-43.jpg')}}"
+                                        alt="img">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-44.jpg')}}"
+                                        alt="img">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-59.jpg')}}"
+                                        alt="img">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-46.jpg')}}"
+                                        alt="img">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-61.jpg')}}"
+                                        alt="img">
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="swiper swiper-overflow">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-40.jpg')}}" alt="img">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-41.jpg')}}" alt="img">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-42.jpg')}}" alt="img">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-43.jpg')}}" alt="img">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-44.jpg')}}" alt="img">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-59.jpg')}}" alt="img">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-46.jpg')}}" alt="img">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img class="img-fluid" src="{{ asset('assets/images/media/media-61.jpg')}}" alt="img">
-                                        </div>
-                                    </div>
-                                    <div class="swiper-pagination"></div>
-                                </div>
-                            </div>
+                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
         {{-- Product Info --}}
         <div class="col-xxl-8">
@@ -130,13 +136,13 @@
 
                             {{-- Stock Status --}}
                             <div class="mb-3">
-                                @if($product->stock <= 0)
-                                    <span class="text-danger fw-semibold">Out of Stock</span>
-                                @elseif($product->stock <= 5)
-                                    <span class="text-warning fw-semibold">Only {{ $product->stock }} left — Hurry Up!</span>
-                                @else
-                                    <span class="text-success fw-semibold">In Stock ({{ $product->stock }} available)</span>
-                                @endif
+                                @if($product->stock <= 0) <span class="text-danger fw-semibold">Out of Stock</span>
+                                    @elseif($product->stock <= 5) <span class="text-warning fw-semibold">Only
+                                        {{ $product->stock }} left — Hurry Up!</span>
+                                        @else
+                                        <span class="text-success fw-semibold">In Stock ({{ $product->stock }}
+                                            available)</span>
+                                        @endif
                             </div>
 
                             @if($product->description)
@@ -186,7 +192,8 @@
                                     </div>
                                     <div class="list-group-item d-flex align-items-center justify-content-between">
                                         <div class="text-muted">100% secure payments</div>
-                                        <div class="lh-1 fs-14 text-success"><i class="ri-secure-payment-line"></i></div>
+                                        <div class="lh-1 fs-14 text-success"><i class="ri-secure-payment-line"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -224,12 +231,14 @@
                                                         PKR {{ number_format($fp->sale_price ?? $fp->price, 0) }}
                                                     </div>
                                                     @if($fp->sale_price)
-                                                    <s class="text-muted fs-12">PKR {{ number_format($fp->price, 0) }}</s>
+                                                    <s class="text-muted fs-12">PKR
+                                                        {{ number_format($fp->price, 0) }}</s>
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="ms-auto align-self-end">
-                                                <a href="{{ route('user.cart') }}" class="btn btn-primary btn-sm">Add</a>
+                                                <a href="{{ route('user.cart') }}"
+                                                    class="btn btn-primary btn-sm">Add</a>
                                             </div>
                                         </div>
                                     </td>
@@ -248,15 +257,15 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs tab-style-8 scaleX profile-settings-tab gap-2" id="myTab4" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link bg-primary-transparent px-4 active"
-                                data-bs-toggle="tab" data-bs-target="#product-details-pane" type="button">
+                            <button class="nav-link bg-primary-transparent px-4 active" data-bs-toggle="tab"
+                                data-bs-target="#product-details-pane" type="button">
                                 Product Details
                             </button>
                         </li>
                         @if($product->description)
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link bg-primary-transparent px-4"
-                                data-bs-toggle="tab" data-bs-target="#key-features-tab-pane" type="button">
+                            <button class="nav-link bg-primary-transparent px-4" data-bs-toggle="tab"
+                                data-bs-target="#key-features-tab-pane" type="button">
                                 Description
                             </button>
                         </li>
@@ -291,7 +300,8 @@
                                     @if($product->sale_price)
                                     <tr>
                                         <th class="fw-semibold">Sale Price</th>
-                                        <td class="text-danger fw-semibold">PKR {{ number_format($product->sale_price, 2) }}</td>
+                                        <td class="text-danger fw-semibold">PKR
+                                            {{ number_format($product->sale_price, 2) }}</td>
                                     </tr>
                                     @endif
                                     <tr>
@@ -301,7 +311,8 @@
                                     <tr>
                                         <th class="fw-semibold">Status</th>
                                         <td>
-                                            <span class="badge bg-{{ $product->status === 'active' ? 'success' : 'secondary' }}">
+                                            <span
+                                                class="badge bg-{{ $product->status === 'active' ? 'success' : 'secondary' }}">
                                                 {{ ucfirst($product->status) }}
                                             </span>
                                         </td>
@@ -329,9 +340,9 @@
                 <div class="swiper-wrapper">
                     @foreach($relatedProducts as $rp)
                     @php
-                        $rpDiscount = $rp->sale_price
-                            ? round((($rp->price - $rp->sale_price) / $rp->price) * 100)
-                            : null;
+                    $rpDiscount = $rp->sale_price
+                    ? round((($rp->price - $rp->sale_price) / $rp->price) * 100)
+                    : null;
                     @endphp
                     <div class="swiper-slide">
                         <div class="card custom-card card-style-2">
@@ -343,7 +354,8 @@
                                 @endif
                                 <div class="card-img-top">
                                     <div class="btns-container-1 align-items-center gap-1">
-                                        <a href="{{ route('user.wishlist') }}" class="btn btn-icon btn-success rounded-circle">
+                                        <a href="{{ route('user.wishlist') }}"
+                                            class="btn btn-icon btn-success rounded-circle">
                                             <i class="bx bx-heart align-center"></i>
                                         </a>
                                     </div>
@@ -356,7 +368,8 @@
                                     </div>
                                 </div>
                                 <div class="p-3">
-                                    <a href="javascript:void(0);" class="text-muted fs-12">{{ $rp->category?->name }}</a>
+                                    <a href="javascript:void(0);"
+                                        class="text-muted fs-12">{{ $rp->category?->name }}</a>
                                     <h6 class="mt-1 mb-2 fw-semibold fs-14">
                                         <a href="{{ route('user.product-details', $rp->slug) }}">{{ $rp->name }}</a>
                                     </h6>

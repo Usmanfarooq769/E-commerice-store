@@ -33,6 +33,7 @@ Route::middleware([
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class)->except(['show']);
+        Route::get('permissions/data', [PermissionController::class, 'getData'])->name('permissions.data');
         Route::resource('users', UserController::class)->only(['index', 'show' ,'create' , 'store']);
         Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])->name('users.assign-role');
         Route::delete('users/{user}/revoke-role/{role}', [UserController::class, 'revokeRole'])->name('users.revoke-role');

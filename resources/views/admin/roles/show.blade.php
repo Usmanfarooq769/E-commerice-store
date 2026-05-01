@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+    <h1 class="page-title fw-semibold fs-18 mb-0">Show Role</h1>
+    <nav><ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">Setting</a></li>
+        <li class="breadcrumb-item active">Show Role</li>
+    </ol></nav>
+</div>
 <div class="row">
     <div class="col-md-12">
         <div class="card custom-card bg-primary-transparent">

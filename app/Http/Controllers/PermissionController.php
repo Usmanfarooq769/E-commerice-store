@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+ use Yajra\DataTables\Facades\DataTables;
 
 class PermissionController extends Controller
 {
@@ -14,9 +15,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::with('roles')->paginate(15);
+        $totalPermissions = Permission::count();
 
-        return view('admin.permissions.index', compact('permissions'));
+    return view('admin.permissions.index', compact('totalPermissions'));
     }
 
     /**
@@ -73,13 +74,68 @@ class PermissionController extends Controller
     /**
      * Remove the specified permission from storage.
      */
-    public function destroy(Permission $permission)
-    {
-        $permName = $permission->name;
-        $permission->delete();
+   public function destroy(Permission $permission)
+{
+    $permission->delete();
 
-        return redirect()
-            ->route('admin.permissions.index')
-            ->with('success', "Permission <strong>{$permName}</strong> deleted successfully.");
+    return response()->json([
+        'success' => true,
+        'message' => 'Permission deleted successfully'
+    ]);
+}
+
+
+  
+
+public function getData(Request $request)
+{
+    if ($request->ajax()) {
+
+        $permissions = Permission::with('roles')->select('permissions.*');
+
+        return DataTables::of($permissions)
+
+            ->addIndexColumn()
+
+            ->addColumn('name', function ($permission) {
+                return '<code class="badge bg-primary">'.$permission->name.'</code>';
+            })
+
+            ->addColumn('roles', function ($permission) {
+                if ($permission->roles->count()) {
+                    return $permission->roles->map(function ($role) {
+                        return '<span class="badge bg-success">'.$role->name.'</span>';
+                    })->implode(' ');
+                }
+                return '<span class="text-primary">Unassigned</span>';
+            })
+
+            ->addColumn('guard_name', function ($permission) {
+                return '<span class="badge bg-primary">'.$permission->guard_name.'</span>';
+            })
+
+            ->addColumn('actions', function ($permission) {
+
+                $edit = '';
+                $delete = '';
+
+                if (auth()->user()->can('edit permissions')) {
+                    $edit = '<a href="'.route('admin.permissions.edit', $permission).'" class="btn btn-sm btn-success-light">
+                                <i class="bi bi-pencil"></i>
+                             </a>';
+                }
+
+                if (auth()->user()->can('delete permissions')) {
+                    $delete = '<button data-id="'.$permission->id.'" data-name="'.$permission->name.'" class="btn btn-sm btn-danger-light delete-btn">
+                                <i class="bi bi-trash"></i>
+                               </button>';
+                }
+
+                return '<div class="d-flex gap-1">'.$edit.$delete.'</div>';
+            })
+
+            ->rawColumns(['name', 'roles', 'guard_name', 'actions'])
+            ->make(true);
     }
+}
 }

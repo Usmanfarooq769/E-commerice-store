@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <div>
-        <h4 class="fw-bold mb-0">Roles</h4>
-        <p class="text-muted mb-0" style="font-size:.85rem">Manage application roles and their permissions</p>
-    </div>
-
+<div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+    <h1 class="page-title fw-semibold fs-18 mb-0">Role</h1>
+    <nav><ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="#">Setting</a></li>
+        <li class="breadcrumb-item active">role</li>
+    </ol></nav>
 </div>
 
 {{-- Stats row --}}
@@ -54,8 +54,9 @@
 <div class="card custom-card">
     <div class="card-header  justify-content-between flex-wrap">
         <h6 class="card-title">All Roles</h6>
+        <span class="badge bg-primary" style="font-size: 13px;">{{ $roles->total() }} total</span>
         <div class="d-flex align-item-center gap3">
-            <span class="badge bg-light text-dark">{{ $roles->total() }} total</span>
+            
             @can('create roles')
             <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
                 <i class="bi bi-plus-lg me-1"></i> New Role
@@ -65,7 +66,7 @@
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-bordered mb-0 w-100">
                 <thead>
                     <tr>
                         <th style="width:50px">#</th>
