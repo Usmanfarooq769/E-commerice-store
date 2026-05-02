@@ -14,7 +14,7 @@
 
 
 <body>
-    @include("user-layout.partials.switcher")
+    @include("layouts.partials.switcher")
     <div id="loader">
         <img src="{{ asset('assets/images/media/loader.svg') }}" alt="">
     </div>
@@ -38,7 +38,7 @@
         <!-- End::app-content -->
 
         @include("user-layout.partials.footer")
-        @include("user-layout.partials.headersearch-modal")
+        @include("layouts.partials.headersearch-modal")
     </div>
 
 
@@ -52,14 +52,14 @@
         cartRemoveBase: '{{ url("user/cart") }}'
     };
 </script>
- @include("user-layout.partials.add-cart-script")
+ @include("layouts.partials.add-cart-script")
 
     @stack('scripts')
     
     <!-- Stack for child scripts -->
    
     <!-- Common JS -->
-    @include("user-layout.partials.commonjs")
+    @include("layouts.partials.commonjs")
 
 
     <!-- Internal Add/Edit Products JS -->

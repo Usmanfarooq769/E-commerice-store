@@ -17,18 +17,23 @@
                         <i class="ti ti-sort-descending-2 me-1"></i> Sort By
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}">Newest</a></li>
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}">Oldest</a></li>
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}">Price: Low to High</a></li>
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}">Price: High to Low</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}">Newest</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}">Oldest</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}">Price: Low to High</a>
+                        </li>
+                        <li><a class="dropdown-item"
+                                href="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}">Price: High to
+                                Low</a></li>
                     </ul>
                 </div>
             </div>
             <div class="card-body">
                 <form action="{{ route('user.category', $category->slug) }}" method="GET">
                     <div class="input-group p-3 bg-light rounded mb-3">
-                        <input type="text" class="form-control" name="search"
-                            value="{{ request('search') }}"
+                        <input type="text" class="form-control" name="search" value="{{ request('search') }}"
                             placeholder="Search in {{ $category->name }}...">
                         <button type="submit" class="btn btn-primary"><i class="ti ti-search"></i></button>
                     </div>
@@ -48,9 +53,8 @@
 <div class="row mb-3">
     <div class="col-12">
         <div class="card custom-card overflow-hidden" style="max-height: 180px;">
-            <img src="{{ asset('storage/' . $category->image) }}"
-                 alt="{{ $category->name }}"
-                 class="w-100 object-fit-cover" style="max-height:180px; object-fit:cover;">
+            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
+                class="w-100 object-fit-cover" style="max-height:180px; object-fit:cover;">
         </div>
     </div>
 </div>
@@ -64,10 +68,10 @@
 
             @forelse($products as $product)
             @php
-                $discount = $product->sale_price
-                    ? round((($product->price - $product->sale_price) / $product->price) * 100)
-                    : null;
-                $displayPrice = $product->sale_price ?? $product->price;
+            $discount = $product->sale_price
+            ? round((($product->price - $product->sale_price) / $product->price) * 100)
+            : null;
+            $displayPrice = $product->sale_price ?? $product->price;
             @endphp
             <div class="col-xxl-3 col-lg-6 col-xl-4 col-sm-6">
                 <div class="card custom-card card-style-2">
@@ -79,25 +83,27 @@
                         @endif
                         <div class="card-img-top">
                             <div class="btns-container-1 align-items-center gap-1">
-                                <a href="{{ route('user.wishlist') }}" class="btn btn-icon btn-success rounded-circle"
-                                   data-bs-toggle="tooltip" title="Add to Wishlist">
+                                <a href="#" class="btn btn-icon btn-success rounded-circle" data-bs-toggle="tooltip"
+                                    title="Add to Wishlist">
                                     <i class="bx bx-heart align-center"></i>
                                 </a>
                             </div>
                             <div class="img-box-2">
                                 <a href="{{ route('user.product-details', $product->slug) }}">
                                     @if($product->image_url)
-                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
-                                            class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3">
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
+                                        class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3">
                                     @else
-                                        <img src="{{ asset('assets/images/ecommerce/png/1.png') }}" alt="{{ $product->name }}"
-                                            class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3">
+                                    <img src="{{ asset('assets/images/ecommerce/png/1.png') }}"
+                                        alt="{{ $product->name }}"
+                                        class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3">
                                     @endif
                                 </a>
                             </div>
                         </div>
                         <div class="p-3">
-                            <a href="javascript:void(0);" class="text-muted fs-12">{{ $product->category?->name ?? '' }}</a>
+                            <a href="javascript:void(0);"
+                                class="text-muted fs-12">{{ $product->category?->name ?? '' }}</a>
                             <h6 class="mt-1 mb-2 fw-semibold fs-14">
                                 <a href="{{ route('user.product-details', $product->slug) }}">{{ $product->name }}</a>
                             </h6>
@@ -107,19 +113,19 @@
                                 <s class="text-muted fs-12">PKR {{ number_format($product->price, 0) }}</s>
                                 @endif
                             </div>
-                            @if($product->stock <= 0)
-                                <span class="badge bg-danger mb-2">Out of Stock</span>
-                            @elseif($product->stock <= 5)
-                                <span class="badge bg-warning text-dark mb-2">Only {{ $product->stock }} left</span>
-                            @endif
-                            <div class="d-flex gap-1 justify-content-between flex-wrap">
-                                <a href="{{ route('user.check-out') }}" class="btn btn-success-light btn-sm">
-                                    <i class="bx bx-credit-card-alt"></i> Buy Now
-                                </a>
-                                <button class="btn btn-primary-light btn-sm add-to-cart-btn" data-id="{{ $product->id }}">
-                                    <i class="bx bxs-cart-add"></i> Add to Cart
-                                </button>
-                            </div>
+                            @if($product->stock <= 0) <span class="badge bg-danger mb-2">Out of Stock</span>
+                                @elseif($product->stock <= 5) <span class="badge bg-warning text-dark mb-2">Only
+                                    {{ $product->stock }} left</span>
+                                    @endif
+                                    <div class="d-flex gap-1 justify-content-between flex-wrap">
+                                        <a href="{{ route('user.check-out') }}" class="btn btn-success-light btn-sm">
+                                            <i class="bx bx-credit-card-alt"></i> Buy Now
+                                        </a>
+                                        <button class="btn btn-primary-light btn-sm add-to-cart-btn"
+                                            data-id="{{ $product->id }}">
+                                            <i class="bx bxs-cart-add"></i> Add to Cart
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -145,17 +151,17 @@
                             <a class="page-link" href="{{ $products->previousPageUrl() }}">Prev</a>
                         </li>
                         @foreach($products->getUrlRange(1, $products->lastPage()) as $page => $url)
-                            @if($page == $products->currentPage())
-                                <li class="page-item active"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                            @elseif($page == 1 || $page == $products->lastPage() || abs($page - $products->currentPage()) <= 1)
-                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                        @if($page == $products->currentPage())
+                        <li class="page-item active"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                        @elseif($page == 1 || $page == $products->lastPage() || abs($page - $products->currentPage()) <=
+                            1) <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
                             @elseif(abs($page - $products->currentPage()) == 2)
-                                <li class="page-item"><a class="page-link"><i class="bi bi-three-dots"></i></a></li>
+                            <li class="page-item"><a class="page-link"><i class="bi bi-three-dots"></i></a></li>
                             @endif
-                        @endforeach
-                        <li class="page-item {{ !$products->hasMorePages() ? 'disabled' : '' }}">
-                            <a class="page-link text-primary" href="{{ $products->nextPageUrl() }}">Next</a>
-                        </li>
+                            @endforeach
+                            <li class="page-item {{ !$products->hasMorePages() ? 'disabled' : '' }}">
+                                <a class="page-link text-primary" href="{{ $products->nextPageUrl() }}">Next</a>
+                            </li>
                     </ul>
                 </nav>
             </div>
@@ -169,7 +175,8 @@
         <div class="card custom-card products-navigation-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">Filter</div>
-                <a href="{{ route('user.category', $category->slug) }}" class="text-decoration-underline fw-medium text-secondary">Clear All</a>
+                <a href="{{ route('user.category', $category->slug) }}"
+                    class="text-decoration-underline fw-medium text-secondary">Clear All</a>
             </div>
             <div class="card-body p-0">
                 <form action="{{ route('user.category', $category->slug) }}" method="GET" id="filterForm">
@@ -182,7 +189,7 @@
                         @foreach($categories as $cat)
                         <div class="mb-1">
                             <a href="{{ route('user.category', $cat->slug) }}"
-                               class="text-decoration-none {{ $cat->id == $category->id ? 'text-primary fw-semibold' : 'text-muted' }}">
+                                class="text-decoration-none {{ $cat->id == $category->id ? 'text-primary fw-semibold' : 'text-muted' }}">
                                 {{ $cat->name }}
                                 <span class="fs-11">({{ $cat->products_count }})</span>
                             </a>
@@ -195,12 +202,12 @@
                         <h6 class="fw-semibold mb-3">Price Range (PKR)</h6>
                         <div class="row g-2">
                             <div class="col-6">
-                                <input type="number" class="form-control form-control-sm"
-                                    name="min_price" placeholder="Min" value="{{ request('min_price') }}">
+                                <input type="number" class="form-control form-control-sm" name="min_price"
+                                    placeholder="Min" value="{{ request('min_price') }}">
                             </div>
                             <div class="col-6">
-                                <input type="number" class="form-control form-control-sm"
-                                    name="max_price" placeholder="Max" value="{{ request('max_price') }}">
+                                <input type="number" class="form-control form-control-sm" name="max_price"
+                                    placeholder="Max" value="{{ request('max_price') }}">
                             </div>
                         </div>
                     </div>
@@ -229,15 +236,29 @@ $(document).on('click', '.add-to-cart-btn', function() {
     $.ajax({
         url: ADD_CART_URL,
         method: 'POST',
-        data: { _token: CSRF, product_id: productId, quantity: 1 },
+        data: {
+            _token: CSRF,
+            product_id: productId,
+            quantity: 1
+        },
         success(res) {
             $('#cart-icon-badge').text(res.count);
             $('#cart-data').text(res.count + ' Item' + (res.count != 1 ? 's' : ''));
             loadHeaderCart();
-            Swal.fire({ icon: 'success', title: res.message, timer: 1500, showConfirmButton: false, position: 'top-end', toast: true });
+            Swal.fire({
+                icon: 'success',
+                title: res.message,
+                timer: 1500,
+                showConfirmButton: false,
+                position: 'top-end',
+                toast: true
+            });
         },
         error(xhr) {
-            Swal.fire({ icon: 'error', title: xhr.responseJSON?.message || 'Error adding to cart' });
+            Swal.fire({
+                icon: 'error',
+                title: xhr.responseJSON?.message || 'Error adding to cart'
+            });
         }
     });
 });

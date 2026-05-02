@@ -336,7 +336,12 @@
                 <!-- Start::header-link|dropdown-toggle -->
                 <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     <span class="avatar avatar-sm avatar-rounded">
-                        <img src="{{asset('assets/images/faces/14.jpg')}}" alt="img" class="img-fluid">
+                        
+                        <img src="{{ auth()->user()->profile_photo_path 
+                        ? asset('storage/'.auth()->user()->profile_photo_path) 
+                        : asset('images/default-user.png') }}"
+                        alt="Profile"
+                        class="img-fluid rounded-circle">
                     </span>
                 </a>
                 <!-- End::header-link|dropdown-toggle -->
@@ -351,8 +356,7 @@
                         </div>
                     </li>
                     <li><a class="dropdown-item d-flex align-items-center" href="{{route('profile')}}"><i class="ti ti-user-circle fs-18 me-2 text-gray fw-normal"></i>My Profile</a></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href= "{{route('mail')}}"><i class="ti ti-inbox fs-18 me-2 text-gray fw-normal"></i>Mail Inbox <span class="badge bg-success ms-auto">06</span></a></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{route('mail-settings')}}"><i class="ti ti-adjustments-horizontal fs-18 me-2 text-gray fw-normal"></i>Account Settings</a></li>
+                    
                     <li> <hr class="dropdown-divider"> </li>
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="#"

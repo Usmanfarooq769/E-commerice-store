@@ -5,7 +5,7 @@
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
     <h1 class="page-title fw-semibold fs-18 mb-0">Users</h1>
     <nav><ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="#">Profile</a></li>
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
         <li class="breadcrumb-item active">Users</li>
     </ol></nav>
 </div>
@@ -55,7 +55,7 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0">
+                    <table class="table table-bordered  mb-0 w-100">
                         <thead>
                             <tr>
                                 <th style="width:50px">#</th>
@@ -91,10 +91,22 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('admin.users.show', $user) }}"
+                                     <div class="d-flex align-items-center gap-2">
+
+                                     <a href="{{ route('admin.users.show', $user) }}"
                                         class="btn btn-sm btn-primary-light" title="Manage Roles">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="{{ route('admin.users.editRole', $user) }}"
+                                        class="btn btn-sm btn-warning-light" title="Manage Roles">
                                         <i class="bi bi-person-gear"></i>
                                     </a>
+                                      <a href="{{ route('admin.users.edit', $user->id) }}"
+                                        class="btn btn-sm btn-success-light"
+                                        title="Edit User">
+                                            <i class="bi bi-pencil"></i>
+                                    </a>
+                                </div>
                                 </td>
                             </tr>
                             @empty

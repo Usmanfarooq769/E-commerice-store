@@ -189,7 +189,7 @@
 
                         <div class="card-img-top">
                             <div class="btns-container-1 align-items-center gap-1">
-                                <a href="{{ route('user.wishlist') }}" class="btn btn-icon btn-success rounded-circle"
+                                <a href="#" class="btn btn-icon btn-success rounded-circle"
                                     data-bs-toggle="tooltip" title="Add to Wishlist">
                                     <i class="bx bx-heart align-center"></i>
                                 </a>

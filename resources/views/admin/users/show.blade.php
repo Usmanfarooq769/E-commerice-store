@@ -1,196 +1,179 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Edit User</h1>
+    <h1 class="page-title fw-semibold fs-18 mb-0">Show User</h1>
     <nav>
         <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Profile</a></li>
-            <li class="breadcrumb-item active">Edit User</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
+            <li class="breadcrumb-item active">Show User</li>
         </ol>
     </nav>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <div class="card custom-card bg-primary-transparent">
-            <div class="card-header justify-content-between flex-wrap border-0">
-                <h3 class="card-title">{{ $user->name }}</h3>
-                <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-light">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
+    <div class="col-xxl-9">
+        <div class="card custom-card profile-card overflow-hidden">
+            <div class="main-profile-cover text-fixed-white">
+                <div class="p-xl-5 p-2 z-1">
+                    <div class="p-4 bg-black-transparent rounded-3 border border-opacity-10 border-white">
+                        <div class="d-flex gap-3 align-items-center flex-wrap">
+                            <div>
+                                <img src="{{ asset('storage/'.$user->profile_photo_path) }}" alt="Profile Images"
+                                    class="img-fluid rounded-circle p-2 bg-success bg-opacity-25 shadow" style="width: 80px; height: 80px;">
+                            </div>
+                            <div>
+                                <h4 class="text-fixed-white mb-1">{{$user->name ?? 'No Name'}} </h4>
+                                <p class="mb-1 op-6 fs-15"><i
+                                        class="ri-briefcase-fill lh-1 align-middle me-2 d-inline-block"></i>Lead Product
+                                    Designer</p>
+                                <div class="d-flex gap-3 align-items-center flex-wrap">
+                                    <p class="mb-0 op-6 fs-15"><i
+                                            class="ri-map-pin-line lh-1 align-middle me-2 d-inline-block"></i>{{$user->staffDetail->address ?? 'No Address'}}</p>
+                                    <span class="op-3">|</span>
+                                    <p class="mb-0 op-6 fs-15"><i
+                                            class="ri-mail-line lh-1 align-middle me-2 d-inline-block"></i>{{$user->email  ?? 'No Email'}}
+                                    </p>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0 position-relative">
+                <div class="profile-content">
+                    <div class="card custom-card rounded-0 mb-0 bg-warning-transparent">
+
+                       <div class="card-header align-items-center flex-wrap gap-2">
+                          @if(!empty($user->staffDetail->last_degree_file))
+                        <a href="{{ asset('storage/'.$user->staffDetail->last_degree_file) }}" class="btn btn-primary"
+                            target="_blank">
+                            View Degree
+                        </a>
+                        @endif
+
+                         @if(!empty($user->staffDetail->father_cnic_front))
+                        <a href="{{ asset('storage/'.$user->staffDetail->father_cnic_front) }}"  class="btn btn-success"  target="_blank">
+                            View Father CNIC
+                        </a>
+                        @endif
+                        @if(!empty($user->staffDetail->father_cnic_back))
+                        <a href="{{ asset('storage/'.$user->staffDetail->father_cnic_back) }}" class="btn btn-warning"  target="_blank">
+                            View Father CNIC Back
+                        </a>
+                        @endif
+
+                          @if(!empty($user->staffDetail->user_cnic_front))
+                        <a href="{{ asset('storage/'.$user->staffDetail->user_cnic_front) }}" class="btn btn-info"  target="_blank">
+                            User CNIC Front
+                        </a>
+                        @endif
+
+                         @if(!empty($user->staffDetail->user_cnic_back))
+                        <a href="{{ asset('storage/'.$user->staffDetail->user_cnic_back) }}" class="btn btn-danger"  target="_blank">
+                            User CNIC Back
+                        </a>
+                        @endif
+                        </div>
+                        <div class="card-body">
+
+                        <div class="d-flex align-items-center justify-content-between flex-wrap border-block-end-dashed pb-2" style="border-bottom: 1px dashed 	rgb(var(--primary-rgb));">
+                           <p class="text-bold text-primary">Father Name</p>
+                           <p >{{$user->staffDetail->father_name}}</p>
+                        </div>
+
+                         <div class="d-flex align-items-center justify-content-between flex-wrap border-block-end-dashed pb-2 pt-2" style="border-bottom: 1px dashed 	rgb(var(--primary-rgb));">
+                           <p class="text-bold text-primary">Father CNIC</p>
+                           <p >{{$user->staffDetail->father_cnic ?? 'N\A'}}</p>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between flex-wrap border-block-end-dashed pb-2 pt-2" style="border-bottom: 1px dashed 	rgb(var(--primary-rgb));">
+                           <p class="text-bold text-primary">Salary</p>
+                           <p >{{$user->staffDetail->salary ?? 'N\A'}}</p>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between flex-wrap border-block-end-dashed pb-2 pt-2" style="border-bottom: 1px dashed 	rgb(var(--primary-rgb));">
+                           <p class="text-bold text-primary">Education</p>
+                           <p >{{$user->staffDetail->education ?? 'N\A'}}</p>
+                        </div>
+
+                       
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-3">
+        <div class="card custom-card">
+            <div class="list-group list-group-flush rounded-3">
+                <div class="p-3 pb-1 d-flex flex-wrap justify-content-between">
+                    <div class="fw-medium fs-15">
+                        Basic Info:
+                    </div>
+                </div>
+                <div class="card-body border-bottom border-block-end-dashed p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item pt-2 border-0">
+                            <div><span class="fw-medium me-2">Full Name :</span><span class="text-muted">{{ $user->name ?? 'N\A'}}</span></div>
+                        </li>
+                        <li class="list-group-item pt-2 border-0">
+                            <div><span class="fw-medium me-2">Job Title :</span><span class="text-muted">Lead Product
+                                    Designer</span></div>
+                        </li>
+                        <li class="list-group-item pt-2 border-0">
+                            <div><span class="fw-medium me-2">Years of Experience :</span><span class="text-muted">{{ $user->staffDetail->work_experience  ?? 'N\A'}}</span></div>
+                        </li>
+                        <li class="list-group-item pt-2 border-0">
+                            <div><span class="fw-medium me-2">Date of Birth :</span><span class="text-muted">{{ $user->staffDetail->birthday ?? 'N\A'}}
+                                    </span></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-group-item p-3">
+                    <span class="fw-medium fs-15 d-block mb-3">Contact Info :</span>
+                    <div class="text-muted">
+                        <p class="mb-3">
+                            <i class="ri-mail-line align-middle fs-15 me-1 d-inline-block text-primary"></i>
+                            <span class="fw-medium text-default">Email : </span> {{$user->email ?? 'No Email'}}
+                        </p>
+                        <p class="mb-3">
+                            <i class="ri-building-line align-middle fs-15 me-1 d-inline-block text-success"></i>
+                            <span class="fw-medium text-default">Location : </span> {{$user->staffDetail->address ?? 'No Address'}}
+                        </p>
+                        <p class="mb-3">
+                            <i class="ri-phone-line align-middle fs-15 me-1 d-inline-block text-info"></i>
+                            <span class="fw-medium text-default">Phone : </span> {{$user->staffDetail->phone_number ?? 'N\A'}}
+                        </p>
+                        <p class="mb-3">
+                            <i class="bi bi-globe align-middle fs-15 me-1 d-inline-block text-warning"></i>
+                            <span class="fw-medium text-default">Country : </span> {{$user->staffDetail->country ?? 'N\A'}}
+                        </p>
+                        <p class="mb-3">
+                            <i class="bi bi-map align-middle fs-15 me-1 d-inline-block text-danger"></i>
+                            <span class="fw-medium text-default">State : </span> {{$user->staffDetail->state ?? 'N\A'}}
+                        </p>
+
+                        <p class="mb-3">
+                            <i class="bi bi-map align-middle fs-15 me-1 d-inline-block text-success"></i>
+                            <span class="fw-medium text-default">Pin Code : </span> {{$user->staffDetail->pincod ?? 'N\A'}}
+                        </p>
+
+                        <p class="mb-3">
+                            <i class="bi bi-buildings  align-middle fs-15 me-1 d-inline-block text-primary"></i>
+                            <span class="fw-medium text-default">City : </span> {{$user->staffDetail->city ?? 'N\A'}}
+                        </p>
+                        
+                    </div>
+                </div>
 
 
             </div>
-
         </div>
+
     </div>
 </div>
 
-<div class="row g-4">
 
-    {{-- Left: current roles + permissions --}}
-    <div class="col-xl-8">
-
-        {{-- Current Roles --}}
-        <div class="card custom-card ">
-            <div class="card-header justify-content-between flex-wrap">
-                <h6 class="card-title">
-                    <i class="bi bi-person-badge me-2 text-primary"></i>
-                    Current Roles
-                </h6>
-                <span class="badge bg-secondary" style="font-size:.85rem">{{ $user->roles->count() }}</span>
-            </div>
-            <div class="card-body">
-                @forelse($user->roles as $role)
-                <div class="d-flex align-items-center justify-content-between py-2
-                            {{ !$loop->last ? 'border-bottom' : '' }}">
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="role-badge {{ $role->name }}">
-                            <i class="bi bi-circle-fill" style="font-size:.4rem"></i>
-                            {{ $role->name }}
-                        </span>
-                        <span class="text-muted" style="font-size:.8rem">
-                            {{ $role->permissions->count() }} permissions
-                        </span>
-                    </div>
-
-                    <form action="{{ route('admin.users.revoke-role', [$user, $role]) }}"
-                          method="POST"
-                          onsubmit="return confirm('Revoke {{ $role->name }} from {{ $user->name }}?')">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-x-lg me-1"></i> Revoke
-                        </button>
-                    </form>
-                </div>
-                @empty
-                <p class="text-primary mb-0" style="font-size:.875rem">
-                    <i class="bi bi-info-circle me-1"></i>
-                    No roles assigned to this user yet.
-                </p>
-                @endforelse
-            </div>
-        </div>
-
-        {{-- Effective Permissions (from all roles) --}}
-        <div class="card custom-card">
-            <div class="card-header justify-content-between flex-wrap">
-                <h6 class="card-title">
-                    <i class="bi bi-key me-2 text-warning"></i>
-                    Effective Permissions
-                    <span class="badge bg-secondary ms-2">
-                        {{ $user->getAllPermissions()->count() }}
-                    </span>
-                </h6>
-            </div>
-            <div class="card-body">
-                @php
-                    $allPerms = $user->getAllPermissions()->groupBy(function($p) {
-                        return explode(' ', $p->name)[1] ?? $p->name;
-                    });
-                @endphp
-
-                @forelse($allPerms as $group => $perms)
-              
-                    <h6 class="perm-group-title mt-3 mb-3">
-                        <i class="bi bi-folder2"></i> {{ ucfirst($group) }}
-                    </h6>
-                    <div class="d-flex flex-wrap gap-2">
-                        @foreach($perms as $perm)
-                            <span class="badge bg-success" style="font-size:.82rem">
-                                <i class="bi bi-check2 me-1"></i>{{ $perm->name }}
-                            </span>
-                        @endforeach
-                    </div>
-               
-                @empty
-                    <p class="text-muted mb-0" style="font-size:.875rem">No permissions from roles.</p>
-                @endforelse
-            </div>
-        </div>
-    </div>
-
-    {{-- Right: assign role + user info --}}
-    <div class="col-xl-4">
-
-        {{-- User info card --}}
-        <div class="card custom-card">
-            <div class="card-body text-center py-4">
-                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                     style="width:64px;height:64px;background:#ede9fe;color:#5b21b6;font-size:1.3rem;font-weight:700">
-                    {{ strtoupper(substr($user->name, 0, 2)) }}
-                </div>
-                <h6 class="fw-semibold mb-1">{{ $user->name }}</h6>
-                <p class="text-muted mb-2" style="font-size:.82rem">{{ $user->email }}</p>
-                <div class="d-flex justify-content-center gap-1 flex-wrap">
-                    @foreach($user->roles as $role)
-                        <span class="role-badge {{ $role->name }}">{{ $role->name }}</span>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
-        {{-- Assign single role --}}
-        <div class="card custom-card ">
-            <div class="card-header justify-content-between flex-wrap">
-                <h6 class="card-title">Assign Role</h6>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('admin.users.assign-role', $user) }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label class="form-label" style="font-size:.85rem">Select Role</label>
-                        <select name="role" class="form-select form-select-sm">
-                            @foreach($roles as $role)
-                                <option value="{{ $role->name }}"
-                                    {{ $user->hasRole($role->name) ? 'disabled' : '' }}>
-                                    {{ $role->name }}
-                                    {{ $user->hasRole($role->name) ? '(assigned)' : '' }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm w-100">
-                        <i class="bi bi-plus-lg me-1"></i> Assign Role
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        {{-- Sync all roles at once --}}
-        <div class="card custom-card">
-            <div class="card-header justify-content-between flex-wrap">
-                <h6 class="card-title">Sync All Roles</h6>
-            </div>
-            <div class="card-body">
-                <p class="text-muted mb-3" style="font-size:.8rem">
-                    This replaces all current roles with the selected ones.
-                </p>
-                <form action="{{ route('admin.users.sync-roles', $user) }}" method="POST">
-                    @csrf
-                    @foreach($roles as $role)
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox"
-                               name="roles[]"
-                               value="{{ $role->name }}"
-                               id="sync_{{ $role->id }}"
-                               {{ $user->hasRole($role->name) ? 'checked' : '' }}>
-                        <label class="form-check-label" for="sync_{{ $role->id }}"
-                               style="font-size:.875rem">
-                            {{ $role->name }}
-                        </label>
-                    </div>
-                    @endforeach
-                    <button type="submit" class="btn btn-warning btn-sm w-100 mt-2"
-                            onclick="return confirm('This will replace all current roles. Continue?')">
-                        <i class="bi bi-arrow-repeat me-1"></i> Sync Roles
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
-@push('script')
-@endpush

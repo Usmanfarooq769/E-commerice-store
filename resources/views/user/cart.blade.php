@@ -134,7 +134,7 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('user.wishlist') }}"
+                                    <a href="#"
                                         class="btn btn-icon btn-secondary btn-sm me-1"
                                         data-bs-toggle="tooltip" title="Move To Wishlist">
                                         <i class="ri-heart-line lh-1 align-middle"></i>

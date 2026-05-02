@@ -113,7 +113,7 @@
 
                     <div class="row gy-3 gy-xl-0">
                         <div class="col-xl-7">
-                            <a href="{{ route('user.wishlist') }}" class="btn btn-outline-primary btn-w-lg me-2 mb-3">
+                            <a href="#" class="btn btn-outline-primary btn-w-lg me-2 mb-3">
                                 <i class="ri-heart-line fs-16 align-middle lh-1"></i> Add to Wishlist
                             </a>
 
@@ -354,7 +354,7 @@
                                 @endif
                                 <div class="card-img-top">
                                     <div class="btns-container-1 align-items-center gap-1">
-                                        <a href="{{ route('user.wishlist') }}"
+                                        <a href="#"
                                             class="btn btn-icon btn-success rounded-circle">
                                             <i class="bx bx-heart align-center"></i>
                                         </a>
