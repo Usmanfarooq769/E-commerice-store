@@ -32,21 +32,37 @@ class CategoryController extends Controller
                 : '<span class="badge bg-secondary">Inactive</span>'
             )
             ->addColumn('created_by', fn($c) => $c->creator?->name ?? 'N/A')
-            ->addColumn('actions', fn($c) => '
-                <button class="btn btn-success-light btn-sm me-1 editCatBtn"
-                    data-id="'.$c->id.'"
-                    data-name="'.e($c->name).'"
-                    data-description="'.e($c->description).'"
-                    data-status="'.$c->status.'"
-                    data-image="'.($c->image ? asset('storage/'.$c->image) : '').'">
-                    <i class="ri-edit-line"></i>
-                </button>
-                <button class="btn btn-danger-light btn-sm deleteCatBtn"
-                    data-id="'.$c->id.'"
-                    data-name="'.e($c->name).'">
-                    <i class="ri-delete-bin-line"></i>
-                </button>
-            ')
+            ->addColumn('actions', function ($c) {
+
+                $buttons = '';
+
+                // ✅ EDIT PERMISSION
+                if (auth()->user()->can('edit category')) {
+                    $buttons .= '
+                        <button class="btn btn-success-light btn-sm me-1 editCatBtn"
+                            data-id="'.$c->id.'"
+                            data-name="'.e($c->name).'"
+                            data-description="'.e($c->description).'"
+                            data-status="'.$c->status.'"
+                            data-image="'.($c->image ? asset('storage/'.$c->image) : '').'">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                    ';
+                }
+
+                // ✅ DELETE PERMISSION
+                if (auth()->user()->can('delete category')) {
+                    $buttons .= '
+                        <button class="btn btn-danger-light btn-sm deleteCatBtn"
+                            data-id="'.$c->id.'"
+                            data-name="'.e($c->name).'">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    ';
+                }
+
+                return $buttons;
+            })
             ->rawColumns(['image_col', 'slug_col', 'description_col', 'status_badge', 'actions'])
             ->make(true);
     }

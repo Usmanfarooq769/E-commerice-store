@@ -10,6 +10,9 @@ class OrderController extends Controller
 {
     public function index()
     {
+         if (!auth()->user()->can('view orders')) {
+            abort(403, 'Unauthorized');
+        }
         $stats = [
             'all'       => Order::count(),
             'pending'   => Order::where('status', 'pending')->count(),
@@ -22,6 +25,10 @@ class OrderController extends Controller
 
     public function getData()
     {
+
+    if (!auth()->user()->can('view orders')) {
+            abort(403, 'Unauthorized');
+        }
         $orders = Order::with(['items.product', 'user'])->latest();
 
         return DataTables::of($orders)
@@ -44,39 +51,66 @@ class OrderController extends Controller
             )
             ->addColumn('cost_col', fn($o) => 'PKR '.number_format($o->total, 2))
             ->addColumn('date_col', fn($o) => $o->created_at->format('d M Y'))
-            ->addColumn('actions', fn($o) =>
-                '<a href="'.route('admin.orders.show', $o->id).'"
-                    class="btn btn-icon btn-sm btn-primary-light me-1" title="View">
-                    <i class="ri-eye-line"></i>
-                </a>
-                <button class="btn btn-icon btn-sm btn-success-light me-1 assign-delivery-btn"
-                    data-id="'.$o->id.'"
-                    data-name="'.e($o->delivery_person_name).'"
-                    data-phone="'.e($o->delivery_person_phone).'"
-                    title="Assign Delivery">
-                    <i class="ri-truck-line"></i>
-                </button>
-                <a href="'.route('admin.order.invoice', $o->id).'"
-                    class="btn btn-icon btn-sm btn-info-light me-1" title="Invoice">
-                    <i class="ri-download-line"></i>
-                </a>
-                <button class="btn btn-icon btn-sm btn-danger-light delete-order-btn"
-                    data-id="'.$o->id.'" title="Delete">
-                    <i class="ri-delete-bin-line"></i>
-                </button>'
-            )
+           ->addColumn('actions', function ($o) {
+
+                $user = auth()->user();
+                $buttons = '';
+                if ($user->can('view orders')) {
+                    $buttons .= '
+                        <a href="'.route('admin.orders.show', $o->id).'"
+                            class="btn btn-icon btn-sm btn-primary-light me-1" title="View">
+                            <i class="ri-eye-line"></i>
+                        </a>
+                    ';
+                }
+                if ($user->can('assign orders')) {
+                    $buttons .= '
+                        <button class="btn btn-icon btn-sm btn-success-light me-1 assign-delivery-btn"
+                            data-id="'.$o->id.'"
+                            data-name="'.e($o->delivery_person_name).'"
+                            data-phone="'.e($o->delivery_person_phone).'"
+                            title="Assign Delivery">
+                            <i class="ri-truck-line"></i>
+                        </button>
+                    ';
+                }
+                if ($user->can('download orders')) {
+                    $buttons .= '
+                        <a href="'.route('admin.order.invoice', $o->id).'"
+                            class="btn btn-icon btn-sm btn-info-light me-1" title="Invoice">
+                            <i class="ri-download-line"></i>
+                        </a>
+                    ';
+                }
+                if ($user->can('delete orders')) {
+                    $buttons .= '
+                        <button class="btn btn-icon btn-sm btn-danger-light delete-order-btn"
+                            data-id="'.$o->id.'" title="Delete">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    ';
+                }
+
+                return $buttons;
+            })
             ->rawColumns(['product_col','customer_col','status_badge','payment_col','actions'])
             ->make(true);
     }
 
     public function show($id)
     {
+        if (!auth()->user()->can('view orders')) {
+            abort(403, 'Unauthorized');
+        }
         $order = Order::with(['items.product', 'user'])->findOrFail($id);
         return view('admin.orders.show', compact('order'));
     }
 
     public function assignDelivery(Request $request, $id)
     {
+        if (!auth()->user()->can('assign orders')) {
+            abort(403, 'Unauthorized');
+        }
         $request->validate([
             'delivery_person_name'  => 'required|string|max:100',
             'delivery_person_phone' => 'required|string|max:20',
@@ -106,6 +140,10 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
+
+    if (!auth()->user()->can('delete order')) {
+            abort(403, 'Unauthorized');
+        }
         Order::findOrFail($id)->delete();
         return response()->json(['success' => true, 'message' => 'Order deleted!']);
     }

@@ -18,6 +18,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (!auth()->user()->can('view users')) {
+            abort(403, 'Unauthorized');
+        }
         $users = User::with('roles')->paginate(10);
 
         return view('admin.users.index', compact('users'));
@@ -28,6 +31,9 @@ class UserController extends Controller
      */
     public function editRole(User $user)
     {
+        if (!auth()->user()->can('edit role user')) {
+        abort(403, 'Unauthorized');
+    }
         $user->load('roles', 'permissions');
         $roles = Role::all();
 
@@ -39,6 +45,9 @@ class UserController extends Controller
      */
     public function assignRole(Request $request, User $user)
     {
+         if (!auth()->user()->can('assign role user')) {
+            abort(403, 'Unauthorized');
+        }
         $request->validate([
             'role' => 'required|exists:roles,name',
         ]);
@@ -57,6 +66,11 @@ class UserController extends Controller
      */
     public function revokeRole(User $user, Role $role)
     {
+
+      if (!auth()->user()->can('revoke role user')) {
+            abort(403, 'Unauthorized');
+        }
+
         if (!$user->hasRole($role)) {
             return back()->with('warning', "User does not have the <strong>{$role->name}</strong> role.");
         }
@@ -71,6 +85,10 @@ class UserController extends Controller
      */
     public function syncRoles(Request $request, User $user) 
     {
+
+    if (!auth()->user()->can('sync role user')) {
+            abort(403, 'Unauthorized');
+        }
         $request->validate([
             'roles'   => 'nullable|array',
             'roles.*' => 'exists:roles,name',
@@ -84,6 +102,10 @@ class UserController extends Controller
 
     public function create()
     {
+        if (!auth()->user()->can('create users')) {
+            abort(403, 'Unauthorized');
+        }
+        
         $roles = Role::all(); 
         return view('admin.users.create', compact('roles'));
     }
@@ -92,6 +114,10 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+
+    if (!auth()->user()->can('create users')) {
+            abort(403, 'Unauthorized');
+        }
         $request->validate([
         // User
         'name'     => 'required|string|max:255',
@@ -193,6 +219,9 @@ class UserController extends Controller
 
 public function edit($id)
 {
+    if (!auth()->user()->can('edit users')) {
+            abort(403, 'Unauthorized');
+        }
     $user = User::with('staffDetail')->findOrFail($id);
     $roles = Role::all();
 
@@ -202,6 +231,9 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
+    if (!auth()->user()->can('edit users')) {
+            abort(403, 'Unauthorized');
+        }
     $user = User::with('staffDetail')->findOrFail($id);
 
     $request->validate([
@@ -300,6 +332,9 @@ public function update(Request $request, $id)
 }
 
 public function show($id){
+    if (!auth()->user()->can('view users')) {
+            abort(403, 'Unauthorized');
+        }
     $user = User::with('staffDetail')->findOrFail($id);
     $roles = Role::all();
 

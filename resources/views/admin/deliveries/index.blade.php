@@ -6,13 +6,11 @@
     <h1 class="page-title fw-semibold fs-18 mb-0">Deliveries</h1>
     <nav>
         <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
             <li class="breadcrumb-item active">Deliveries</li>
         </ol>
     </nav>
 </div>
-
-{{-- Stats --}}
 <div class="row">
     <div class="col-xl-3">
         <div class="card custom-card border border-primary border-opacity-10 bg-primary-transparent">
@@ -55,15 +53,17 @@
 {{-- Table --}}
 <div class="card custom-card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title mb-0">All Deliveries</h3>
+        <h3 class="card-title">All Deliveries</h3>
+        @can('create deliveries')
         <button class="btn btn-primary" id="openAddDeliveryModal">
             <i class="ri-add-line me-1"></i> Assign Delivery
         </button>
+        @endcan
     </div>
     <div class="card-body">
         <div class="table-responsive">
-        <table id="deliveriesTable" class="table  text-nowrap w-100">
-            <thead class="table-dark">
+        <table id="deliveriesTable" class="table  table-bordered text-nowrap w-100">
+            <thead >
                 <tr>
                     <th>#</th>
                     <th>Order ID</th>
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-{{-- Add / Edit Modal --}}
+
 <div class="modal fade" id="deliveryModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -98,7 +98,7 @@
                 <div class="row g-3">
                     <div class="col-md-12" id="order_select_wrap">
                         <label class="form-label">Order <span class="text-danger">*</span></label>
-                        <select class="form-select" id="del_order_id">
+                        <select class="form-select js-example-basic-single select2" id="del_order_id">
                             <option value="">-- Select Order --</option>
                             @foreach(\App\Models\Order::whereDoesntHave('delivery')->latest()->get() as $order)
                             <option value="{{ $order->id }}">
@@ -121,7 +121,7 @@
 
                     <div class="col-md-12">
                         <label class="form-label">Status <span class="text-danger">*</span></label>
-                        <select class="form-select" id="del_status">
+                        <select class="form-select js-example-basic-single select2" id="del_status">
                             <option value="assigned">Assigned</option>
                             <option value="out_for_delivery">Out for Delivery</option>
                             <option value="delivered">Delivered</option>
@@ -131,12 +131,12 @@
 
                     <div class="col-md-12">
                         <label class="form-label">Notes</label>
-                        <input type="text" class="form-control" id="del_notes" placeholder="Optional notes...">
+                        <input type="text" class="form-control" row="3" id="del_notes" placeholder="Optional notes...">
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <div class="modal-footer text-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="saveDeliveryBtn">
                     <span id="delBtnText">Save</span>
                     <span id="delBtnSpinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
@@ -157,7 +157,7 @@ const DEL_DATA_URL = '{{ route("admin.deliveries.data") }}';
 const DEL_STORE_URL = '{{ route("admin.deliveries.store") }}';
 const DEL_BASE_URL = '{{ url("admin/deliveries") }}';
 
-// ─── DataTable ────────────────────────────────────────────────
+// DataTable 
 const table = $('#deliveriesTable').DataTable({
     processing: true,
     serverSide: true,
@@ -228,7 +228,20 @@ const table = $('#deliveriesTable').DataTable({
     }
 });
 
-// ─── Helpers ──────────────────────────────────────────────────
+$(document).ready(function () {
+
+    // when modal opens
+    $('#deliveryModal').on('shown.bs.modal', function () {
+
+        $('.select2').select2({
+            dropdownParent: $('#deliveryModal'), 
+            width: '100%'
+        });
+
+    });
+
+});
+// Helpers 
 const modal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('deliveryModal'));
 
 function resetModal(title = 'Assign Delivery') {
@@ -240,13 +253,13 @@ function resetModal(title = 'Assign Delivery') {
     $('#order_select_wrap').show();
 }
 
-// ─── Open Add Modal ───────────────────────────────────────────
+//  Open Add Modal 
 $('#openAddDeliveryModal').on('click', function() {
     resetModal('Assign Delivery');
     modal().show();
 });
 
-// ─── Open Edit Modal ──────────────────────────────────────────
+// Open Edit Modal
 $(document).on('click', '.edit-delivery-btn', function() {
     const d = $(this).data();
     resetModal('Edit Delivery');
@@ -259,7 +272,7 @@ $(document).on('click', '.edit-delivery-btn', function() {
     modal().show();
 });
 
-// ─── Save ─────────────────────────────────────────────────────
+// Save
 $('#saveDeliveryBtn').on('click', function() {
     const id = $('#del_id').val();
     const url = id ? `${DEL_BASE_URL}/${id}` : DEL_STORE_URL;
@@ -309,7 +322,7 @@ $('#saveDeliveryBtn').on('click', function() {
     });
 });
 
-// ─── Delete ───────────────────────────────────────────────────
+// Delete 
 $(document).on('click', '.delete-delivery-btn', function() {
     const id = $(this).data('id');
 

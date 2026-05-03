@@ -11,6 +11,11 @@ class DeliveryController extends Controller
 {
     public function index()
     {
+
+     if (!auth()->user()->can('view deliveries')) {
+            abort(403, 'Unauthorized');
+        }
+    
         $stats = [
             'total'            => Delivery::count(),
             'assigned'         => Delivery::where('status', 'assigned')->count(),
@@ -24,6 +29,10 @@ class DeliveryController extends Controller
 
     public function getData()
     {
+
+     if (!auth()->user()->can('view deliveries')) {
+            abort(403, 'Unauthorized');
+        }
         $deliveries = Delivery::with('order')->latest();
 
         return DataTables::of($deliveries)
@@ -50,28 +59,50 @@ class DeliveryController extends Controller
             ->addColumn('delivered_at_col', fn($d) =>
                 $d->delivered_at ? $d->delivered_at->format('d M Y, h:i A') : '<span class="text-muted">—</span>'
             )
-            ->addColumn('actions', fn($d) =>
-                '<button class="btn btn-success-light btn-sm me-1 edit-delivery-btn"
-                    data-id="'.$d->id.'"
-                    data-name="'.e($d->delivery_person_name).'"
-                    data-phone="'.e($d->delivery_person_phone).'"
-                    data-status="'.$d->status.'"
-                    data-notes="'.e($d->notes).'"
-                    title="Edit">
-                    <i class="ri-edit-line"></i>
-                </button>
-                <button class="btn btn-danger-light btn-sm delete-delivery-btn"
-                    data-id="'.$d->id.'"
-                    title="Delete">
-                    <i class="ri-delete-bin-line"></i>
-                </button>'
-            )
+           ->addColumn('actions', function ($d) {
+
+            $user = auth()->user();
+            $buttons = '';
+
+            // EDIT DELIVERY
+            if ($user->can('edit deliveries')) {
+                $buttons .= '
+                    <button class="btn btn-success-light btn-sm me-1 edit-delivery-btn"
+                        data-id="'.$d->id.'"
+                        data-name="'.e($d->delivery_person_name).'"
+                        data-phone="'.e($d->delivery_person_phone).'"
+                        data-status="'.$d->status.'"
+                        data-notes="'.e($d->notes).'"
+                        title="Edit">
+                        <i class="ri-edit-line"></i>
+                    </button>
+                ';
+            }
+
+            //  DELETE DELIVERY
+            if ($user->can('delete deliveries')) {
+                $buttons .= '
+                    <button class="btn btn-danger-light btn-sm delete-delivery-btn"
+                        data-id="'.$d->id.'"
+                        title="Delete">
+                        <i class="ri-delete-bin-line"></i>
+                    </button>
+                ';
+            }
+
+            return $buttons;
+        })
             ->rawColumns(['order_number','customer_col','status_badge','assigned_at_col','delivered_at_col','actions'])
             ->make(true);
     }
 
     public function store(Request $request)
     {
+
+     if (!auth()->user()->can('create deliveries')) {
+            abort(403, 'Unauthorized');
+        }
+
         $request->validate([
             'order_id'              => 'required|exists:orders,id',
             'delivery_person_name'  => 'required|string|max:100',
@@ -111,6 +142,10 @@ class DeliveryController extends Controller
 
     public function update(Request $request, $id)
     {
+
+     if (!auth()->user()->can('edit deliveries')) {
+            abort(403, 'Unauthorized');
+        }
         $delivery = Delivery::findOrFail($id);
 
         $request->validate([
@@ -141,6 +176,9 @@ class DeliveryController extends Controller
 
     public function destroy($id)
     {
+         if (!auth()->user()->can('delete deliveries')) {
+            abort(403, 'Unauthorized');
+        }
         Delivery::findOrFail($id)->delete();
         return response()->json(['success' => true, 'message' => 'Delivery record deleted!']);
     }

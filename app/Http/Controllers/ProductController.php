@@ -12,12 +12,18 @@ class ProductController extends Controller
 {
     public function index()
     {
+         if (!auth()->user()->can('view products')) {
+            abort(403, 'Unauthorized');
+        }
         $categories = Category::where('status', 'active')->get(['id', 'name']);
         return view('admin.products.index', compact('categories'));
     }
 
     public function getData()
     {
+         if (!auth()->user()->can('view products')) {
+            abort(403, 'Unauthorized');
+        }
         $products = Product::with(['category', 'creator'])->latest();
 
         return DataTables::of($products)
@@ -41,34 +47,55 @@ class ProductController extends Controller
                 : '<span class="badge bg-light text-dark">No</span>'
             )
             ->addColumn('created_by', fn($p) => $p->creator?->name ?? 'N/A')
-            ->addColumn('actions', fn($p) => '
-                <button class="btn btn-success-light btn-sm editProdBtn"
-                    data-id="'.$p->id.'"
-                    data-category_id="'.$p->category_id.'"
-                    data-name="'.e($p->name).'"
-                    data-sku="'.e($p->sku).'"
-                    data-price="'.$p->price.'"
-                    data-sale_price="'.$p->sale_price.'"
-                    data-stock="'.$p->stock.'"
-                    data-unit="'.$p->unit.'"
-                    data-status="'.$p->status.'"
-                    data-featured="'.($p->is_featured ? 1 : 0).'"
-                    data-description="'.e($p->description).'"
-                    data-image="'.($p->image_url ?? '').'">
-                    <i class="ri-edit-line"></i>
-                </button>
-                <button class="btn btn-danger-light btn-sm deleteProdBtn"
-                    data-id="'.$p->id.'"
-                    data-name="'.e($p->name).'">
-                    <i class="ri-delete-bin-line"></i>
-                </button>
-            ')
+           ->addColumn('actions', function ($p) {
+
+                    $buttons = '';
+
+                    $user = auth()->user();
+
+                    // EDIT PRODUCT
+                    if ($user->can('edit products')) {
+                        $buttons .= '
+                            <button class="btn btn-success-light btn-sm editProdBtn"
+                                data-id="'.$p->id.'"
+                                data-category_id="'.$p->category_id.'"
+                                data-name="'.e($p->name).'"
+                                data-sku="'.e($p->sku).'"
+                                data-price="'.$p->price.'"
+                                data-sale_price="'.$p->sale_price.'"
+                                data-stock="'.$p->stock.'"
+                                data-unit="'.$p->unit.'"
+                                data-status="'.$p->status.'"
+                                data-featured="'.($p->is_featured ? 1 : 0).'"
+                                data-description="'.e($p->description).'"
+                                data-image="'.($p->image_url ?? '').'">
+                                <i class="ri-edit-line"></i>
+                            </button>
+                        ';
+                    }
+
+                    // DELETE PRODUCT
+                    if ($user->can('delete products')) {
+                        $buttons .= '
+                            <button class="btn btn-danger-light btn-sm deleteProdBtn"
+                                data-id="'.$p->id.'"
+                                data-name="'.e($p->name).'">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
+                        ';
+                    }
+
+                    return $buttons;
+                })
             ->rawColumns(['image_col','sale_price_col','status_badge','featured_badge','actions'])
             ->make(true);
     }
 
     public function store(Request $request)
     {
+         if (!auth()->user()->can('create products')) {
+            abort(403, 'Unauthorized');
+        }
         $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name'        => 'required|string|max:150',
@@ -107,6 +134,9 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+         if (!auth()->user()->can('edit products')) {
+            abort(403, 'Unauthorized');
+        }
         $product = Product::findOrFail($id);
 
         $request->validate([
@@ -148,6 +178,9 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+         if (!auth()->user()->can('delete products')) {
+            abort(403, 'Unauthorized');
+        }
         $product = Product::findOrFail($id);
 
         if ($product->image && file_exists(public_path('products/'.$product->image))) {

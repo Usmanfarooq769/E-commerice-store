@@ -26,6 +26,7 @@
                 <div class="d-flex gap-2 align-items-center">
 
                     {{-- Status Updater --}}
+                    @can('status orders')
                     <select class="form-select form-select-sm" id="statusSelect" style="width:150px;">
                         @foreach(['pending','processing','shipped','delivered','cancelled'] as $s)
                         <option value="{{ $s }}" {{ $order->status === $s ? 'selected' : '' }}>
@@ -34,6 +35,7 @@
                         @endforeach
                     </select>
                     <button class="btn btn-sm btn-success" id="updateStatusBtn">Update</button>
+                    @endcan
 
                     <a href="{{ route('admin.orders.index') }}" class="btn btn-primary btn-sm rounded-pill py-2">
                         Go to List
@@ -80,6 +82,8 @@
                         @else
                         <p class="text-muted fs-13">Not assigned yet.</p>
                         @endif
+
+                        @can('assign orders')
                         <button class="btn btn-sm btn-success-light mt-2 assign-delivery-btn"
                             data-id="{{ $order->id }}"
                             data-name="{{ $order->delivery_person_name }}"
@@ -87,6 +91,7 @@
                             <i class="ri-truck-line me-1"></i>
                             {{ $order->delivery_person_name ? 'Update Delivery' : 'Assign Delivery' }}
                         </button>
+                        @endcan
                     </div>
                 </div>
 
@@ -326,13 +331,12 @@
 @endsection
 
 @push('scripts')
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 <script>
 const CSRF           = '{{ csrf_token() }}';
 const ORDERS_BASE    = '{{ url("admin/orders") }}';
 const ORDER_ID       = {{ $order->id }};
 
-// ─── Update Status ────────────────────────────────────────────
+// Update Status 
 $('#updateStatusBtn').on('click', function() {
     const status = $('#statusSelect').val();
     $.ajax({
@@ -348,12 +352,12 @@ $('#updateStatusBtn').on('click', function() {
     });
 });
 
-// ─── Open Assign Modal ────────────────────────────────────────
+// Open Assign Modal
 $(document).on('click', '.assign-delivery-btn', function() {
     bootstrap.Modal.getOrCreateInstance(document.getElementById('assignDeliveryModal')).show();
 });
 
-// ─── Save Delivery ────────────────────────────────────────────
+//Save Delivery 
 $('#saveDeliveryBtn').on('click', function() {
     const name  = $('#delivery_name').val().trim();
     const phone = $('#delivery_phone').val().trim();

@@ -13,9 +13,11 @@
 <div class="card custom-card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title mb-0">All Categories</h3>
+        @can('create category')
         <button class="btn btn-primary" id="openAddModal">
             <i class="ri-add-line me-1"></i> Add Category
         </button>
+        @endcan
     </div>
     <div class="card-body">
         <div class="table-responsive">

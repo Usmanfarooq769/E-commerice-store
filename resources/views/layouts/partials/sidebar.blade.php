@@ -23,8 +23,6 @@
                 </svg>
             </div>
             <ul class="main-menu">
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Main</span></li>
                 <!-- End::slide__category -->
                 <li class="slide">
                     <a href="{{ route('ecommerce') }}" class="side-menu__item">
@@ -37,50 +35,62 @@
                         <span class="side-menu__label">Dashboards</span>
                     </a>
                 </li>
-
+                 @can('view users')
                  <li class="slide">
                     <a href="{{ route('admin.users.index') }}" class="side-menu__item">
                         <i class="bi bi-person-badge me-1"></i>
                         <span class="side-menu__label">User</span>
                     </a>
                 </li>
+                @endcan
+                @can('view category')
                 <li class="slide">
                     <a href="{{ route('admin.categories.index') }}" class="side-menu__item">
                         <i class="ri-folder-add-line me-1"></i>
                         <span class="side-menu__label">Category</span>
                     </a>
                 </li>
+                @endcan
+                @can('view products')
                 <li class="slide">
                     <a href="{{ route('admin.products.index') }}" class="side-menu__item">
                         <i class="ri-shopping-bag-line me-1"></i>
                         <span class="side-menu__label">Products</span>
                     </a>
                 </li>
-
+                @endcan
+                @can('view orders')
                 <li class="slide">
                     <a href="{{ route('admin.orders.index') }}" class="side-menu__item">
                         <i class="ri-shopping-cart-line me-1"></i>
                         <span class="side-menu__label">Orders</span>
                     </a>
                 </li>
+                @endcan
+                @can('view deliveries')
                 <li class="slide">
                     <a href="{{ route('admin.deliveries.index') }}" class="side-menu__item">
                         <i class="ri-truck-line me-1"></i>
                         <span class="side-menu__label">Deliveries</span>
                     </a>
                 </li>
+                @endcan
+                @can('view roles')
                 <li class="slide">
                     <a href="{{ route('admin.roles.index') }}" class="side-menu__item">
                         <i class="bi bi-people-fill me-1"></i>
                         <span class="side-menu__label">Role</span>
                     </a>
                 </li>
+                @endcan
+                @can('view permissions')
                 <li class="slide">
                     <a href="{{ route('admin.permissions.index') }}" class="side-menu__item">
                         <i class="bi bi-shield-lock me-1"></i>
                         <span class="side-menu__label">Permission</span>
                     </a>
                 </li>
+                @endcan
 
 
 

@@ -64,19 +64,19 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
 
     // Categories
-    Route::get('categories',           [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('categories/data',      [CategoryController::class, 'getData'])->name('categories.data');
-    Route::post('categories',          [CategoryController::class, 'store'])->name('categories.store');
-    Route::put('categories/{id}',      [CategoryController::class, 'update'])->name('categories.update');
-    Route::delete('categories/{id}',   [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('categories',           [CategoryController::class, 'index'])->name('categories.index')->middleware('permission:view category');
+    Route::get('categories/data',      [CategoryController::class, 'getData'])->name('categories.data')->middleware('permission:view category');
+    Route::post('categories',          [CategoryController::class, 'store'])->name('categories.store')->middleware('permission:create category');
+    Route::put('categories/{id}',      [CategoryController::class, 'update'])->name('categories.update')->middleware('permission:edit category');
+    Route::delete('categories/{id}',   [CategoryController::class, 'destroy'])->name('categories.destroy')->middleware('permission:delete category');
 
     // Products
   
-    Route::get('products',           [ProductController::class, 'index'])->name('products.index');
-    Route::get('products/data',      [ProductController::class, 'getData'])->name('products.data');
-    Route::post('products',          [ProductController::class, 'store'])->name('products.store');
-    Route::put('products/{id}',      [ProductController::class, 'update'])->name('products.update');
-    Route::delete('products/{id}',   [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('products',           [ProductController::class, 'index'])->name('products.index')->middleware('permission:view products');
+    Route::get('products/data',      [ProductController::class, 'getData'])->name('products.data')->middleware('permission:view products');
+    Route::post('products',          [ProductController::class, 'store'])->name('products.store')->middleware('permission:create products');
+    Route::put('products/{id}',      [ProductController::class, 'update'])->name('products.update')->middleware('permission:edit products');
+    Route::delete('products/{id}',   [ProductController::class, 'destroy'])->name('products.destroy')->middleware('permission:delete products');
 
     //orders
     Route::get('orders',                    [OrderController::class, 'index'])->name('orders.index');

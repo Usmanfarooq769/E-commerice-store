@@ -48,10 +48,11 @@
         <div class="card custom-card ">
             <div class="card-header justify-content-between flex-wrap">
                 <h6 class="card-title">All Users</h6>
-
+                @can('create users')
                 <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary me-2">
                     <i class="bi bi-shield-lock"></i> Add User
                 </a>
+                @endcan
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -92,20 +93,25 @@
 
                                 <td>
                                      <div class="d-flex align-items-center gap-2">
-
+                                     @can('view users')
                                      <a href="{{ route('admin.users.show', $user) }}"
                                         class="btn btn-sm btn-primary-light" title="Manage Roles">
                                         <i class="bi bi-eye"></i>
                                     </a>
+                                    @endcan
+                                    @can('edit role user')
                                     <a href="{{ route('admin.users.editRole', $user) }}"
                                         class="btn btn-sm btn-warning-light" title="Manage Roles">
                                         <i class="bi bi-person-gear"></i>
                                     </a>
+                                    @endcan
+                                    @can('edit users')
                                       <a href="{{ route('admin.users.edit', $user->id) }}"
                                         class="btn btn-sm btn-success-light"
                                         title="Edit User">
                                             <i class="bi bi-pencil"></i>
                                     </a>
+                                    @endcan
                                 </div>
                                 </td>
                             </tr>

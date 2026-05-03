@@ -29,18 +29,50 @@ class RolePermissionSeeder extends Seeder
             'create users',
             'edit users',
             'delete users',
+            'edit role user',
+            'assign role user',
+            'revoke role user',
+            'sync role user' ,
 
             // Roles
             'view roles',
             'create roles',
             'edit roles',
             'delete roles',
+            'status orders',
+            'download orders',
 
             // Permissions
             'view permissions',
             'create permissions',
             'edit permissions',
             'delete permissions',
+
+            // category
+            'view category',
+            'create category',
+            'edit category',
+            'delete category',
+            
+            // products
+            'view products',
+            'create products',
+            'edit products',
+            'delete products' ,
+
+            // orders
+            'view orders',
+            'edit orders' ,
+            'delete orders',
+            'download orders',
+            'assign orders',
+
+            //Deliveries 
+             'view deliveries',
+             'create deliveries',
+             'delete deliveries',
+             'edit deliveries',
+
         ];
 
         foreach ($permissions as $perm) {
