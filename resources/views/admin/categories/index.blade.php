@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .desc-col {
+    max-width: 200px;        /* adjust width */
+    white-space: nowrap;     /* keep single line */
+    overflow: hidden;        /* hide overflow */
+    text-overflow: ellipsis; /* show ... */
+}
+</style>
 
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
     <h1 class="page-title fw-semibold fs-18 mb-0">Categories</h1>
@@ -77,7 +85,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Description</label>
-                    <textarea class="form-control" id="cat_description" rows="2" placeholder="Optional..."></textarea>
+                    <textarea class="form-control" id="cat_description" rows="3" placeholder="Optional..."></textarea>
                 </div>
 
                 <div class="mb-3">
@@ -119,7 +127,21 @@ const table = $('#categoriesTable').DataTable({
         { data: 'image_col',       name: 'image',        orderable: false, searchable: false },
         { data: 'name',            name: 'name' },
         { data: 'slug_col',        name: 'slug' },
-        { data: 'description_col', name: 'description',  orderable: false },
+       {
+            data: 'description_col',
+            name: 'description',
+            orderable: false,
+            render: function (data) {
+
+                if (!data) return '<span class="text-muted">—</span>';
+
+                return `
+                    <div class="desc-col" title="${$('<div>').text(data).html()}">
+                        ${data}
+                    </div>
+                `;
+            }
+        },
         { data: 'status_badge',    name: 'status' },
         { data: 'created_by',      name: 'creator.name', orderable: false },
       { 
@@ -128,7 +150,7 @@ const table = $('#categoriesTable').DataTable({
     render: function (data) {
         if (!data) return '';
         let date = new Date(data);
-        return date.toLocaleString(); // you can customize format
+        return date.toLocaleString(); 
     }
 },
 { 
@@ -147,7 +169,7 @@ const table = $('#categoriesTable').DataTable({
     language: { processing: '<div class="spinner-border text-primary"></div>' }
 });
 
-// ─── Helpers ──────────────────────────────────────────────────
+//  Helpers 
 const modal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('categoryModal'));
 
 function resetModal(title = 'Add Category') {
@@ -163,13 +185,13 @@ function resetModal(title = 'Add Category') {
     $('#err_name').text('');
 }
 
-// ─── Open Add Modal ───────────────────────────────────────────
+// Open Add Modal 
 $('#openAddModal').on('click', function () {
     resetModal('Add Category');
     modal().show();
 });
 
-// ─── Open Edit Modal ──────────────────────────────────────────
+//  Open Edit Modal 
 $(document).on('click', '.editCatBtn', function () {
     const d = $(this).data();
     resetModal('Edit Category');
@@ -186,7 +208,7 @@ $(document).on('click', '.editCatBtn', function () {
     modal().show();
 });
 
-// ─── Live image preview on file select ────────────────────────
+//  Live image preview on file select 
 $('#cat_image').on('change', function () {
     const file = this.files[0];
     if (!file) return;
@@ -199,7 +221,7 @@ $('#cat_image').on('change', function () {
     reader.readAsDataURL(file);
 });
 
-// ─── Remove image ─────────────────────────────────────────────
+//  Remove image ──
 $('#removeImageBtn').on('click', function () {
     $('#cat_image').val('');
     $('#imagePreview').attr('src', '');
@@ -207,7 +229,7 @@ $('#removeImageBtn').on('click', function () {
     $('#cat_remove_image').val('1');
 });
 
-// ─── Save (Add / Update) ──────────────────────────────────────
+//  Save (Add / Update) ──
 $('#saveCategoryBtn').on('click', function () {
     const id   = $('#cat_id').val();
     const name = $('#cat_name').val().trim();
@@ -264,7 +286,7 @@ $('#saveCategoryBtn').on('click', function () {
     });
 });
 
-// ─── Delete ───────────────────────────────────────────────────
+//  Delete ──
 $(document).on('click', '.deleteCatBtn', function () {
     const id   = $(this).data('id');
     const name = $(this).data('name');

@@ -2,6 +2,14 @@
 
 @section('content')
 
+<style>
+    .notes-col {
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
     <h1 class="page-title fw-semibold fs-18 mb-0">Deliveries</h1>
     <nav>
@@ -131,7 +139,7 @@
 
                     <div class="col-md-12">
                         <label class="form-label">Notes</label>
-                        <input type="text" class="form-control" row="3" id="del_notes" placeholder="Optional notes...">
+                        <textarea class="form-control" rows="3" id="del_notes" placeholder="Optional notes..."></textarea>
                     </div>
                 </div>
             </div>
@@ -208,10 +216,26 @@ const table = $('#deliveriesTable').DataTable({
             name: 'delivered_at'
         },
         {
-            data: 'notes',
-            name: 'notes',
-            orderable: false
-        },
+        data: 'notes',
+        name: 'notes',
+        orderable: false,
+        searchable: false,
+        render: function (data, type, row) {
+
+            if (!data) return '<span class="text-muted">—</span>';
+
+            return `
+                <div class="notes-col" title="${data}">
+                    ${data}
+                </div>
+            `;
+        }
+    },
+        // {
+        //     data: 'notes',
+        //     name: 'notes',
+        //     orderable: false
+        // },
         {
             data: 'actions',
             name: 'actions',

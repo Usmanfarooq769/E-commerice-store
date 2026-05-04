@@ -71,17 +71,17 @@
 
                     <div class="col-xl-4">
                         <div class="fs-15 fw-semibold mb-2">Delivery Person:</div>
-                        @if($order->delivery_person_name)
+                        @if($order->delivery->delivery_person_name ?? '')
                         <p class="mb-1 fw-semibold">
                             <i class="ri-user-line me-1 text-success"></i>
-                            {{ $order->delivery_person_name }}
+                            {{ $order->delivery->delivery_person_name }}
                         </p>
                         <p class="mb-1 text-muted fs-13">
-                            <i class="ri-phone-line me-1"></i>{{ $order->delivery_person_phone }}
+                            <i class="ri-phone-line me-1 text-primary"></i>{{ $order->delivery->delivery_person_phone }}
                         </p>
                         @else
                         <p class="text-muted fs-13">Not assigned yet.</p>
-                        @endif
+                      
 
                         @can('assign orders')
                         <button class="btn btn-sm btn-success-light mt-2 assign-delivery-btn"
@@ -92,6 +92,7 @@
                             {{ $order->delivery_person_name ? 'Update Delivery' : 'Assign Delivery' }}
                         </button>
                         @endcan
+                        @endif
                     </div>
                 </div>
 
@@ -316,10 +317,15 @@
                     <input type="text" class="form-control" id="delivery_phone"
                         value="{{ $order->delivery_person_phone }}" placeholder="e.g. 0300-1234567">
                 </div>
-            </div>
+                 <div class="mb-3">
+                <label class="form-label">Notes</label>
+                <textarea class="form-control" rows="3" id="del_notes"></textarea>           
+              </div>
+           
+        </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success" id="saveDeliveryBtn">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveDeliveryBtn">
                     <span id="deliveryBtnText">Save</span>
                     <span id="deliveryBtnSpinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
                 </button>
@@ -345,6 +351,7 @@ $('#updateStatusBtn').on('click', function() {
         data: { _token: CSRF, status },
         success(res) {
             Swal.fire({ icon: 'success', title: res.message, timer: 1500, showConfirmButton: false });
+            location.reload();
         },
         error(xhr) {
             Swal.fire({ icon: 'error', title: xhr.responseJSON?.message || 'Error!' });
@@ -358,9 +365,12 @@ $(document).on('click', '.assign-delivery-btn', function() {
 });
 
 //Save Delivery 
-$('#saveDeliveryBtn').on('click', function() {
+$('#saveDeliveryBtn').on('click', function () {
+
     const name  = $('#delivery_name').val().trim();
     const phone = $('#delivery_phone').val().trim();
+    const notes = $('#del_notes').val().trim(); 
+    const orderId = $('#assign_order_id').val(); 
 
     if (!name || !phone) {
         Swal.fire({ icon: 'warning', title: 'Both fields are required!', timer: 1500, showConfirmButton: false });
@@ -373,11 +383,21 @@ $('#saveDeliveryBtn').on('click', function() {
     $.ajax({
         url: `${ORDERS_BASE}/${ORDER_ID}/assign`,
         method: 'POST',
-        data: { _token: CSRF, delivery_person_name: name, delivery_person_phone: phone },
+        data: {
+            _token: CSRF,
+            order_id: orderId, 
+            delivery_person_name: name,
+            delivery_person_phone: phone,
+            notes: notes 
+        },
         success(res) {
             bootstrap.Modal.getOrCreateInstance(document.getElementById('assignDeliveryModal')).hide();
+
             Swal.fire({
-                icon: 'success', title: res.message, timer: 2000, showConfirmButton: false
+                icon: 'success',
+                title: res.message,
+                timer: 2000,
+                showConfirmButton: false
             }).then(() => location.reload());
         },
         error(xhr) {
@@ -388,6 +408,7 @@ $('#saveDeliveryBtn').on('click', function() {
             $('#deliveryBtnText').text('Save');
         }
     });
+
 });
 </script>
 @endpush

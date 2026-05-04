@@ -77,38 +77,6 @@
     </div>
 </div>
 
-{{-- Assign Delivery Modal --}}
-<div class="modal fade" id="assignDeliveryModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Assign Delivery Person</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" id="assign_order_id">
-                <div class="mb-3">
-                    <label class="form-label">Delivery Person Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="delivery_name"
-                        placeholder="e.g. Ahmed Ali">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Phone Number <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="delivery_phone"
-                        placeholder="e.g. 0300-1234567">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="saveDeliveryBtn">
-                    <span id="deliveryBtnText">Assign</span>
-                    <span id="deliveryBtnSpinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @push('scripts')
@@ -140,49 +108,7 @@ const table = $('#ordersTable').DataTable({
     language: { processing: '<div class="spinner-border text-primary"></div>' }
 });
 
-// ─── Open Assign Modal ────────────────────────────────────────
-$(document).on('click', '.assign-delivery-btn', function() {
-    const d = $(this).data();
-    $('#assign_order_id').val(d.id);
-    $('#delivery_name').val(d.name || '');
-    $('#delivery_phone').val(d.phone || '');
-    bootstrap.Modal.getOrCreateInstance(document.getElementById('assignDeliveryModal')).show();
-});
-
-// ─── Save Delivery ────────────────────────────────────────────
-$('#saveDeliveryBtn').on('click', function() {
-    const id    = $('#assign_order_id').val();
-    const name  = $('#delivery_name').val().trim();
-    const phone = $('#delivery_phone').val().trim();
-
-    if (!name || !phone) {
-        Swal.fire({ icon: 'warning', title: 'Both fields are required!', timer: 1500, showConfirmButton: false });
-        return;
-    }
-
-    $('#deliveryBtnSpinner').removeClass('d-none');
-    $('#deliveryBtnText').text('Saving...');
-
-    $.ajax({
-        url: `${ORDERS_BASE_URL}/${id}/assign`,
-        method: 'POST',
-        data: { _token: CSRF, delivery_person_name: name, delivery_person_phone: phone },
-        success(res) {
-            bootstrap.Modal.getOrCreateInstance(document.getElementById('assignDeliveryModal')).hide();
-            table.ajax.reload(null, false);
-            Swal.fire({ icon: 'success', title: res.message, timer: 2000, showConfirmButton: false });
-        },
-        error(xhr) {
-            Swal.fire({ icon: 'error', title: xhr.responseJSON?.message || 'Error!' });
-        },
-        complete() {
-            $('#deliveryBtnSpinner').addClass('d-none');
-            $('#deliveryBtnText').text('Assign');
-        }
-    });
-});
-
-// ─── Delete Order ─────────────────────────────────────────────
+// Delete Order 
 $(document).on('click', '.delete-order-btn', function() {
     const id = $(this).data('id');
 

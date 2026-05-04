@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\Delivery;
 
 class OrderController extends Controller
 {
@@ -63,17 +64,7 @@ class OrderController extends Controller
                         </a>
                     ';
                 }
-                if ($user->can('assign orders')) {
-                    $buttons .= '
-                        <button class="btn btn-icon btn-sm btn-success-light me-1 assign-delivery-btn"
-                            data-id="'.$o->id.'"
-                            data-name="'.e($o->delivery_person_name).'"
-                            data-phone="'.e($o->delivery_person_phone).'"
-                            title="Assign Delivery">
-                            <i class="ri-truck-line"></i>
-                        </button>
-                    ';
-                }
+                
                 if ($user->can('download orders')) {
                     $buttons .= '
                         <a href="'.route('admin.order.invoice', $o->id).'"
@@ -102,25 +93,36 @@ class OrderController extends Controller
         if (!auth()->user()->can('view orders')) {
             abort(403, 'Unauthorized');
         }
-        $order = Order::with(['items.product', 'user'])->findOrFail($id);
+        $order = Order::with(['items.product', 'user' , 'delivery'])->findOrFail($id);
         return view('admin.orders.show', compact('order'));
     }
 
-    public function assignDelivery(Request $request, $id)
+   public function assignDelivery(Request $request, $id)
     {
         if (!auth()->user()->can('assign orders')) {
             abort(403, 'Unauthorized');
         }
+
         $request->validate([
             'delivery_person_name'  => 'required|string|max:100',
             'delivery_person_phone' => 'required|string|max:20',
+            'notes'                 => 'nullable|string',
         ]);
 
         $order = Order::findOrFail($id);
+
         $order->update([
+            'status' => 'processing',
+        ]);
+
+        Delivery::create([
+            'order_id'              => $order->id, 
             'delivery_person_name'  => $request->delivery_person_name,
             'delivery_person_phone' => $request->delivery_person_phone,
-            'status'                => 'processing',
+            'status'                => 'assigned', 
+            'notes'                 => $request->notes,
+            'assigned_at'           => now(),
+            'delivered_at'          => null,
         ]);
 
         return response()->json([
@@ -131,11 +133,44 @@ class OrderController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $request->validate(['status' => 'required|in:pending,processing,shipped,delivered,cancelled']);
+        if (!auth()->user()->can('status orders')) {
+            abort(403, 'Unauthorized');
+        }
 
-        Order::findOrFail($id)->update(['status' => $request->status]);
+        $request->validate([
+            'status' => 'required|in:pending,processing,shipped,delivered,cancelled'
+        ]);
 
-        return response()->json(['success' => true, 'message' => 'Status updated!']);
+        $order = Order::with('delivery')->findOrFail($id);
+        if (in_array($request->status, ['processing' ,'shipped', 'delivered']) && !$order->delivery) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please assign delivery boy first!'
+            ], 422);
+        }
+        $order->update([
+            'status' => $request->status
+        ]);
+        if ($order->delivery) {
+
+            if ($request->status == 'shipped') {
+                $order->delivery->update([
+                    'status' => 'out for delivery'
+                ]);
+            }
+
+            if ($request->status == 'delivered') {
+                $order->delivery->update([
+                    'status' => 'delivered',
+                    'delivered_at' => now()
+                ]);
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully!'
+        ]);
     }
 
     public function destroy($id)
@@ -148,7 +183,7 @@ class OrderController extends Controller
         return response()->json(['success' => true, 'message' => 'Order deleted!']);
     }
 
-    // ── Helpers ───────────────────────────────────────────────
+    // Helpers 
     private function productCell(Order $order): string
     {
         $first = $order->items->first();
