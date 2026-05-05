@@ -11,20 +11,16 @@ use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        // return view('dashboard');
-        return view('ecommerce');
-    })->name('dashboard');
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'), 'verified',])->group(function () {
+     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+
    Route::middleware(['auth'])->get('/profile', function () {
     return view('profile'); // or controller
 })->name('profile');
@@ -43,18 +39,13 @@ Route::get('sign-in-cover', function () {
     return view('sign-in-cover');
 })->name('sign-in-cover');
 
-
-Route::get('ecommerce', function () {
-    return view('ecommerce');
-})->name('ecommerce');
-
 //Admin routes (auth + admin role required) 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class)->except(['show']);
         Route::get('permissions/data', [PermissionController::class, 'getData'])->name('permissions.data');
         Route::resource('users', UserController::class)->only(['index' ,'create' , 'show' , 'store' , 'edit' , 'update']);
-          Route::get('users/{user}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
+        Route::get('users/{user}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
         Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])->name('users.assign-role');
         Route::delete('users/{user}/revoke-role/{role}', [UserController::class, 'revokeRole'])->name('users.revoke-role');
         Route::post('users/{user}/sync-roles', [UserController::class, 'syncRoles']) ->name('users.sync-roles');
