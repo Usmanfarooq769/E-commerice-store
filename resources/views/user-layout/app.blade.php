@@ -14,22 +14,22 @@
 
 
 <body>
-    @include("layouts.partials.switcher")
+    @include("user-layout.partials.switcher")
     <div id="loader">
         <img src="{{ asset('assets/images/media/loader.svg') }}" alt="">
     </div>
 
 
 
-    <div class="page">
+    <div class="page mx-0 px-0">
 
         @include("user-layout.partials.header")
 
-        <div class="main-content app-content">
+        <div class="main-content main-content mt-5 pt-3 mx-0  px-0">
 
             <!-- Start::app-content -->
 
-            <div class="container-fluid mt-4">
+            <div class="container-fluid mt-4 mx-0">
                 @yield('content')
                 <!-- Section for child content -->
             </div>

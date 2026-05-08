@@ -54,56 +54,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card custom-card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            Effect Coverflow
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="swiper swiper-overflow">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-40.jpg')}}"
-                                        alt="img">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-41.jpg')}}"
-                                        alt="img">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-42.jpg')}}"
-                                        alt="img">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-43.jpg')}}"
-                                        alt="img">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-44.jpg')}}"
-                                        alt="img">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-59.jpg')}}"
-                                        alt="img">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-46.jpg')}}"
-                                        alt="img">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ asset('assets/images/media/media-61.jpg')}}"
-                                        alt="img">
-                                </div>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         {{-- Product Info --}}
         <div class="col-xxl-8">
@@ -252,7 +202,7 @@
         </div>
 
         {{-- Product Details & Description Tabs --}}
-        <div class="col-xxl-6">
+        <div class="col-xxl-4">
             <div class="card custom-card">
                 <div class="card-header">
                     <ul class="nav nav-tabs tab-style-8 scaleX profile-settings-tab gap-2" id="myTab4" role="tablist">
@@ -333,9 +283,8 @@
 
         {{-- Related Products --}}
         @if($relatedProducts->count())
-        <div class="col-12">
+        <div class="col-xxl-5">
             <h5>Related Products</h5>
-            <p class="text-muted">Discover more products similar to this one.</p>
             <div class="swiper swiper-related-products">
                 <div class="swiper-wrapper">
                     @foreach($relatedProducts as $rp)
@@ -363,7 +312,7 @@
                                         <a href="{{ route('user.product-details', $rp->slug) }}">
                                             <img src="{{ $rp->image_url ?? asset('assets/images/ecommerce/png/1.png') }}"
                                                 alt="{{ $rp->name }}"
-                                                class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3">
+                                                class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3" style="height: 310px;object-fit: cover;">
                                         </a>
                                     </div>
                                 </div>
