@@ -67,6 +67,11 @@
                                         <button type="submit" class="btn btn-primary w-100">
                                             Log In
                                         </button>
+                                        <div class="mt-2">
+                                         <a type="button" href="{{route('products')}}" class="btn btn-primary w-100">
+                                            Return Home Pages
+</a>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -98,7 +103,7 @@
                                     <span class="ms-2">Twitter</span>
                                 </button>
                             </div>
-                            <a href="index.html">
+                            <a href="{{route('products')}}">
                                 <img alt="logo" class="toggle-logo mb-4 pb-2"
                                     src="../assets/images/brand-logos/toggle-logo.png">
                             </a>
