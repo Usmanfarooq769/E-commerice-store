@@ -65,7 +65,7 @@
                     </li>
 
                     <li class="mb-2">
-                        <a href="#"
+                        <a href="{{route('contact.us')}}"
                             class=" text-decoration-none">
                             Contact Us
                         </a>

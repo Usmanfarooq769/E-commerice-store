@@ -25,11 +25,16 @@
 
         @include("user-layout.partials.header")
 
-        <div class="main-content main-content mt-5 pt-3 mx-0  px-0">
+       @if(request()->routeIs('products'))
+            @include('user.hero-section')
+        @endif
+
+
+        <div class="main-content main-content">
 
             <!-- Start::app-content -->
 
-            <div class="container-fluid mt-4 mx-0">
+            <div class="container-fluid mt-2">
                 @yield('content')
                 <!-- Section for child content -->
             </div>

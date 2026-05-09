@@ -12,6 +12,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+ use App\Http\Controllers\ContactUsController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -103,4 +104,6 @@ Route::get('/categories/{slug}', [UserProductController::class, 'byCategory'])->
     Route::get('check-out',                   [CheckoutController::class, 'index'])->name('check-out');
     Route::post('check-out/place-order',      [CheckoutController::class, 'placeOrder'])->name('checkout.place-order');
     Route::get('order/{id}/invoice',          [CheckoutController::class, 'downloadInvoice'])->name('order.invoice');
+   Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.us');
+   Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('contact.us.store');
 
