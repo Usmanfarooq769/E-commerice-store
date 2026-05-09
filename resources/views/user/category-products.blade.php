@@ -4,11 +4,9 @@
 
 {{-- Header --}}
 <div class="card custom-card mb-4">
-
-    {{-- Top: breadcrumb + count --}}
     <div class="card-header justify-content-between flex-wrap gap-2">
         <div class="d-flex align-items-center gap-1 fs-13 text-muted">
-            <a href="{{ route('user.products') }}" class="text-muted text-decoration-none">All Products</a>
+            <a href="{{ route('products') }}" class="text-muted text-decoration-none">All Products</a>
             <span>/</span>
             <span class="text-dark fw-medium">{{ $category->name }}</span>
         </div>
@@ -18,7 +16,7 @@
                 product{{ $products->total() != 1 ? 's' : '' }}
                 @if(request('search')) for "<strong>{{ request('search') }}</strong>" @endif
             </span>
-            <a href="{{ route('user.category', $category->slug) }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('category', $category->slug) }}" class="btn btn-primary btn-sm">
                 Clear all
             </a>
         </div>
@@ -26,57 +24,52 @@
 
     {{-- Body: all filters in one row --}}
     <div class="card-body p-0">
-        <form action="{{ route('user.category', $category->slug) }}" method="GET">
+        <form action="{{ route('category', $category->slug) }}" method="GET">
             <input type="hidden" name="search" value="{{ request('search') }}">
-
             <div class="d-flex align-items-center flex-wrap border-top" style="gap:0">
-
-                {{-- Category pills --}}
-                <div class="d-flex align-items-center gap-2 px-3 py-2 flex-nowrap overflow-auto border-end" style="scrollbar-width:none;max-width:260px">
-                    <span class="text-muted text-uppercase fs-10 fw-semibold text-nowrap" style="letter-spacing:.5px">Categories</span>
+                <div class="d-flex align-items-center gap-2 px-3 py-2 flex-nowrap overflow-auto border-end"
+                    style="scrollbar-width:none;max-width:260px">
+                    <span class="text-muted text-uppercase fs-10 fw-semibold text-nowrap"
+                        style="letter-spacing:.5px">Categories</span>
                     @foreach($categories as $cat)
-                    <a href="{{ route('user.category', $cat->slug) }}"
+                    <a href="{{ route('category', $cat->slug) }}"
                         class="badge rounded-pill text-decoration-none fw-normal fs-12 text-nowrap {{ $cat->id == $category->id ? 'bg-primary-transparent text-primary border border-primary' : 'bg-light text-muted border' }}">
                         {{ $cat->name }}
                         <span class="opacity-75">({{ $cat->products_count }})</span>
                     </a>
                     @endforeach
                 </div>
-
-                {{-- Search --}}
                 <div class="px-3 py-2 border-end">
                     <div class="input-group input-group-sm" style="min-width:180px">
                         <span class="input-group-text bg-light border-end-0">
                             <i class="ti ti-search fs-13"></i>
                         </span>
-                        <input type="text" class="form-control border-start-0 bg-light ps-0 fs-13"
-                            name="search" value="{{ request('search') }}"
-                            placeholder="Search in {{ $category->name }}...">
+                        <input type="text" class="form-control border-start-0 bg-light ps-0 fs-13" name="search"
+                            value="{{ request('search') }}" placeholder="Search in {{ $category->name }}...">
                     </div>
                 </div>
-
-                {{-- Price range --}}
                 <div class="d-flex align-items-center gap-2 px-3 py-2 border-end">
-                    <span class="text-muted text-uppercase fs-10 fw-semibold text-nowrap" style="letter-spacing:.5px">PKR</span>
+                    <span class="text-muted text-uppercase fs-10 fw-semibold text-nowrap"
+                        style="letter-spacing:.5px">PKR</span>
                     <input type="number" class="form-control form-control-sm bg-light" style="width:80px"
                         name="min_price" placeholder="Min" value="{{ request('min_price') }}">
                     <span class="text-muted">—</span>
                     <input type="number" class="form-control form-control-sm bg-light" style="width:80px"
                         name="max_price" placeholder="Max" value="{{ request('max_price') }}">
                 </div>
-
-                {{-- Sort --}}
                 <div class="px-3 py-2 border-end">
                     <select class="form-select form-select-sm bg-light fs-13" name="sort" style="min-width:140px">
                         <option value="">Sort by</option>
-                        <option value="newest"     {{ request('sort')=='newest'     ? 'selected' : '' }}>Newest first</option>
-                        <option value="oldest"     {{ request('sort')=='oldest'     ? 'selected' : '' }}>Oldest first</option>
-                        <option value="price_asc"  {{ request('sort')=='price_asc'  ? 'selected' : '' }}>Price: low → high</option>
-                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>Price: high → low</option>
+                        <option value="newest" {{ request('sort')=='newest'     ? 'selected' : '' }}>Newest first
+                        </option>
+                        <option value="oldest" {{ request('sort')=='oldest'     ? 'selected' : '' }}>Oldest first
+                        </option>
+                        <option value="price_asc" {{ request('sort')=='price_asc'  ? 'selected' : '' }}>Price: low →
+                            high</option>
+                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>Price: high →
+                            low</option>
                     </select>
                 </div>
-
-                {{-- Apply --}}
                 <div class="px-3 py-2">
                     <button type="submit" class="btn btn-primary btn-sm px-3">
                         <i class="ri-filter-line me-1"></i> Apply
@@ -113,7 +106,7 @@
                         </a>
                     </div>
                     <div class="img-box-2">
-                        <a href="{{ route('user.product-details', $product->slug) }}">
+                        <a href="{{ route('product-details', $product->slug) }}">
                             @if($product->image_url)
                             <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
                                 class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3 "
@@ -128,7 +121,7 @@
                 <div class="p-3">
                     <a href="javascript:void(0);" class="text-muted fs-12">{{ $product->category?->name ?? '' }}</a>
                     <h6 class="mt-1 mb-2 fw-semibold fs-14">
-                        <a href="{{ route('user.product-details', $product->slug) }}">{{ $product->name }}</a>
+                        <a href="{{ route('product-details', $product->slug) }}">{{ $product->name }}</a>
                     </h6>
                     <div class="d-flex gap-2 align-items-center justify-content-between  mb-2">
                         <div class="fw-semibold fs-20 text-pink">PKR {{ number_format($displayPrice, 0) }}
@@ -147,9 +140,10 @@
                     </div>
 
                     <div class="d-flex gap-1 justify-content-between flex-wrap">
-                        <a href="{{ route('user.check-out') }}" class="btn btn-success-light btn-sm">
+                        <a href="{{ route('check-out') }}" class="btn btn-success-light btn-sm">
                             <i class="bx bx-credit-card-alt"></i> Buy Now
                         </a>
+
                         <button class="btn btn-primary-light btn-sm add-to-cart-btn" data-id="{{ $product->id }}">
                             <i class="bx bxs-cart-add"></i> Add to Cart
                         </button>
@@ -164,7 +158,7 @@
             <div class="card-body text-center py-5">
                 <i class="ri-inbox-line fs-1 text-muted"></i>
                 <h5 class="mt-3 text-muted">No products in this category</h5>
-                <a href="{{ route('user.products') }}" class="btn btn-primary mt-2">Browse All Products</a>
+                <a href="{{ route('products') }}" class="btn btn-primary mt-2">Browse All Products</a>
             </div>
         </div>
     </div>
@@ -201,7 +195,7 @@
 
 @push('scripts')
 <script>
-const ADD_CART_URL = '{{ route("user.cart.add") }}';
+const ADD_CART_URL = '{{ route("cart.add") }}';
 const CSRF = '{{ csrf_token() }}';
 
 $(document).on('click', '.add-to-cart-btn', function() {

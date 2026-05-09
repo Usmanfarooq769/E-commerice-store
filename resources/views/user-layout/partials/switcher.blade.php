@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="" style="display:none">
                         <p class="switcher-style-head">Navigation Styles:</p>
                         <div class="row switcher-style gx-0">
                             <div class="col-4">
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="navigation-menu-styles">
+                    <div class="navigation-menu-styles" style="display:none">
                         <p class="switcher-style-head">Vertical & Horizontal Menu Styles:</p>
                         <div class="row switcher-style gx-0 pb-2 gy-2">
                             <div class="col-4">
@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidemenu-layout-styles">
+                    <div class="sidemenu-layout-styles" style="display:none">
                         <p class="switcher-style-head">Sidemenu Layout Styles:</p>
                         <div class="row switcher-style gx-0 pb-2 gy-2">
                             <div class="col-sm-6">
@@ -182,7 +182,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="" style="display:none">
                         <p class="switcher-style-head">Page Styles:</p>
                         <div class="row switcher-style gx-0">
                             <div class="col-4">
@@ -212,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="" style="display:none">
                         <p class="switcher-style-head">Layout Width Styles:</p>
                         <div class="row switcher-style gx-0">
                             <div class="col-4">
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="" style="display:none">
                         <p class="switcher-style-head">Menu Positions:</p>
                         <div class="row switcher-style gx-0">
                             <div class="col-4">
@@ -256,7 +256,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="" style="display:none">
                         <p class="switcher-style-head">Header Positions:</p>
                         <div class="row switcher-style gx-0">
                             <div class="col-4">
@@ -279,7 +279,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="" style="display:none">
                         <p class="switcher-style-head">Loader:</p>
                         <div class="row switcher-style gx-0">
                             <div class="col-4">
@@ -305,7 +305,7 @@
                 </div>
                 <div class="tab-pane fade border-0" id="switcher-profile" role="tabpanel" aria-labelledby="switcher-profile-tab" tabindex="0">
                     <div>
-                        <div class="theme-colors">
+                        <div class="theme-colors" style="display:none">
                             <p class="switcher-style-head">Menu Colors:</p>
                             <div class="d-flex switcher-style pb-2">
                                 <div class="form-check switch-select me-3">
@@ -336,7 +336,7 @@
                             </div>
                             <div class="px-4 pb-3 text-muted fs-11">Note:If you want to change color Menu dynamically change from below Theme Primary color picker</div>
                         </div>
-                        <div class="theme-colors">
+                        <div class="theme-colors" style="display:none">
                             <p class="switcher-style-head">Header Colors:</p>
                             <div class="d-flex switcher-style pb-2">
                                 <div class="form-check switch-select me-3">
@@ -396,7 +396,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="theme-colors">
+                        <div class="theme-colors" style="display:none">
                             <p class="switcher-style-head">Theme Background:</p>
                             <div class="d-flex flex-wrap align-items-center switcher-style">
                                 <div class="form-check switch-select me-3">
@@ -425,7 +425,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="menu-image mb-3">
+                        <div class="menu-image mb-3" style="display:none">
                             <p class="switcher-style-head">Menu With Background Image:</p>
                             <div class="d-flex flex-wrap align-items-center switcher-style">
                                 <div class="form-check switch-select m-2">

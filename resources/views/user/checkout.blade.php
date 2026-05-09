@@ -13,23 +13,30 @@
                         <div class="p-3 border border-dashed rounded mb-5">
                             <ul class="nav nav-tabs flex-column nav-style-5 gap-3 checkout-tabs" role="tablist">
                                 <li class="nav-item m-0 flex-fill">
-                                    <button class="nav-link w-100 fw-medium fs-13 d-flex align-items-center gap-2 active"
-                                        id="order-tab" data-bs-toggle="tab" data-bs-target="#order-tab-pane" type="button">
-                                        <i class="ri-truck-line align-middle p-2 lh-1 rounded-circle checkout-tab-icon"></i>
+                                    <button
+                                        class="nav-link w-100 fw-medium fs-13 d-flex align-items-center gap-2 active"
+                                        id="order-tab" data-bs-toggle="tab" data-bs-target="#order-tab-pane"
+                                        type="button">
+                                        <i
+                                            class="ri-truck-line align-middle p-2 lh-1 rounded-circle checkout-tab-icon"></i>
                                         Shipping
                                     </button>
                                 </li>
                                 <li class="nav-item m-0 flex-fill">
                                     <button class="nav-link w-100 fw-medium fs-13 d-flex align-items-center gap-2"
-                                        id="confirmed-tab" data-bs-toggle="tab" data-bs-target="#confirm-tab-pane" type="button">
-                                        <i class="ri-user-3-line align-middle p-2 lh-1 rounded-circle checkout-tab-icon"></i>
+                                        id="confirmed-tab" data-bs-toggle="tab" data-bs-target="#confirm-tab-pane"
+                                        type="button">
+                                        <i
+                                            class="ri-user-3-line align-middle p-2 lh-1 rounded-circle checkout-tab-icon"></i>
                                         Personal Details
                                     </button>
                                 </li>
                                 <li class="nav-item m-0 flex-fill">
                                     <button class="nav-link w-100 fw-medium fs-13 d-flex align-items-center gap-2"
-                                        id="delivered-tab" data-bs-toggle="tab" data-bs-target="#delivery-tab-pane" type="button">
-                                        <i class="ri-checkbox-circle-line align-middle p-2 lh-1 rounded-circle checkout-tab-icon"></i>
+                                        id="delivered-tab" data-bs-toggle="tab" data-bs-target="#delivery-tab-pane"
+                                        type="button">
+                                        <i
+                                            class="ri-checkbox-circle-line align-middle p-2 lh-1 rounded-circle checkout-tab-icon"></i>
                                         Complete Order
                                     </button>
                                 </li>
@@ -53,7 +60,8 @@
                                     <div class="row gy-3 mb-4">
                                         <div class="col-xl-6">
                                             <label class="form-label">Address <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="ship_address" placeholder="Street address">
+                                            <input type="text" class="form-control" id="ship_address"
+                                                placeholder="Street address">
                                         </div>
                                         <div class="col-xl-6">
                                             <label class="form-label">City <span class="text-danger">*</span></label>
@@ -65,11 +73,13 @@
                                         </div>
                                         <div class="col-xl-4">
                                             <label class="form-label">Country <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="ship_country" placeholder="Country">
+                                            <input type="text" class="form-control" id="ship_country"
+                                                placeholder="Country">
                                         </div>
                                         <div class="col-xl-4">
                                             <label class="form-label">Pincode</label>
-                                            <input type="text" class="form-control" id="ship_pincode" placeholder="Pincode">
+                                            <input type="text" class="form-control" id="ship_pincode"
+                                                placeholder="Pincode">
                                         </div>
                                     </div>
 
@@ -79,12 +89,14 @@
                                             <div class="border rounded border-dashed p-2 bg-light">
                                                 <div class="form-check mb-0">
                                                     <input id="shipping-standard" name="shipping_method_select"
-                                                        type="radio" class="form-check-input mt-3" value="standard" checked>
+                                                        type="radio" class="form-check-input mt-3" value="standard"
+                                                        checked>
                                                     <label class="form-check-label" for="shipping-standard">
                                                         <div class="d-flex align-items-center gap-2 flex-wrap">
                                                             <div class="shipping-partner-details">
                                                                 <p class="mb-0 fw-semibold">Standard Shipping</p>
-                                                                <p class="text-muted fs-11 mb-0">Delivered within 7 Days</p>
+                                                                <p class="text-muted fs-11 mb-0">Delivered within 7 Days
+                                                                </p>
                                                             </div>
                                                             <div class="fw-semibold ms-auto">PKR 5.00</div>
                                                         </div>
@@ -101,7 +113,8 @@
                                                         <div class="d-flex align-items-center gap-2 flex-wrap">
                                                             <div class="shipping-partner-details">
                                                                 <p class="mb-0 fw-semibold">Express Shipping</p>
-                                                                <p class="text-muted fs-11 mb-0">Delivered within 1 Day</p>
+                                                                <p class="text-muted fs-11 mb-0">Delivered within 1 Day
+                                                                </p>
                                                             </div>
                                                             <div class="fw-semibold ms-auto">PKR 20.00</div>
                                                         </div>
@@ -126,30 +139,36 @@
                                     <p class="fs-15 fw-semibold mb-3">Personal Details:</p>
                                     <div class="row gy-3">
                                         <div class="col-xl-6">
-                                            <label class="form-label">First Name <span class="text-danger">*</span></label>
+                                            <label class="form-label">First Name <span
+                                                    class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="per_firstname"
                                                 placeholder="First Name"
-                                                value="{{ auth()->user()->name ? explode(' ', auth()->user()->name)[0] : '' }}">
+                                                value="{{ auth()->check() ? explode(' ', auth()->user()->name)[0] : '' }}">
                                         </div>
                                         <div class="col-xl-6">
-                                            <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                                            <label class="form-label">Last Name <span
+                                                    class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="per_lastname"
-                                                placeholder="Last Name"
-                                                value="{{ auth()->user()->name && str_contains(auth()->user()->name, ' ') ? explode(' ', auth()->user()->name, 2)[1] : '' }}">
+                                                placeholder="Last Name" value="{{ auth()->check() && auth()->user()->name && str_contains(auth()->user()->name, ' ')
+    ? explode(' ', auth()->user()->name, 2)[1]
+    : '' }}">
                                         </div>
                                         <div class="col-xl-12">
                                             <label class="form-label">Email <span class="text-danger">*</span></label>
-                                            <input type="email" class="form-control" id="per_email"
-                                                placeholder="Email" value="{{ auth()->user()->email }}">
+                                            <input type="email" class="form-control" id="per_email" placeholder="Email"
+                                                value="{{ auth()->user()->email ?? ''}}">
                                         </div>
                                         <div class="col-xl-6">
                                             <label class="form-label">Phone <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="per_phone" placeholder="Phone Number">
+                                            <input type="text" class="form-control" id="per_phone"
+                                                placeholder="Phone Number">
                                         </div>
-                                         <div class="col-xl-6">
-                                            <label class="form-label">Shop Name <span class="text-danger">*</span></label>
-                                            <input type="text" name="shop_name" class="form-control" id="per_shop_name" placeholder="e.g. Ahmed General Store">
-                                            
+                                        <div class="col-xl-6">
+                                            <label class="form-label">Shop Name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="shop_name" class="form-control" id="per_shop_name"
+                                                placeholder="e.g. Ahmed General Store">
+
                                         </div>
                                     </div>
                                 </div>
@@ -176,9 +195,11 @@
                                                     <input class="form-check-input" type="radio"
                                                         name="payment_method_select" id="pay-cod" value="cod" checked>
                                                     <label class="form-check-label fw-semibold" for="pay-cod">
-                                                        <i class="ri-money-dollar-circle-line me-2 text-success fs-18"></i>
+                                                        <i
+                                                            class="ri-money-dollar-circle-line me-2 text-success fs-18"></i>
                                                         Cash on Delivery
-                                                        <p class="mb-0 text-muted fs-12 fw-normal">Pay when you receive your order</p>
+                                                        <p class="mb-0 text-muted fs-12 fw-normal">Pay when you receive
+                                                            your order</p>
                                                     </label>
                                                 </div>
                                             </div>
@@ -191,7 +212,8 @@
                                                     <label class="form-check-label fw-semibold" for="pay-card">
                                                         <i class="ri-bank-card-line me-2 text-primary fs-18"></i>
                                                         Credit / Debit Card
-                                                        <p class="mb-0 text-muted fs-12 fw-normal">Pay securely online</p>
+                                                        <p class="mb-0 text-muted fs-12 fw-normal">Pay securely online
+                                                        </p>
                                                     </label>
                                                 </div>
                                             </div>
@@ -203,12 +225,15 @@
                                         <p class="fw-semibold mb-3">Order Review:</p>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p class="mb-1 text-muted">Shipping to: <strong id="review-address">—</strong></p>
-                                                <p class="mb-1 text-muted">Method: <strong id="review-shipping">—</strong></p>
+                                                <p class="mb-1 text-muted">Shipping to: <strong
+                                                        id="review-address">—</strong></p>
+                                                <p class="mb-1 text-muted">Method: <strong
+                                                        id="review-shipping">—</strong></p>
                                             </div>
                                             <div class="col-md-6">
                                                 <p class="mb-1 text-muted">Name: <strong id="review-name">—</strong></p>
-                                                <p class="mb-1 text-muted">Email: <strong id="review-email">—</strong></p>
+                                                <p class="mb-1 text-muted">Email: <strong id="review-email">—</strong>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -220,7 +245,8 @@
                                     </button>
                                     <button class="btn btn-success mt-sm-0 mt-2" id="place-order-btn">
                                         <span id="place-order-text">Place Order</span>
-                                        <span id="place-order-spinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
+                                        <span id="place-order-spinner"
+                                            class="spinner-border spinner-border-sm d-none ms-1"></span>
                                         <i class="ri-checkbox-circle-line ms-2"></i>
                                     </button>
                                 </div>
@@ -240,7 +266,8 @@
                                             Your order <b id="success-order-number">—</b> has been placed.
                                             Payment method: <b id="success-payment-method">—</b>
                                         </p>
-                                        <p class="text-muted">We appreciate your business and look forward to serving you again!</p>
+                                        <p class="text-muted">We appreciate your business and look forward to serving
+                                            you again!</p>
                                     </div>
                                     <div class="d-flex gap-2 justify-content-center flex-wrap">
                                         <button class="btn btn-success" id="download-invoice-btn">
@@ -249,7 +276,7 @@
                                         <button class="btn btn-primary" id="print-invoice-btn">
                                             <i class="ri-printer-line me-1"></i> Print Invoice
                                         </button>
-                                        <a href="{{ route('user.products') }}" class="btn btn-secondary">
+                                        <a href="{{ route('products') }}" class="btn btn-secondary">
                                             Continue Shopping <i class="bi bi-cart ms-2"></i>
                                         </a>
                                     </div>
@@ -276,43 +303,88 @@
 
                     {{-- Cart Items List --}}
                     <div class="list-group mb-3 rounded text-start">
+
                         @foreach($cartItems as $item)
+
                         @php
-                            $price    = $item->product->sale_price ?? $item->product->price;
-                            $discount = $item->product->sale_price
-                                ? round((($item->product->price - $price) / $item->product->price) * 100)
-                                : null;
+
+                        // AUTH USER
+                        if(isset($item->product)) {
+
+                        $product = $item->product;
+                        $name = $product->name;
+                        $image = $product->image_url ?? asset('assets/images/ecommerce/png/1.png');
+                        $quantity = $item->quantity;
+                        $price = $product->sale_price ?? $product->price;
+                        $oldPrice = $product->price;
+
+                        }
+
+                        // GUEST USER
+                        else {
+
+                        $name = $item['name'];
+                        $image = $item['image'] ?? asset('assets/images/ecommerce/png/1.png');
+                        $quantity = $item['quantity'];
+                        $price = $item['price'];
+                        $oldPrice = $item['original_price'] ?? $price;
+
+                        }
+
+                        $discount = $oldPrice > $price
+                        ? round((($oldPrice - $price) / $oldPrice) * 100)
+                        : null;
+
                         @endphp
+
                         <div class="list-group-item">
                             <div class="d-flex align-items-center flex-wrap">
+
                                 <span class="avatar avatar-lg bg-secondary-transparent me-2">
-                                    <img src="{{ $item->product->image_url ?? asset('assets/images/ecommerce/png/1.png') }}"
-                                        alt="{{ $item->product->name }}">
+                                    <img src="{{ $image }}" alt="{{ $name }}">
                                 </span>
+
                                 <div class="flex-fill">
+
                                     <p class="mb-1 fw-semibold">
-                                        {{ $item->product->name }}
-                                        <span class="fs-12 fw-normal text-muted">({{ $item->quantity }} qty)</span>
+                                        {{ $name }}
+                                        <span class="fs-12 fw-normal text-muted">
+                                            ({{ $quantity }} qty)
+                                        </span>
                                     </p>
+
                                     @if($discount)
                                     <span class="badge bg-success-transparent fs-11">
-                                        <i class="ri-discount-percent-line fs-10"></i> {{ $discount }}% OFF
+                                        <i class="ri-discount-percent-line fs-10"></i>
+                                        {{ $discount }}% OFF
                                     </span>
                                     @endif
+
                                 </div>
+
                                 <div class="ms-auto">
+
                                     <p class="mb-0 fs-14 fw-semibold text-pink">
-                                        PKR {{ number_format($price * $item->quantity, 0) }}
-                                        @if($item->product->sale_price)
+
+                                        PKR {{ number_format($price * $quantity, 0) }}
+
+                                        @if($oldPrice > $price)
                                         <span class="ms-1 text-muted fs-11 fw-normal">
-                                            <s>PKR {{ number_format($item->product->price * $item->quantity, 0) }}</s>
+                                            <s>
+                                                PKR {{ number_format($oldPrice * $quantity, 0) }}
+                                            </s>
                                         </span>
                                         @endif
+
                                     </p>
+
                                 </div>
+
                             </div>
                         </div>
+
                         @endforeach
+
                     </div>
 
                     {{-- Totals --}}
@@ -342,7 +414,7 @@
                         PKR {{ number_format($total, 2) }}
                     </h3>
 
-                    <a href="{{ route('user.products') }}" class="btn btn-primary-light btn-wave d-grid">
+                    <a href="{{ route('products') }}" class="btn btn-primary-light btn-wave d-grid">
                         Continue Shopping
                     </a>
                 </div>
@@ -397,10 +469,22 @@
 
         <div style="text-align:right;">
             <table style="margin-left:auto;">
-                <tr><td style="padding:5px 15px;color:#666;">Subtotal:</td><td style="padding:5px 0;font-weight:bold;" id="inv-subtotal">—</td></tr>
-                <tr><td style="padding:5px 15px;color:#666;">Discount:</td><td style="padding:5px 0;font-weight:bold;color:green;" id="inv-discount">—</td></tr>
-                <tr><td style="padding:5px 15px;color:#666;">Delivery:</td><td style="padding:5px 0;font-weight:bold;" id="inv-delivery">—</td></tr>
-                <tr><td style="padding:5px 15px;color:#666;">Tax (18%):</td><td style="padding:5px 0;font-weight:bold;" id="inv-tax">—</td></tr>
+                <tr>
+                    <td style="padding:5px 15px;color:#666;">Subtotal:</td>
+                    <td style="padding:5px 0;font-weight:bold;" id="inv-subtotal">—</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 15px;color:#666;">Discount:</td>
+                    <td style="padding:5px 0;font-weight:bold;color:green;" id="inv-discount">—</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 15px;color:#666;">Delivery:</td>
+                    <td style="padding:5px 0;font-weight:bold;" id="inv-delivery">—</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 15px;color:#666;">Tax (18%):</td>
+                    <td style="padding:5px 0;font-weight:bold;" id="inv-tax">—</td>
+                </tr>
                 <tr style="border-top:2px solid #ddd;">
                     <td style="padding:10px 15px;font-weight:bold;font-size:16px;">Total:</td>
                     <td style="padding:10px 0;font-weight:bold;font-size:16px;color:#e91e63;" id="inv-total">—</td>
@@ -418,46 +502,51 @@
 
 @push('scripts')
 <script>
-const CSRF            = '{{ csrf_token() }}';
-const PLACE_ORDER_URL = '{{ route("user.checkout.place-order") }}';
-const INVOICE_BASE    = '{{ url("user/order") }}';
+const CSRF = '{{ csrf_token() }}';
+const PLACE_ORDER_URL = '{{ route("checkout.place-order") }}';
+const INVOICE_BASE = '{{ url("order") }}';
 
-let placedOrderId     = null;
-let placedOrderData   = null;
+let placedOrderId = null;
+let placedOrderData = null;
 
-// ─── Tab helpers ──────────────────────────────────────────────
+//  Tab helpers ─
 function goToTab(targetId) {
     const tab = document.querySelector(`[data-bs-target="${targetId}"]`);
     if (tab) bootstrap.Tab.getOrCreateInstance(tab).show();
 }
 
-// ─── Update delivery charge on shipping change ────────────────
-$('input[name="shipping_method_select"]').on('change', function() {
+//  Update delivery charge on shipping change ─
+$(document).on('change', 'input[name="shipping_method_select"]', function() {
     const charge = $(this).val() === 'express' ? 20 : 5;
     $('#summary-delivery-checkout').text('PKR ' + charge.toFixed(2));
 
     // Recalculate total
-    const subtotal  = {{ $subtotal }};
-    const discount  = {{ $discount }};
-    const tax       = {{ $tax }};
-    const total     = subtotal - discount + tax + charge;
+    const subtotal = {{ $subtotal}};
+    const discount = {{ $discount}};
+    const tax = {{ $tax }};
+    const total = subtotal - discount + tax + charge;
     $('#summary-total-checkout').text('PKR ' + total.toFixed(2));
 });
 
-// ─── Step 1 → Step 2 ─────────────────────────────────────────
-$('#to-personal-btn').on('click', function() {
+//  Step 1 → Step 2 ──
+$(document).on('click', '#to-personal-btn', function() {
     const address = $('#ship_address').val().trim();
-    const city    = $('#ship_city').val().trim();
+    const city = $('#ship_city').val().trim();
     const country = $('#ship_country').val().trim();
 
     if (!address || !city || !country) {
-        Swal.fire({ icon: 'warning', title: 'Please fill required shipping fields', timer: 2000, showConfirmButton: false });
+        Swal.fire({
+            icon: 'warning',
+            title: 'Please fill required shipping fields',
+            timer: 2000,
+            showConfirmButton: false
+        });
         return;
     }
     goToTab('#confirm-tab-pane');
 });
 
-// ─── Step 2 → Step 3 ─────────────────────────────────────────
+//  Step 2 → Step 3 ──
 $('#to-payment-btn').on('click', function() {
     const fname = $('#per_firstname').val().trim();
     const lname = $('#per_lastname').val().trim();
@@ -466,7 +555,12 @@ $('#to-payment-btn').on('click', function() {
     const shop_name = $('#per_shop_name').val().trim();
 
     if (!fname || !lname || !email || !phone) {
-        Swal.fire({ icon: 'warning', title: 'Please fill all personal details', timer: 2000, showConfirmButton: false });
+        Swal.fire({
+            icon: 'warning',
+            title: 'Please fill all personal details',
+            timer: 2000,
+            showConfirmButton: false
+        });
         return;
     }
 
@@ -474,34 +568,35 @@ $('#to-payment-btn').on('click', function() {
     $('#review-name').text(fname + ' ' + lname);
     $('#review-email').text(email);
     $('#review-address').text($('#ship_address').val() + ', ' + $('#ship_city').val());
-    $('#review-shipping').text($('input[name="shipping_method_select"]:checked').next('label').find('p').first().text());
+    $('#review-shipping').text($('input[name="shipping_method_select"]:checked').next('label').find('p').first()
+        .text());
 
     goToTab('#delivery-tab-pane');
 });
 
-// ─── Back buttons ─────────────────────────────────────────────
+//  Back buttons 
 $('#back-to-shipping-btn').on('click', () => goToTab('#order-tab-pane'));
 $('#back-to-personal-btn').on('click', () => goToTab('#confirm-tab-pane'));
 
-// ─── Place Order ──────────────────────────────────────────────
+//  Place Order ─
 $('#place-order-btn').on('click', function() {
     $('#place-order-spinner').removeClass('d-none');
     $('#place-order-text').text('Placing...');
 
     const data = {
-        _token:          CSRF,
-        first_name:      $('#per_firstname').val(),
-        last_name:       $('#per_lastname').val(),
-        email:           $('#per_email').val(),
-        phone:           $('#per_phone').val(),
-        shop_name:       $('#per_shop_name').val(),
-        address:         $('#ship_address').val(),
-        city:            $('#ship_city').val(),
-        state:           $('#ship_state').val(),
-        country:         $('#ship_country').val(),
-        pincode:         $('#ship_pincode').val(),
+        _token: CSRF,
+        first_name: $('#per_firstname').val(),
+        last_name: $('#per_lastname').val(),
+        email: $('#per_email').val(),
+        phone: $('#per_phone').val(),
+        shop_name: $('#per_shop_name').val(),
+        address: $('#ship_address').val(),
+        city: $('#ship_city').val(),
+        state: $('#ship_state').val(),
+        country: $('#ship_country').val(),
+        pincode: $('#ship_pincode').val(),
         shipping_method: $('input[name="shipping_method_select"]:checked').val(),
-        payment_method:  $('input[name="payment_method_select"]:checked').val(),
+        payment_method: $('input[name="payment_method_select"]:checked').val(),
     };
 
     $.ajax({
@@ -509,8 +604,11 @@ $('#place-order-btn').on('click', function() {
         method: 'POST',
         data: data,
         success(res) {
-            placedOrderId   = res.order_id;
-            placedOrderData = { ...data, order_number: res.order_number };
+            placedOrderId = res.order_id;
+            placedOrderData = {
+                ...data,
+                order_number: res.order_number
+            };
 
             // Fill success tab
             $('#success-order-number').text(res.order_number);
@@ -539,7 +637,11 @@ $('#place-order-btn').on('click', function() {
         },
         error(xhr) {
             const msg = xhr.responseJSON?.message || 'Something went wrong!';
-            Swal.fire({ icon: 'error', title: 'Error', text: msg });
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: msg
+            });
         },
         complete() {
             $('#place-order-spinner').addClass('d-none');
@@ -548,43 +650,124 @@ $('#place-order-btn').on('click', function() {
     });
 });
 
-// ─── Fill Invoice ─────────────────────────────────────────────
+//  Fill Invoice 
+//  Fill Invoice 
 function fillInvoice(res, data) {
-    $('#inv-order-number').text(res.order_number);
-    $('#inv-name').text(data.first_name + ' ' + data.last_name);
-    $('#inv-email').text(data.email);
-    $('#inv-phone').text(data.phone);
-    $('#inv-address').text(data.address + ', ' + data.city + ', ' + data.country);
-    $('#inv-payment').text(data.payment_method === 'cod' ? 'Cash on Delivery' : 'Card');
-    $('#inv-shipping').text(data.shipping_method === 'express' ? 'Express (1 Day)' : 'Standard (7 Days)');
 
-    // Items from summary sidebar
+    $('#inv-order-number').text(res.order_number);
+
+    $('#inv-name').text(
+        data.first_name + ' ' + data.last_name
+    );
+
+    $('#inv-email').text(data.email);
+
+    $('#inv-phone').text(data.phone);
+
+    $('#inv-address').text(
+        data.address + ', ' + data.city + ', ' + data.country
+    );
+
+    $('#inv-payment').text(
+        data.payment_method === 'cod'
+            ? 'Cash on Delivery'
+            : 'Card'
+    );
+
+    $('#inv-shipping').text(
+        data.shipping_method === 'express'
+            ? 'Express (1 Day)'
+            : 'Standard (7 Days)'
+    );
+
+    //  Invoice Items ─
     let itemsHtml = '';
+
     @foreach($cartItems as $item)
-    @php $p = $item->product->sale_price ?? $item->product->price; @endphp
+
+    @php
+
+        // AUTH USER
+        if(isset($item->product)) {
+
+            $name      = $item->product->name;
+            $quantity  = $item->quantity;
+
+            $price     = $item->product->sale_price
+                ?? $item->product->price;
+
+            $total     = $price * $quantity;
+        }
+
+        // GUEST USER
+        else {
+
+            $name      = $item['name'];
+            $quantity  = $item['quantity'];
+
+            $price     = $item['price'];
+
+            $total     = $price * $quantity;
+        }
+
+    @endphp
+
     itemsHtml += `
         <tr>
-            <td style="padding:8px;border-bottom:1px solid #eee;">{{ $item->product->name }}</td>
-            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">{{ $item->quantity }}</td>
-            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">PKR {{ number_format($p, 2) }}</td>
-            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">PKR {{ number_format($p * $item->quantity, 2) }}</td>
-        </tr>`;
+            <td style="padding:8px;border-bottom:1px solid #eee;">
+                {{ $name }}
+            </td>
+
+            <td style="padding:8px;text-align:center;border-bottom:1px solid #eee;">
+                {{ $quantity }}
+            </td>
+
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">
+                PKR {{ number_format($price, 2) }}
+            </td>
+
+            <td style="padding:8px;text-align:right;border-bottom:1px solid #eee;">
+                PKR {{ number_format($total, 2) }}
+            </td>
+        </tr>
+    `;
+
     @endforeach
+
     $('#inv-items').html(itemsHtml);
 
-    $('#inv-subtotal').text('PKR {{ number_format($subtotal, 2) }}');
-    $('#inv-discount').text('PKR {{ number_format($discount, 2) }}');
-    $('#inv-tax').text('PKR {{ number_format($tax, 2) }}');
+    //  Totals ──
+    $('#inv-subtotal').text(
+        'PKR {{ number_format($subtotal, 2) }}'
+    );
 
-    const delivery = data.shipping_method === 'express' ? 20 : 5;
-    $('#inv-delivery').text('PKR ' + delivery.toFixed(2));
-    $('#inv-total').text('PKR ' + ({{ $subtotal }} - {{ $discount }} + {{ $tax }} + delivery).toFixed(2));
+    $('#inv-discount').text(
+        'PKR {{ number_format($discount, 2) }}'
+    );
+
+    $('#inv-tax').text(
+        'PKR {{ number_format($tax, 2) }}'
+    );
+
+    const delivery = data.shipping_method === 'express'
+        ? 20
+        : 5;
+
+    $('#inv-delivery').text(
+        'PKR ' + delivery.toFixed(2)
+    );
+
+  const total = @json((float)$subtotal) -  @json((float)$discount) + @json((float)$tax) +  delivery;
+
+    $('#inv-total').text(
+        'PKR ' + total.toFixed(2)
+    );
 }
 
-// ─── Print Invoice ────────────────────────────────────────────
+//  Print Invoice ──
 $('#print-invoice-btn').on('click', function() {
-    const content   = document.getElementById('printable-invoice').innerHTML;
-    const printWin  = window.open('', '_blank', 'width=900,height=700');
+    const content = document.getElementById('printable-invoice').innerHTML;
+    const printWin = window.open('', '_blank', 'width=900,height=700');
     printWin.document.write(`
         <html><head><title>Invoice</title></head>
         <body>${content}</body></html>
@@ -595,7 +778,7 @@ $('#print-invoice-btn').on('click', function() {
     printWin.close();
 });
 
-// ─── Download Invoice PDF ─────────────────────────────────────
+//  Download Invoice PDF ─
 $('#download-invoice-btn').on('click', function() {
     if (!placedOrderId) return;
     window.location.href = `${INVOICE_BASE}/${placedOrderId}/invoice`;

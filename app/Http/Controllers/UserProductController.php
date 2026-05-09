@@ -61,7 +61,7 @@ class UserProductController extends Controller
         $featuredProducts = Product::where('status', 'active')
             ->where('is_featured', true)
             ->where('id', '!=', $product->id)
-            ->take(5)->get();
+            ->take(4)->get();
 
         return view('user.product-details', compact('product', 'discount', 'relatedProducts', 'featuredProducts'));
     }

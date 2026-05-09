@@ -463,7 +463,7 @@
                 delivered fresh to your doorstep. Quality
                 you trust, prices that make sense.</p>
             <div class="zb-btns">
-                <a href="{{ route('user.products') }}" class="zb-btn-main">Shop Now →</a>
+                <a href="{{ route('products') }}" class="zb-btn-main">Shop Now →</a>
                 <a href="#deals" class="zb-btn-sec">View Deals</a>
             </div>
         </div>
@@ -549,7 +549,7 @@
 <div class="row g-3">
     @foreach($categories as $cat)
     <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3">
-        <a href="{{ route('user.category', $cat->slug) }}" class="text-decoration-none d-block h-100">
+        <a href="{{ route('category', $cat->slug) }}" class="text-decoration-none d-block h-100">
             <div class="card custom-card h-100 card-style-2">
                 <div class="card-body p-0">
 
@@ -660,7 +660,7 @@
     </h5>
 
     <!-- Controls -->
-    <form action="{{ route('user.products') }}"
+    <form action="{{ route('products') }}"
           method="GET"
           class="d-flex flex-wrap align-items-center justify-content-center justify-content-xl-end gap-2 flex-grow-1">
 
@@ -729,7 +729,7 @@
         </button>
 
         <!-- Clear -->
-        <a href="{{ route('user.products') }}"
+        <a href="{{ route('products') }}"
            class="btn btn-outline-secondary ">
             Clear
         </a>
@@ -773,7 +773,7 @@
                                 </a>
                             </div>
                             <div class="img-box-2" style=" overflow: hidden;">
-                                <a href="{{ route('user.product-details', $product->slug) }}">
+                                <a href="{{ route('product-details', $product->slug) }}">
                                     @if($product->image_url)
                                     <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
                                         class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3 card-img-top"
@@ -795,7 +795,7 @@
                                 </a>
                             </div>
                             <h6 class="mt-1 mb-2 fw-semibold fs-14">
-                                <a href="{{ route('user.product-details', $product->slug) }}">
+                                <a href="{{ route('product-details', $product->slug) }}">
                                     {{ $product->name }}
                                 </a>
                             </h6>
@@ -815,7 +815,7 @@
                                     @endif
 
                                     <div class="d-flex gap-1 justify-content-between flex-wrap">
-                                        <a href="{{ route('user.check-out') }}" class="btn btn-success-light btn-sm">
+                                        <a href="{{ route('check-out') }}" class="btn btn-success-light btn-sm">
                                             <i class="bx bx-credit-card-alt"></i> Buy Now
                                         </a>
                                         <button class="btn btn-primary-light btn-sm add-to-cart-btn"
@@ -834,7 +834,7 @@
                     <div class="card-body text-center py-5">
                         <i class="ri-inbox-line fs-1 text-muted"></i>
                         <h5 class="mt-3 text-muted">No products found</h5>
-                        <a href="{{ route('user.products') }}" class="btn btn-primary mt-2">Clear Filters</a>
+                        <a href="{{ route('products') }}" class="btn btn-primary mt-2">Clear Filters</a>
                     </div>
                 </div>
             </div>

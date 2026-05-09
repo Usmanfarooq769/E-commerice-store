@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="flex-fill">
                                             <div class="mb-2 fs-16 fw-semibold">
-                                                <a href="{{ route('user.product-details', $item->product->slug) }}">
+                                                <a href="{{ route('product-details', $item->product->slug) }}">
                                                     {{ $item->product->name }}
                                                 </a>
                                             </div>
@@ -140,7 +140,7 @@
                                         <i class="ri-heart-line lh-1 align-middle"></i>
                                     </a>
                                     <a href="javascript:void(0);"
-                                        class="btn btn-icon btn-info btn-sm remove-cart-btn"
+                                        class="btn btn-icon btn-danger btn-sm remove-cart-btn"
                                         data-id="{{ $item->id }}"
                                         data-bs-toggle="tooltip" title="Remove From Cart">
                                         <i class="ri-delete-bin-line lh-1 align-middle"></i>
@@ -159,8 +159,8 @@
                 <div class="cart-empty text-center py-5">
                     <i class="ri-shopping-cart-2-line fs-1 text-muted"></i>
                     <h3 class="fw-bold mb-1 mt-3">Your Cart is Empty</h3>
-                    <h5 class="mb-3 text-muted">Add some items to make me happy :)</h5>
-                    <a href="{{ route('user.products') }}" class="btn btn-primary btn-wave m-3">
+                    <h5 class="mb-3 text-muted">Add some items to make me happy :</h5>
+                    <a href="{{ route('products') }}" class="btn btn-primary btn-wave m-3">
                         Continue Shopping <i class="bi bi-arrow-right ms-1"></i>
                     </a>
                 </div>
@@ -211,7 +211,7 @@
                         <s class="text-muted fs-12 fw-normal">PKR {{ number_format($subtotal, 2) }}</s>
                         @endif
                     </h3>
-                    <a href="{{ route('user.check-out') }}" class="btn btn-primary d-grid">Checkout</a>
+                    <a href="{{ route('check-out') }}" class="btn btn-success d-grid">Checkout</a>
                 </div>
 
                 <div class="p-3 border-bottom border-block-end-dashed">
@@ -239,7 +239,7 @@
                 </div>
 
                 <div class="p-3">
-                    <a href="{{ route('user.products') }}" class="btn btn-success-light btn-wave d-grid">
+                    <a href="{{ route('products') }}" class="btn btn-primary btn-wave d-grid">
                         Continue Shopping
                     </a>
                 </div>
@@ -255,7 +255,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 const CSRF            = '{{ csrf_token() }}';
-const CART_UPDATE_URL = '{{ url("user/cart") }}';
+const CART_UPDATE_URL = '{{ url("cart") }}';
 
 // ─── Quantity + ───────────────────────────────────────────────
 $(document).on('click', '.cart-qty-plus', function() {
@@ -288,7 +288,7 @@ function updateCartQty(id, qty) {
     });
 }
 
-// ─── Remove Item ──────────────────────────────────────────────
+//Remove Item 
 $(document).on('click', '.remove-cart-btn', function() {
     const id = $(this).data('id');
 

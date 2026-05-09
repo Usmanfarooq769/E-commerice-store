@@ -47,9 +47,9 @@
     <script>
     window.Laravel = {
         csrfToken: '{{ csrf_token() }}',
-        addToCartUrl: '{{ route("user.cart.add") }}',
-        cartHeaderUrl: '{{ route("user.cart.header") }}',
-        cartRemoveBase: '{{ url("user/cart") }}'
+        addToCartUrl: '{{ route("cart.add") }}',
+        cartHeaderUrl: '{{ route("cart.header") }}',
+        cartRemoveBase: '{{ url("cart") }}'
     };
 </script>
  @include("layouts.partials.add-cart-script")

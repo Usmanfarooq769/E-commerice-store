@@ -44,14 +44,14 @@
                 <ul class="list-unstyled">
 
                     <li class="mb-2">
-                        <a href="{{ route('user.products') }}"
+                        <a href="{{ route('products') }}"
                             class=" text-decoration-none">
                             Home
                         </a>
                     </li>
 
                     <li class="mb-2">
-                        <a href="{{ route('user.cart') }}"
+                        <a href="{{ route('cart') }}"
                             class=" text-decoration-none">
                             Cart
                         </a>

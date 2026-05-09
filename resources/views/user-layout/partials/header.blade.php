@@ -14,7 +14,7 @@ $categories = App\Models\Category::where('status', 'active')->get(['id', 'name']
 
         {{-- Search bar - centered, hidden on mobile --}}
         <div class="d-none d-md-flex flex-grow-1 justify-content-center px-3">
-            <form action="{{ route('user.products') }}" method="GET">
+            <form action="{{ route('products') }}" method="GET">
                 <div class="d-flex gap-2" style="width: 100%; max-width: 420px;">
 
                     <input type="search" class="form-control" name="search" value="{{ request('search') }}"
@@ -33,7 +33,7 @@ $categories = App\Models\Category::where('status', 'active')->get(['id', 'name']
 
                     {{-- Show Clear button --}}
                     @if($hasFilter)
-                    <a href="{{ route('user.products') }}" class="btn btn-danger flex-shrink-0">
+                    <a href="{{ route('products') }}" class="btn btn-danger flex-shrink-0">
                         Clear
                     </a>
                     @endif
@@ -59,7 +59,7 @@ $categories = App\Models\Category::where('status', 'active')->get(['id', 'name']
             </div>
 
             {{-- Home --}}
-            <a class="header-link p-2" href="{{ route('user.products')}}">
+            <a class="header-link p-2" href="{{ route('products')}}">
                 <i class="fa fa-home fs-5" style="color: #5f6368;"></i>
             </a>
 
@@ -112,7 +112,7 @@ $categories = App\Models\Category::where('status', 'active')->get(['id', 'name']
                     <ul class="list-unstyled mb-0" id="header-cart-items-scroll"></ul>
                     <div class="p-3 empty-header-item border-top d-none">
                         <div class="d-grid">
-                            <a href="{{ route('user.cart') }}" class="btn btn-primary">View Cart & Checkout</a>
+                            <a href="{{ route('cart') }}" class="btn btn-primary btn-sm text-nowrap">View Cart & Checkout</a>
                         </div>
                     </div>
                     <div class="p-5 empty-item">
@@ -122,7 +122,7 @@ $categories = App\Models\Category::where('status', 'active')->get(['id', 'name']
                             </span>
                             <h6 class="fw-semibold mb-1 mt-3">Your Cart is Empty</h6>
                             <span class="mb-3 fw-normal fs-13 d-block">Add some items to make me happy</span>
-                            <a href="{{ route('user.products') }}" class="btn btn-primary btn-wave btn-sm m-1">
+                            <a href="{{ route('products') }}" class="btn btn-primary btn-wave btn-sm text-nowrap m-1">
                                 Continue Shopping <i class="bi bi-arrow-right ms-1"></i>
                             </a>
                         </div>
@@ -168,7 +168,7 @@ $categories = App\Models\Category::where('status', 'active')->get(['id', 'name']
 
 <div class="d-md-none bg-light border-bottom px-3 py-2"
     style="display: none !important; position: fixed; top: 64px; left: 0; right: 0; z-index: 1029;">
-    <form action="{{ route('user.products') }}" method="GET">
+    <form action="{{ route('products') }}" method="GET">
         <div class="d-flex gap-2" style="width: 100%; max-width: 420px;">
 
             <input type="search" class="form-control" name="search" value="{{ request('search') }}"
@@ -187,7 +187,7 @@ $categories = App\Models\Category::where('status', 'active')->get(['id', 'name']
 
             {{-- Show Clear button --}}
             @if($hasFilter)
-            <a href="{{ route('user.products') }}" class="btn btn-danger flex-shrink-0">
+            <a href="{{ route('products') }}" class="btn btn-danger flex-shrink-0">
                 Clear
             </a>
             @endif

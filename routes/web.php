@@ -13,9 +13,9 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'), 'verified',])->group(function () {
      Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
@@ -90,9 +90,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 });
 
 
-Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
 
-Route::get('products',                  [UserProductController::class, 'index'])->name('products');
+
+Route::get('/',                  [UserProductController::class, 'index'])->name('products');
 Route::get('product/{slug}',            [UserProductController::class, 'show'])->name('product-details');
 Route::get('/categories/{slug}', [UserProductController::class, 'byCategory'])->name('category');
     Route::get('cart',            [CartController::class, 'index'])->name('cart');
@@ -104,5 +104,3 @@ Route::get('/categories/{slug}', [UserProductController::class, 'byCategory'])->
     Route::post('check-out/place-order',      [CheckoutController::class, 'placeOrder'])->name('checkout.place-order');
     Route::get('order/{id}/invoice',          [CheckoutController::class, 'downloadInvoice'])->name('order.invoice');
 
-
-});

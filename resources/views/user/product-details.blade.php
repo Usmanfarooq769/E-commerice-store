@@ -120,12 +120,14 @@
 
                             <div class="d-flex gap-2 align-items-center flex-wrap">
                                 @if($product->stock > 0)
-                                <a href="{{ route('user.check-out') }}" class="btn btn-primary btn-w-lg">
+                                <a href="{{ route('check-out') }}" class="btn btn-success-light btn-w-lg">
                                     <i class="bx bx-credit-card fs-16 align-middle"></i> Buy Now
                                 </a>
-                                <a href="{{ route('user.cart') }}" class="btn btn-success btn-w-lg">
-                                    <i class="bx bx-cart-add fs-16 align-middle"></i> Add to Cart
-                                </a>
+                               <button type="button"
+                                    class="btn btn-primary-light btn-w-lg add-to-cart-btn"
+                                    data-id="{{ $product->id }}">
+                                <i class="bx bx-cart-add fs-16 align-middle"></i> Add to Cart
+                            </button>
                                 @else
                                 <button class="btn btn-secondary btn-w-lg" disabled>Out of Stock</button>
                                 @endif
@@ -158,7 +160,7 @@
             <div class="card custom-card overflow-hidden">
                 <div class="card-header justify-content-between">
                     <div class="card-title">Featured Products</div>
-                    <a href="{{ route('user.products') }}" class="btn btn-sm btn-primary-light">View All</a>
+                    <a href="{{ route('products') }}" class="btn btn-sm btn-primary-light">View All</a>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -187,8 +189,10 @@
                                                 </div>
                                             </div>
                                             <div class="ms-auto align-self-end">
-                                                <a href="{{ route('user.cart') }}"
-                                                    class="btn btn-primary btn-sm">Add</a>
+                                               <button class="btn btn-primary btn-sm add-to-cart-btn"
+                                            data-id="{{ $product->id }}">
+                                            <i class="bx bxs-cart-add"></i> Add 
+                                        </button>
                                             </div>
                                         </div>
                                     </td>
@@ -309,10 +313,10 @@
                                         </a>
                                     </div>
                                     <div class="img-box-2">
-                                        <a href="{{ route('user.product-details', $rp->slug) }}">
+                                        <a href="{{ route('product-details', $rp->slug) }}">
                                             <img src="{{ $rp->image_url ?? asset('assets/images/ecommerce/png/1.png') }}"
                                                 alt="{{ $rp->name }}"
-                                                class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3" style="height: 310px;object-fit: cover;">
+                                                class="scale-img img-fluid w-100 bg-gray-400 rounded-top p-3" style="height: 300px;object-fit: cover;">
                                         </a>
                                     </div>
                                 </div>
@@ -320,7 +324,7 @@
                                     <a href="javascript:void(0);"
                                         class="text-muted fs-12">{{ $rp->category?->name }}</a>
                                     <h6 class="mt-1 mb-2 fw-semibold fs-14">
-                                        <a href="{{ route('user.product-details', $rp->slug) }}">{{ $rp->name }}</a>
+                                        <a href="{{ route('product-details', $rp->slug) }}">{{ $rp->name }}</a>
                                     </h6>
                                     <div class="d-flex gap-2 align-items-center mb-2">
                                         <div class="fw-semibold fs-17 text-pink">
@@ -331,12 +335,14 @@
                                         @endif
                                     </div>
                                     <div class="d-flex gap-1 justify-content-between flex-wrap">
-                                        <a href="{{ route('user.check-out') }}" class="btn btn-success-light btn-sm">
+                                        <a href="{{ route('check-out') }}" class="btn btn-success-light btn-sm">
                                             <i class="bx bx-credit-card-alt"></i> Buy Now
                                         </a>
-                                        <a href="{{ route('user.cart') }}" class="btn btn-primary btn-sm">
-                                            <i class="bx bxs-cart-add"></i> Add to Cart
-                                        </a>
+                                       <button type="button"
+                                            class="btn btn-primary-light btn-w-lg add-to-cart-btn"
+                                            data-id="{{ $product->id }}">
+                                        <i class="bx bx-cart-add fs-16 align-middle"></i> Add to Cart
+                                    </button>
                                     </div>
                                 </div>
                             </div>
