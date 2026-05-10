@@ -27,6 +27,17 @@
                         </div>
                         @endif
 
+                        <div class="d-block d-md-none text-center mb-4">
+                        <a href="{{ route('products') }}">
+                            <img alt="logo"
+                                class="img-fluid mb-3"
+                                style="max-height:60px;"
+                                src="../assets/images/brand-logos/toggle-logo.png">
+                        </a>
+
+                        
+                    </div>
+
                         <div class="mb-4 small text-muted">
                             Forgot your password? No problem. Just let us know your email address and we will email
                             you a password reset link that will allow you to choose a new one.
@@ -58,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 border rounded bg-secondary-transparent border-secondary border-opacity-10">
+                <div class=" col-xl-6 border rounded bg-secondary-transparent border-secondary border-opacity-10 d-none d-md-block">
                     <div class="d-flex align-items-center justify-content-around flex-column gap-4 h-100">
                         <img src="{{ asset('assets/images/authentication/5.png') }}" alt="Reset Password"
                             class="img-fluid m-auto mb-3 flex-fill mt-4">

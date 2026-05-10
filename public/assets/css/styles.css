@@ -9896,7 +9896,6 @@ button {
 /* Start::Switcher */
 /* Start:Responsive Dropdowns */
 @media (max-width: 575.98px) {
-  .cart-dropdown,
   .notifications-dropdown,
   .header-shortcuts-dropdown,
   .header-fullscreen {

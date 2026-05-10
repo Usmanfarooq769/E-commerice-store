@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    <div class="col-xxl-9">
+    <div class="col-xl-9 order-2 order-xl-1">
         <div class="card custom-card">
             <div class="card-body product-checkout">
                 <div class="row">
@@ -150,8 +150,8 @@
                                                     class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="per_lastname"
                                                 placeholder="Last Name" value="{{ auth()->check() && auth()->user()->name && str_contains(auth()->user()->name, ' ')
-    ? explode(' ', auth()->user()->name, 2)[1]
-    : '' }}">
+                                                ? explode(' ', auth()->user()->name, 2)[1]
+                                                : '' }}">
                                         </div>
                                         <div class="col-xl-12">
                                             <label class="form-label">Email <span class="text-danger">*</span></label>
@@ -292,7 +292,7 @@
     </div>
 
     {{-- Checkout Summary (Right Sidebar) --}}
-    <div class="col-xxl-3">
+    <div class="col-xl-3 order-1 order-xl-2">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">Checkout Summary</div>

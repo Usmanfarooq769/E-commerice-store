@@ -1,36 +1,23 @@
-
-<!-- <footer class="footer mt-auto py-3 bg-white text-center">
-    <div class="container">
-        <span class="text-muted">
-            Copyright © <span id="year"></span> 
-            <a href="javascript:void(0);" class="text-dark fw-semibold">usman Farooq</a>.
-    
-  All rights reserved.
-        </span>        
-    </div>
-</footer> -->
-
-
-
-
-
-
-
-{{-- ================= FOOTER ================= --}}
+<style>
+    .white-color{
+        color:#fff;
+    }
+    .dark-white-color{
+        color:rgba(255, 255, 255, .8);
+    }
+</style>
 <footer class="footer bg-primary pt-5 pb-3 mt-auto">
 
     <div class="container">
 
         <div class="row gy-4">
-
-            {{-- About --}}
             <div class="col-lg-4 col-md-6">
-                <h5 class="fw-bold mb-3 text-white">
+                <h5 class="fw-bold mb-3 white-color">
                     <i class="ri-store-2-line me-2"></i>
                     Zaroorat <span class="text-warning">Bazar</span>
                 </h5>
 
-                <p class=" mb-0">
+                <p class=" mb-0 dark-white-color">
                     Your trusted online mini mart for groceries,
                     kitchen essentials, snacks, beverages,
                     household items, and daily needs at affordable prices.
@@ -39,34 +26,34 @@
 
             {{-- Quick Links --}}
             <div class="col-lg-2 col-md-6">
-                <h6 class="fw-bold mb-3 ">Quick Links</h6>
+                <h6 class="fw-bold mb-3 white-color">Quick Links</h6>
 
                 <ul class="list-unstyled">
 
                     <li class="mb-2">
                         <a href="{{ route('products') }}"
-                            class=" text-decoration-none">
+                            class=" text-decoration-none white-color">
                             Home
                         </a>
                     </li>
 
                     <li class="mb-2">
                         <a href="{{ route('cart') }}"
-                            class=" text-decoration-none">
+                            class=" text-decoration-none white-color">
                             Cart
                         </a>
                     </li>
 
                     <li class="mb-2">
                         <a href="#"
-                            class=" text-decoration-none">
+                            class=" text-decoration-none white-color">
                             Categories
                         </a>
                     </li>
 
                     <li class="mb-2">
                         <a href="{{route('contact.us')}}"
-                            class=" text-decoration-none">
+                            class=" text-decoration-none white-color">
                             Contact Us
                         </a>
                     </li>
@@ -76,19 +63,19 @@
 
             {{-- Contact --}}
             <div class="col-lg-3 col-md-6">
-                <h6 class="fw-bold mb-3">Contact Info</h6>
+                <h6 class="fw-bold mb-3 white-color">Contact Info</h6>
 
-                <p class="mb-2">
+                <p class="mb-2 white-color">
                     <i class="ri-phone-line me-2"></i>
                     +92 300 1234567
                 </p>
 
-                <p class="mb-2">
+                <p class="mb-2 white-color">
                     <i class="ri-mail-line me-2"></i>
                     help@zarooratbazar.com
                 </p>
 
-                <p class="mb-0">
+                <p class="mb-0 white-color">
                     <i class="ri-map-pin-line me-2"></i>
                     Pakistan
                 </p>
@@ -96,7 +83,7 @@
 
             {{-- Social --}}
             <div class="col-lg-3 col-md-6">
-                <h6 class="fw-bold mb-3">Follow Us</h6>
+                <h6 class="fw-bold mb-3 white-color">Follow Us</h6>
 
                 <div class="d-flex gap-2">
 
@@ -126,11 +113,11 @@
         </div>
 
         {{-- Bottom --}}
-        <hr class="border-secondary my-4">
+        <hr class="border-warning my-4">
 
-        <div class="text-center  small">
+        <div class="text-center  medium-emphasis text-warning">
             © <span id="year"></span>
-            <span class="fw-semibold ">Zarooratbazar</span>.
+            <span class="fw-semibold white-color">Zarooratbazar</span>
             All Rights Reserved.
         </div>
 

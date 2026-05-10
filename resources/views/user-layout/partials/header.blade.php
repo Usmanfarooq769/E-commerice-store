@@ -38,7 +38,7 @@ $hasFilter = request()->has('search') && request('search') != '';
                 <i class="fa fa-home hdr-icon" style="font-size:19px;"></i>
             </a>
 
-            {{-- Dark / Light theme toggle --}}
+             {{-- Dark / Light theme toggle --}}
             <div class="header-theme-mode">
                 <a href="javascript:void(0);" class="hdr-btn layout-setting" aria-label="Toggle theme"
                     title="Toggle theme">
@@ -69,6 +69,17 @@ $hasFilter = request()->has('search') && request('search') != '';
                     </span>
                 </a>
             </div>
+           
+
+            <style>
+                @media (max-width: 991.98px) {
+                    .cart-dropdown .dropdown-menu {
+                        left: 50% !important;
+                        right: auto !important;
+                        transform: translateX(-50%) !important;
+                    }
+                }
+            </style>
 
             {{-- CART — ALL devices ── --}}
             <div class="cart-dropdown dropdown">
@@ -87,7 +98,7 @@ $hasFilter = request()->has('search') && request('search') != '';
                 </a>
 
                 {{-- Cart Dropdown --}}
-                <div class="main-header-dropdown dropdown-menu dropdown-menu-end shadow"
+                <div class="main-header-dropdown dropdown-menu dropdown-menu-lg-end shadow"
                     style="min-width:290px; max-width:min(340px, calc(100vw - 16px));" data-popper-placement="none">
                     <div class="p-3 bg-light bg-opacity-75">
                         <div class="d-flex align-items-center justify-content-between">
@@ -116,6 +127,8 @@ $hasFilter = request()->has('search') && request('search') != '';
                     </div>
                 </div>
             </div>
+
+            
 
             {{-- SETTINGS — desktop only --}}
             <a href="javascript:void(0);" class="hdr-btn switcher-icon d-none d-lg-inline-flex"
@@ -213,7 +226,7 @@ $hasFilter = request()->has('search') && request('search') != '';
                          M12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5
                          3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
             </svg>
-            <span class="small fw-medium">Settings</span>
+            
         </a>
 
         <div class="flex-grow-1"></div>

@@ -30,7 +30,7 @@
         @endif
 
 
-        <div class="main-content main-content">
+        <div class="div">
 
             <!-- Start::app-content -->
 

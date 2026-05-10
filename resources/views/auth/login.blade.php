@@ -10,10 +10,24 @@
                         <x-validation-errors class="mb-4" />
 
                         @session('status')
-                        <div class="mb-4 font-medium text-sm text-green-600">
+                        <div class="mb-4 font-medium text-sm text-success">
                             {{ $value }}
                         </div>
                         @endsession
+                        <div class="d-block d-md-none text-center mb-4">
+                        <a href="{{ route('products') }}">
+                            <img alt="logo"
+                                class="img-fluid mb-3"
+                                style="max-height:60px;"
+                                src="../assets/images/brand-logos/toggle-logo.png">
+                        </a>
+
+                        <h5 class="mb-1">Welcome Back!</h5>
+
+                        <p class="text-muted fs-13 mb-0">
+                            Sign in to your account to continue.
+                        </p>
+                    </div>
                         <div class="p-3">
                             <div class="row gy-3">
                                 <form method="POST" action="{{ route('login') }}">
@@ -68,16 +82,16 @@
                                             Log In
                                         </button>
                                         <div class="mt-2">
-                                         <a type="button" href="{{route('products')}}" class="btn btn-primary w-100">
-                                            Return Home Pages
-</a>
+                                            <a type="button" href="{{route('products')}}" class="btn btn-primary w-100">
+                                                Return Home Pages
+                                            </a>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 border rounded bg-secondary-transparent border-secondary border-opacity-10">
+                    <div class="col-xl-6 border rounded bg-secondary-transparent border-secondary border-opacity-10 d-none d-md-block">
                         <div class="d-flex align-items-center justify-content-around flex-column gap-4 h-100">
                             <img src="../assets/images/authentication/5.png" alt="Sign In"
                                 class="img-fluid m-auto mb-3 flex-fill mt-4">
