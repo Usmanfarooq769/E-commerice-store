@@ -16,7 +16,7 @@ class RolePermissionSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // ─── Define all permissions ───────────────────────────────────────────
+        // ─── Define all permissions 
         $permissions = [
             // Posts
             'view posts',
@@ -83,7 +83,7 @@ class RolePermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $perm]);
         }
 
-        // ─── Create Roles & assign permissions ───────────────────────────────
+        // Create Roles & assign permissions 
 
         // Admin — all permissions
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -104,9 +104,9 @@ class RolePermissionSeeder extends Seeder
             'view posts',
         ]);
 
-        // ─── Create a default admin user ─────────────────────────────────────
+        //  Create a default admin user 
         $adminUser = User::firstOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => 'shanusmanfarooq@gmail.com'],
             [
                 'name'     => 'Super Admin',
                 'password' => Hash::make('password'),
@@ -138,7 +138,7 @@ class RolePermissionSeeder extends Seeder
         $this->command->table(
             ['Email', 'Password', 'Role'],
             [
-                ['admin@example.com',  'password', 'admin'],
+                ['shanusmanfarooq@gmail.com',  'password', 'admin'],
                 ['editor@example.com', 'password', 'editor'],
                 ['viewer@example.com', 'password', 'viewer'],
             ]
