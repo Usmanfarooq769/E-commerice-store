@@ -73,6 +73,10 @@ class RolePermissionSeeder extends Seeder
              'delete deliveries',
              'edit deliveries',
 
+             // dashboard
+
+             'dashboard',
+
         ];
 
         foreach ($permissions as $perm) {

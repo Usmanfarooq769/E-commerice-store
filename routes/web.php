@@ -17,28 +17,10 @@ use App\Http\Controllers\DashboardController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'), 'verified',])->group(function () {
-     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('permission:dashboard')->name('dashboard');
 });
 
-
-   Route::middleware(['auth'])->get('/profile', function () {
-    return view('profile'); // or controller
-})->name('profile');
-Route::get('profile', function () {
-    return view('profile');
-})->name('profile');
-
-Route::get('mail-settings', function () {
-    return view('mail-settings');
-})->name('mail-settings');
-
-Route::get('mail', function () {
-    return view('mail');
-})->name('mail');
-Route::get('sign-in-cover', function () {
-    return view('sign-in-cover');
-})->name('sign-in-cover');
 
 //Admin routes (auth + admin role required) 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

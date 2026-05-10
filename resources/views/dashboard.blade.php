@@ -122,17 +122,15 @@
             <div class="card custom-card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
-                        <div>
-                            <div class="fs-13 align-middle text-muted mb-1">New Visitors</div>
-                            <div class="text-muted fs-12 mb-1">
-                                <span class="text-dark fw-semibold fs-18">
-                                    5,659
-                                </span>
-                            </div>
-                            <div class="d-flex gap-2 justify-content-between flex-wrap align-items-center">
-                                <div class="fs-12 mb-0">Decreased by </div>
-                                <div class="badge bg-danger-transparent rounded-pill">- 7.6%</div>
-                            </div>
+                        <div class="fs-13 align-middle text-muted mb-1">New Visitors</div>
+                        <div class="text-muted fs-12 mb-1">
+                            <span class="text-dark fw-semibold fs-18">
+                                {{ number_format($newVisitors) }}
+                            </span>
+                        </div>
+                        <div class="d-flex gap-2 justify-content-between flex-wrap align-items-center">
+                            <div class="fs-12 mb-0">Total Guest Users</div>
+                            <div class="badge bg-info-transparent rounded-pill">Registered</div>
                         </div>
                         <div
                             class="text-info p-1 rounded-circle border border-info border-opacity-25 shadow-sm ms-auto">
@@ -156,7 +154,7 @@
 
 <!-- Start::row-1 -->
 <div class="row">
-    <div class="col-xl-6">
+    <div class="col-xl-8">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">Earnings</div>
@@ -176,40 +174,41 @@
                 <div class="row text-center mb-3 gy-sm-0 gy-3">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                         <div class="mb-1">
-                            <span class="mt-1 fs-16 fw-semibold">8.56k</span>
-                            <span class="badge bg-success-transparent text-success rounded-pill mx-1 mx-1"><i
-                                    class="fa fa-caret-up me-2"></i>0.25%</span>
+                            <span class="mt-1 fs-16 fw-semibold">{{ number_format($totalOrders) }}</span>
+                            <span class="badge bg-success-transparent text-success rounded-pill mx-1"><i
+                                    class="fa fa-caret-up me-2"></i>{{ $growth >= 0 ? '+' : '' }}{{ $growth }}%</span>
                         </div>
                         <div><i
                                 class="ti ti-chart-bar text-primary fs-15 align-middle lh-1 me-1 d-inline-block"></i>Total
-                            Orders </div>
+                            Orders</div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                         <div class="mb-1">
-                            <span class="mt-1 fs-16 fw-semibold">$38.15k</span>
+                            <span class="mt-1 fs-16 fw-semibold">PKR {{ number_format($totalRevenue, 0) }}</span>
                             <span class="badge bg-success-transparent text-success rounded-pill mx-1"><i
-                                    class="fa fa-caret-up me-2"></i>0.33%</span>
+                                    class="fa fa-caret-up me-2"></i>{{ $growth >= 0 ? '+' : '' }}{{ $growth }}%</span>
                         </div>
                         <div><i
                                 class="ti ti-chart-bar text-secondary fs-15 align-middle lh-1 me-1 d-inline-block"></i>Total
-                            Revenue </div>
+                            Revenue</div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                        @php $totalProfit = $totalRevenue * 0.2; @endphp
                         <div class="mb-1">
-                            <span class="mt-1 fs-16 fw-semibold">$58.5k</span>
-                            <span class="badge bg-danger-transparent text-danger rounded-pill mx-1"><i
+                            <span class="mt-1 fs-16 fw-semibold">PKR {{ number_format($totalProfit, 0) }}</span>
+                            <span class="badge bg-success-transparent text-success rounded-pill mx-1"><i
                                     class="fa fa-caret-up me-2"></i>0.15%</span>
                         </div>
                         <div><i
                                 class="ti ti-chart-bar text-success fs-15 align-middle lh-1 me-1 d-inline-block"></i>Total
-                            Profit </div>
+                            Profit</div>
                     </div>
                 </div>
                 <div id="earnings"></div>
             </div>
         </div>
     </div>
-    <div class="col-xl-6">
+    <div class="col-xl-4">
         <div class="card custom-card border border-success border-opacity-50 ecommerce-sellercard">
             <div class="card-body">
                 <div class="d-flex gap-3">
@@ -233,131 +232,97 @@
                 <div class="card-title">Premier Product Selections</div>
             </div>
             <div class="card-body row gx-3 gy-3 gy-sm-0">
+                @php
+                $borderColors = ['pink','primary','danger','info','warning','success'];
+                $bgColors =
+                ['bg-pink-transparent','bg-primary-transparent','bg-danger-transparent','bg-info-transparent','bg-warning-transparent','bg-success-transparent'];
+                $discountColors =
+                ['text-success','text-danger','text-success','text-danger','text-success','text-danger'];
+                $leftProducts = $saleProducts->take(3);
+                $rightProducts = $saleProducts->skip(3)->take(3);
+                @endphp
+
                 <div class="col-sm-6">
                     <div id="carouselpremier1" class="carousel slide carousel-fade" data-bs-ride="carousel"
                         data-bs-interval="2800">
                         <div class="carousel-inner">
+                            @forelse($leftProducts as $loopIndex => $product)
+                            @php
+                            $discount = $product->price > 0
+                            ? round((($product->price - $product->sale_price) / $product->price) * 100)
+                            : 0;
+                            $border = $borderColors[$loopIndex % count($borderColors)];
+                            $bg = $bgColors[$loopIndex % count($bgColors)];
+                            $dColor = $discountColors[$loopIndex % count($discountColors)];
+                            @endphp
+                            <div class="carousel-item {{ $loopIndex === 0 ? 'active' : '' }}">
+                                <div
+                                    class="border border-{{ $border }} border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center {{ $bg }} position-relative overflow-hidden">
+                                    <div class="ribbon-sale ribbon-success top-right">Sale</div>
+                                    <img src="{{ $product->image_url ?? asset('assets/images/no-image.png') }}"
+                                        alt="{{ $product->name }}" class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="{{ $dColor }}">{{ $discount }}% OFF</span>
+                                        <p class="fw-medium mb-1">{{ $product->name }}</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1">
+                                                <i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                                                <i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                                                <i class="ri-star-half-fill"></i>
+                                            </span>
+                                        </div>
+                                        <a href="javascript:void(0);" class="btn btn-primary btn-sm">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @empty
                             <div class="carousel-item active">
-                                <div
-                                    class="border border-pink border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-pink-transparent posotion-relative overflow-hidden">
-                                    <div class="ribbon-sale ribbon-success top-right">Sale</div>
-                                    <img src="../assets/images/ecommerce/png/30.png" alt=""
-                                        class="img-fluid avatar avatar-xxl mb-4">
-                                    <div class="text-center ms-auto">
-                                        <span class="text-success">20% OFF</span>
-                                        <p class="fw-medium mb-1"> on home decor</p>
-                                        <div class="ratings mb-3">
-                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
-                                            <span class="text-muted fs-12">(22 reviews)</span>
-                                        </div>
-                                        <a class="btn btn-primary btn-sm">View Product</a>
-                                    </div>
-                                </div>
+                                <div class="text-center text-muted py-4">No sale products</div>
                             </div>
-                            <div class="carousel-item">
-                                <div
-                                    class="border border-primary border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-primary-transparent ">
-                                    <div class="ribbon-sale ribbon-success top-right">Sale</div>
-                                    <img src="../assets/images/ecommerce/png/34.png" alt=""
-                                        class="img-fluid avatar avatar-xxl mb-4">
-                                    <div class="text-center ms-auto">
-                                        <span class="text-danger">21% OFF</span>
-                                        <p class="fw-medium mb-1"> on home decor</p>
-                                        <div class="ratings mb-3">
-                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
-                                            <span class="text-muted fs-12">(75 reviews)</span>
-                                        </div>
-                                        <a class="btn btn-primary btn-sm" href="javascript:void(0);">View Product</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div
-                                    class="border border-danger border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-danger-transparent">
-                                    <div class="ribbon-sale ribbon-success top-right">Sale</div>
-                                    <img src="../assets/images/ecommerce/png/35.png" alt=""
-                                        class="img-fluid avatar avatar-xxl mb-4">
-                                    <div class="text-center ms-auto">
-                                        <span class="text-success">30% OFF</span>
-                                        <p class="fw-medium mb-1"> on home decor</p>
-                                        <div class="ratings mb-3">
-                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
-                                            <span class="text-muted fs-12">(66 reviews)</span>
-                                        </div>
-                                        <a class="btn btn-primary btn-sm">View Product</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6">
                     <div id="carouselpremier2" class="carousel slide carousel-fade" data-bs-ride="carousel"
                         data-bs-interval="3200">
                         <div class="carousel-inner">
+                            @forelse($rightProducts as $loopIndex => $product)
+                            @php
+                            $discount = $product->price > 0
+                            ? round((($product->price - $product->sale_price) / $product->price) * 100)
+                            : 0;
+                            $idx = $loopIndex + 3;
+                            $border = $borderColors[$idx % count($borderColors)];
+                            $bg = $bgColors[$idx % count($bgColors)];
+                            $dColor = $discountColors[$idx % count($discountColors)];
+                            @endphp
+                            <div class="carousel-item {{ $loopIndex === 0 ? 'active' : '' }}">
+                                <div
+                                    class="border border-{{ $border }} border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center {{ $bg }} position-relative overflow-hidden">
+                                    <div class="ribbon-sale ribbon-secondary top-right">Offer</div>
+                                    <img src="{{ $product->image_url ?? asset('assets/images/no-image.png') }}"
+                                        alt="{{ $product->name }}" class="img-fluid avatar avatar-xxl mb-4">
+                                    <div class="text-center ms-auto">
+                                        <span class="{{ $dColor }}">{{ $discount }}% OFF</span>
+                                        <p class="fw-medium mb-1">{{ $product->name }}</p>
+                                        <div class="ratings mb-3">
+                                            <span class="text-warning fs-10 lh-1">
+                                                <i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                                                <i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                                                <i class="ri-star-half-fill"></i>
+                                            </span>
+                                        </div>
+                                        <a href="javascript:void(0);" class="btn btn-primary btn-sm">View Product</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @empty
                             <div class="carousel-item active">
-                                <div
-                                    class="border border-info border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-info-transparent">
-                                    <div class="ribbon-sale ribbon-secondary top-right">Offer</div>
-                                    <img src="../assets/images/ecommerce/png/31.png" alt=""
-                                        class="img-fluid avatar avatar-xxl mb-4">
-                                    <div class="text-center ms-auto">
-                                        <span class="text-success">20% OFF</span>
-                                        <p class="fw-medium mb-1"> on Fashion Wear</p>
-                                        <div class="ratings mb-3">
-                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
-                                            <span class="text-muted fs-12">(111 reviews)</span>
-                                        </div>
-                                        <a class="btn btn-primary btn-sm">View Product</a>
-                                    </div>
-                                </div>
+                                <div class="text-center text-muted py-4">No sale products</div>
                             </div>
-                            <div class="carousel-item">
-                                <div
-                                    class="border border-warning border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-warning-transparent">
-                                    <div class="ribbon-sale ribbon-secondary top-right">Offer</div>
-                                    <img src="../assets/images/ecommerce/png/32.png" alt=""
-                                        class="img-fluid avatar avatar-xxl mb-4">
-                                    <div class="text-center ms-auto">
-                                        <span class="text-success">10% OFF</span>
-                                        <p class="fw-medium mb-1"> on sports shoes</p>
-                                        <div class="ratings mb-3">
-                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
-                                            <span class="text-muted fs-12">(23 reviews)</span>
-                                        </div>
-                                        <a class="btn btn-primary btn-sm">View Product</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div
-                                    class="border border-success border-opacity-10 p-3 rounded-2 align-items-center d-block gap-2 text-center bg-success-transparent">
-                                    <div class="ribbon-sale ribbon-secondary top-right">Offer</div>
-                                    <img src="../assets/images/ecommerce/png/33.png" alt=""
-                                        class="img-fluid avatar avatar-xxl mb-4">
-                                    <div class="text-center ms-auto">
-                                        <span class="text-danger">15% OFF</span>
-                                        <p class="fw-medium mb-1"> on Wrist Watch</p>
-                                        <div class="ratings mb-3">
-                                            <span class="text-warning fs-10 lh-1"><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-fill"></i><i
-                                                    class="ri-star-fill"></i><i class="ri-star-half-fill"></i></span>
-                                            <span class="text-muted fs-12">(43 reviews)</span>
-                                        </div>
-                                        <a class="btn btn-primary btn-sm">View Product</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -387,8 +352,29 @@
                     </ul>
                 </div>
             </div>
+
             <div class="card-body pb-0">
-                <div id="newCutomers"></div>
+                <ul class="list-unstyled mb-0">
+                    @forelse($newCustomers as $customer)
+                    <li class="d-flex align-items-center gap-2 mb-3">
+                        <div class="avatar avatar-md avatar-rounded bg-primary text-fixed-white flex-shrink-0">
+                            {{ strtoupper(substr($customer->name ?? 'G', 0, 1)) }}
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-0 fw-semibold fs-13 text-truncate">{{ $customer->name ?? 'Guest' }}</p>
+                            <p class="mb-0 text-muted fs-12 text-truncate">{{ $customer->email }}</p>
+                        </div>
+                        <div class="text-end flex-shrink-0">
+                            <span class="badge bg-success-transparent text-success">New</span>
+                            <div class="text-muted fs-11 mt-1">
+                                {{ $customer->orders->first()?->created_at?->format('d M, Y') ?? '' }}
+                            </div>
+                        </div>
+                    </li>
+                    @empty
+                    <li class="text-center text-muted py-3">No new customers found</li>
+                    @endforelse
+                </ul>
             </div>
             <div class="card-footer">
                 <div class="d-flex align-items-center">
@@ -408,13 +394,13 @@
                         </span>
                     </div>
                     <div>
-                        <p class="mb-0 fw-semibold">New Customers </p>
+                        <p class="mb-0 fw-semibold">New Customers</p>
                         <p class="mb-0 text-muted fs-12">Increased by<span
                                 class="badge bg-success-transparent rounded-pill ms-2 d-inline-block">+ 2.3%</span></p>
                     </div>
                     <div class="ms-auto">
                         <h5 class="text-dark mb-0 fw-semibold">
-                            34,784<i
+                            {{ number_format($newCustomers->count()) }}<i
                                 class="ri-arrow-up-s-fill text-success ms-1 d-inline-block lh-1 fw-normal align-text-bottom"></i>
                         </h5>
                     </div>
@@ -435,106 +421,41 @@
             </div>
             <div class="card-body">
                 <ul class="list-unstyled mb-0">
-                    <li class="mb-3">
-                        <a href="javascript:void(0);">
-                            <div class="d-flex align-items-end gap-2 flex-wrap">
-                                <div class="d-flex align-items-top justify-content-start flex-grow-1">
-                                    <div class="avatar avatar-md avatar-rounded bg-secondary me-2">
-                                        <img src="../assets/images/faces/6.jpg" alt="Natalie Brown">
-                                    </div>
-                                    <div>
-                                        <p class="mb-0 fw-semibold">Natalie Brown <i
-                                                class="ri-checkbox-circle-line text-success fw-normal fs-14 lh-1 fw-medium"></i>
-                                        </p>
-                                        <p class="mb-0 text-muted fs-12"><i
-                                                class="ri ri-map-pin-line me-1 lh-1 align-end d-inline-block"></i>San
-                                            Francisco</p>
-                                    </div>
-                                </div>
-                                <div class="text-muted me-4">Purchases 48</div>
-                                <div class="text-end ms-auto">
-                                    <div class="fs-14 fw-medium">$3,784 <i
-                                            class="ti ti-coins text-warning fw-normal"></i></div>
-                                    <div class="mt-1 text-muted fs-11">Last Order: 06 Jul,24</div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    @forelse($topCustomers as $customer)
                     <li class="mb-3">
                         <a href="javascript:void(0);">
                             <div class="d-flex align-items-end gap-2 flex-wrap">
                                 <div class="d-flex align-items-top justify-content-start flex-grow-1">
                                     <div class="avatar avatar-md avatar-rounded bg-primary me-2">
-                                        A
+                                        {{ strtoupper(substr($customer->name ?? 'G', 0, 1)) }}
                                     </div>
                                     <div>
-                                        <p class="mb-0 fw-semibold">Alex Johnson <i
+                                        <p class="mb-0 fw-semibold">{{ $customer->name ?? 'Guest' }}
+                                            <i
                                                 class="ri-checkbox-circle-line text-success fw-normal fs-14 lh-1 fw-medium"></i>
                                         </p>
-                                        <p class="mb-0 text-muted fs-12"><i
-                                                class="ri ri-map-pin-line me-1 lh-1 align-end d-inline-block"></i>Los
-                                            Angeles</p>
+                                        <p class="mb-0 text-muted fs-12">
+                                            <i class="ri ri-mail-line me-1 lh-1 align-end d-inline-block"></i>
+                                            {{ $customer->email }}
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="text-muted me-4">Purchases 52</div>
+                                <div class="text-muted me-4">Purchases {{ $customer->orders_count }}</div>
                                 <div class="text-end ms-auto">
-                                    <div class="fs-14 fw-medium">$5,578 <i
-                                            class="ti ti-coins text-warning fw-normal"></i></div>
-                                    <div class="mt-1 text-muted fs-11">Last Order: 06 Jul,24</div>
+                                    <div class="fs-14 fw-medium">
+                                        PKR {{ number_format($customer->total_spent, 0) }}
+                                        <i class="ti ti-coins text-warning fw-normal"></i>
+                                    </div>
+                                    <div class="mt-1 text-muted fs-11">
+                                        Last Order: {{ $customer->last_order?->created_at?->format('d M, Y') ?? 'N/A' }}
+                                    </div>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    <li class="mb-3">
-                        <a href="javascript:void(0);">
-                            <div class="d-flex align-items-end gap-2 flex-wrap">
-                                <div class="d-flex align-items-top justify-content-start flex-grow-1">
-                                    <div class="avatar avatar-md avatar-rounded bg-success me-2">
-                                        <img src="../assets/images/faces/14.jpg" alt="Michael Davis">
-                                    </div>
-                                    <div>
-                                        <p class="mb-0 fw-semibold">Michael Davis <i
-                                                class="ri-checkbox-circle-line text-success fw-normal fs-14 lh-1 fw-medium"></i>
-                                        </p>
-                                        <p class="mb-0 text-muted fs-12"><i
-                                                class="ri ri-map-pin-line me-1 lh-1 align-end d-inline-block"></i>Chicago
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="text-muted me-4">Purchases 42</div>
-                                <div class="text-end ms-auto">
-                                    <div class="fs-14 fw-medium">$2,050 <i
-                                            class="ti ti-coins text-warning fw-normal"></i></div>
-                                    <div class="mt-1 text-muted fs-11">Last Order: 06 Jul,24</div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="mb-0">
-                        <a href="javascript:void(0);">
-                            <div class="d-flex align-items-end gap-2 flex-wrap">
-                                <div class="d-flex align-items-top justify-content-start flex-grow-1">
-                                    <div class="avatar avatar-md avatar-rounded bg-info me-2">
-                                        <img src="../assets/images/faces/8.jpg" alt="Sophia Lee">
-                                    </div>
-                                    <div>
-                                        <p class="mb-0 fw-semibold">Sophia Lee <i
-                                                class="ri-checkbox-circle-line text-success fw-normal fs-14 lh-1 fw-medium"></i>
-                                        </p>
-                                        <p class="mb-0 text-muted fs-12"><i
-                                                class="ri ri-map-pin-line me-1 lh-1 align-end d-inline-block"></i>Seattle
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="text-muted me-4">Purchases 38</div>
-                                <div class="text-end ms-auto">
-                                    <div class="fs-14 fw-medium">$2,003 <i
-                                            class="ti ti-coins text-warning fw-normal"></i></div>
-                                    <div class="mt-1 text-muted fs-11">Last Order: 06 Jul,24</div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    @empty
+                    <li class="text-center text-muted py-3">No customers found</li>
+                    @endforelse
                 </ul>
             </div>
         </div>

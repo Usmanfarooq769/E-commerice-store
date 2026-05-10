@@ -24,6 +24,7 @@
             </div>
             <ul class="main-menu">
                 <!-- End::slide__category -->
+                  @can('dashboard')
                 <li class="slide">
                     <a href="{{ route('dashboard') }}" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" height="24px"
@@ -35,6 +36,7 @@
                         <span class="side-menu__label">Dashboards</span>
                     </a>
                 </li>
+                @endcan
                  @can('view users')
                  <li class="slide">
                     <a href="{{ route('admin.users.index') }}" class="side-menu__item">
