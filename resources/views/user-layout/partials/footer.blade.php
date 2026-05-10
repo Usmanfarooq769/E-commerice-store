@@ -6,7 +6,7 @@
         color:rgba(255, 255, 255, .8);
     }
 </style>
-<footer class="footer bg-primary pt-5 pb-3 mt-auto">
+<footer class=" bg-primary pt-5 pb-3 mt-auto">
 
     <div class="container">
 
@@ -25,7 +25,7 @@
             </div>
 
             {{-- Quick Links --}}
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-2 col-md-6 ">
                 <h6 class="fw-bold mb-3 white-color">Quick Links</h6>
 
                 <ul class="list-unstyled">
