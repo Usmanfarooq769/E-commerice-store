@@ -140,10 +140,10 @@
                                                 </span>
                                                 <p class="fw-semibold fs-14 mb-1 mt-3"><span
                                                         class="text-muted fw-medium fs-12">Mail:
-                                                    </span>arhakhan@mail.com</p>
+                                                    </span>help@zarooratbazar.com</p>
                                                 <p class="fw-semibold fs-14 mb-0"><span
                                                         class="text-muted fw-medium fs-12">Mail:
-                                                    </span>official874@mail.com</p>
+                                                    </span>help@zarooratbazar.com</p>
                                             </div>
                                         </div>
                                     </div>

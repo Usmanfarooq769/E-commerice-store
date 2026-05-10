@@ -85,7 +85,7 @@
 
                 <p class="mb-2">
                     <i class="ri-mail-line me-2"></i>
-                    support@rozanabazaar.pk
+                    help@zarooratbazar.com
                 </p>
 
                 <p class="mb-0">
@@ -130,7 +130,7 @@
 
         <div class="text-center  small">
             © <span id="year"></span>
-            <span class="fw-semibold ">Usman Farooq</span>.
+            <span class="fw-semibold ">Zarooratbazar</span>.
             All Rights Reserved.
         </div>
 
